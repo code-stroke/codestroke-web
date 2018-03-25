@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.section {
+    flex: 1 1 auto;
+    width: 100%;
+
+    margin-top: 20px;
+
+    border: 1px solid gray;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.section > h3 {
+    width: 100px;
+    text-align: center;
+}
+
+.section-form {
+    align-items: flex-start;
+}
+
+.inputs {
+    width: 210px;
+
+    margin-left: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.inputs > * {
+    margin-top: 5px;
+}
+
+.submit {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.output-data {
+    min-height: 150px;
+    min-width: 400px;
+}
