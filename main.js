@@ -1,3 +1,21 @@
+class Utilities {
+    /**
+     * Search through an Array of Objects and match a certain key-value pair
+     * @param  {array}   array  The array to search through
+     * @param  {string}  key
+     * @param  {any}     value
+     * @return {object}         The object that has matched
+     */
+    //TODO: Handle if it doesn't match??
+    static getFromArrayByKey(array, key, value) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i][key] == value) {
+                return array[i];
+            }
+        }
+    }
+}
+
 /**
  * An API Call can have the following properties:
  * @prop {string} name          @required - Name of the Call
@@ -9,205 +27,54 @@
  * @prop {object} result        optional  - The expected JSON result returned from serve
  */
 
+//TODO: Future: Store API Calls in a .json file
+
 let apiCalls = new Array();
-function createAPICalls() {
+function loadAPICalls() {
+    $.getJSON("api.json", function(data) {
+        apiCalls = data;
 
-    apiCalls.push({
-        name: "create-db",
-        address: "/create_db",
-        method: "POST"
+        //Removes the first element
+        //First element is just the API Version and not an API call
+        apiCalls.shift();
+
+        createAPIElements();
     });
-
-    apiCalls.push({
-        name: "delete-db",
-        address: "/delete_db",
-        method: "POST"
-    });
-
-    /*********************
-     * Patient API Calls *
-     *********************/
-
-    apiCalls.push({
-        name: "get-patients",
-        address: "/patients",
-        method: "GET",
-        optional: {
-            first_name: "VARCHAR(20)",
-            last_name: "VARCHAR(20)",
-            city: "VARCHAR(30)"
-        }
-    });
-
-    apiCalls.push({
-        name: "get-patient",
-        address: "/patients",
-        addressExtra: {
-            patient_id: "INT(8)"
-        },
-        method: "GET"
-    });
-
-    //Adds a new patient
-    apiCalls.push({
-        name: "add-patient",
-        address: "/patients",
-        method: "POST",
-        required: {
-            first_name: "VARCHAR(20)",
-            last_name: "VARCHAR(20)",
-            dob: "DATE",
-            address: "VARCHAR(40)",
-            city: "VARCHAR(30)",
-            state: "VARCHAR(20)",
-            postcode: "VARCHAR(20)",
-            phone: "VARCHAR(20)",
-            urn: "INT(8)"
-        },
-        optional: {
-            hospital_id: "INT(8)"
-        },
-        result: {
-            patient_id: "INT(8)"
-        }
-    });
-
-    apiCalls.push({
-        name: "edit-patient",
-        address: "/patients",
-        addressExtra: {
-            patient_id: "INT(8)"
-        },
-        method: "PUT",
-        optional: {
-            first_name: "VARCHAR(20)",
-            last_name: "VARCHAR(20)",
-            dob: "DATE",
-            address: "VARCHAR(40)",
-            city: "VARCHAR(30)",
-            state: "VARCHAR(20)",
-            postcode: "VARCHAR(20)",
-            phone: "VARCHAR(20)",
-            hospital_id: "INT(8)",
-            urn: "INT(8)"
-        }
-    });
-
-    apiCalls.push({
-        name: "remove-patient",
-        address: "/patients",
-        addressExtra: {
-            patient_id: "INT(8)"
-        },
-        method: "DELETE"
-    });
-
-
-    /***********************
-     * Clinician API Calls *
-     ***********************/
-
-     apiCalls.push({
-         name: "get-clinicians",
-         address: "/clinicians",
-         method: "GET",
-         optional: {
-             first_name: "VARCHAR(20)",
-             last_name: "VARCHAR(20)",
-             hospital_id: "INT(8)",
-             group: "VARCHAR(20)" //TODO: What datatype is this?
-         }
-     });
-
-     apiCalls.push({
-         name: "get-clinician",
-         address: "/clinicians",
-         addressExtra: {
-             clinician_id: "INT(8)"
-         },
-         method: "GET"
-     });
-
-     apiCalls.push({
-         name: "add-clinician",
-         address: "/clinicians",
-         method: "POST",
-         required: {
-             first_name: "VARCHAR(20)",
-             last_name: "VARCHAR(20)",
-             hospitals: "LIST", //TODO: Clarify
-             groups: "LIST" //TODO: Clarify
-             //TODO: Type
-         },
-         optional: {
-             hospital_id: "INT(8)"
-         },
-         result: {
-             clinician_id: "INT(8)"
-         }
-     });
-
-     apiCalls.push({
-         name: "edit-clinician",
-         address: "/clinicians",
-         addressExtra: {
-             clinician_id: "INT(8)"
-         },
-         method: "PUT",
-         optional: {
-             first_name: "VARCHAR(20)",
-             last_name: "VARCHAR(20)",
-             hospitals: "LIST", //TODO: Clarify
-             groups: "LIST" //TODO: Clarify
-             //TODO: Type
-         }
-     });
-
-     apiCalls.push({
-         name: "remove-clinician",
-         address: "/clinicians",
-         addressExtra: {
-             clinician_id: "INT(8)"
-         },
-         method: "DELETE"
-     });
-
-     /***********************
-      * Hospital API Calls *
-      ***********************/
-
-      ////////////////////////////////////////
-      //TODO: Add the rest of the API Calls //
-      ////////////////////////////////////////
-
-
 }
 
 function createAPIElements() {
     for (let i = 0; i < apiCalls.length; i++) {
-        let requiredList = new Array();
-        if (apiCalls[i].hasOwnProperty('addressExtra') && apiCalls[i]['addressExtra']) {
-            $.each( apiCalls[i].addressExtra, function( key, value ) {
-              requiredList.push(parseAPIElement(key, value));
-            });
-        }
+        //First create a list of categories
+        let category = $("<option value='" + apiCalls[i].category + "'>" + apiCalls[i].category + "</option>");
+        $("#js-categories").append(category);
 
-        if (apiCalls[i].hasOwnProperty('required') && apiCalls[i]['required']) {
-            $.each( apiCalls[i].required, function( key, value ) {
-              requiredList.push(parseAPIElement(key, value));
-            });
-        }
+        let calls = apiCalls[i].calls;
 
-        let optionalList = new Array();
-        if (apiCalls[i].hasOwnProperty('optional') && apiCalls[i]['optional']) {
-            $.each( apiCalls[i].optional, function( key, value ) {
-              optionalList.push(parseAPIElement(key, value));
-            });
-        }
+        for (let j = 0; j < calls.length; j++) {
+            let requiredList = new Array();
+            if (calls[j].hasOwnProperty('addressExtra') && calls[j]['addressExtra']) {
+                $.each( calls[j].addressExtra, function( key, value ) {
+                  requiredList.push(parseAPIElement(key, value));
+                });
+            }
 
-        apiCalls[i].elements = {
-            required: requiredList,
-            optional: optionalList
+            if (calls[j].hasOwnProperty('required') && calls[j]['required']) {
+                $.each( calls[j].required, function( key, value ) {
+                  requiredList.push(parseAPIElement(key, value));
+                });
+            }
+
+            let optionalList = new Array();
+            if (calls[j].hasOwnProperty('optional') && calls[j]['optional']) {
+                $.each( calls[j].optional, function( key, value ) {
+                  optionalList.push(parseAPIElement(key, value));
+                });
+            }
+
+            calls[j].elements = {
+                required: requiredList,
+                optional: optionalList
+            }
         }
 
     }
@@ -217,7 +84,7 @@ function createAPIElements() {
  * Converts the data to be sent into input element for the front-end
  * @param  {string}         key      The data key
  * @param  {string}         datatype The data type
- * @return {JQueryElement}           The input element that can be
+ * @return {JQueryElement}           The input element that will be displayed on the page
  */
 function parseAPIElement(key, datatype) {
     let label = $("<label>" + key + "</label>")
@@ -262,52 +129,64 @@ function parseAPIElement(key, datatype) {
 /**
  * When you select an API call from the list , the correct input fields will show up
  */
-let currentAPICall;
-function loadAPICalls() {
-    for (let i = 0; i < apiCalls.length; i++) {
-        let select = $("<option value='" + apiCalls[i].name + "'>" + apiCalls[i].name + "</option>");
-        $("#js-select").append(select);
-    }
-
-    $("#js-select").change(function() {
+let currCategory;
+let currAPICall;
+function selectAPICall() {
+    //When a category is selected --> Update the available calls
+    $("#js-categories").change(function() {
         $("#js-required").html("<h4>Required</h4>");
         $("#js-optional").html("<h4>Optional</h4>");
-        currentAPICall = getAPICallByName($("#js-select").find(":selected").val());
-        for (let i = 0; i < currentAPICall.elements.required.length; i++) {
-            currentAPICall.elements.required[i].val("");
-            $("#js-required").append(currentAPICall.elements.required[i]);
-        }
-        for (let i = 0; i < currentAPICall.elements.optional.length; i++) {
-            currentAPICall.elements.optional[i].val("");
-            $("#js-optional").append(currentAPICall.elements.optional[i]);
+
+        currCategory = Utilities.getFromArrayByKey(
+                                    apiCalls,
+                                    "category",
+                                    $("#js-categories").find(":selected").val());
+
+        $("#js-calls").html('<option style="display:none;"></option>');
+        for (let i = 0; i < currCategory.calls.length; i++) {
+            let call = $("<option value='" + currCategory.calls[i].name + "'>"
+                            + currCategory.calls[i].name
+                            + "</option>");
+            $("#js-calls").append(call);
         }
     });
-}
 
-function getAPICallByName(name) {
-    for (let i = 0; i < apiCalls.length; i++) {
-        if (apiCalls[i].name == name) {
-            return apiCalls[i];
+    //When a call is selected --> Update the input fields
+    $("#js-calls").change(function() {
+        $("#js-required").html("<h4>Required</h4>");
+        $("#js-optional").html("<h4>Optional</h4>");
+
+        currAPICall = Utilities.getFromArrayByKey(
+                                    currCategory.calls,
+                                    "name",
+                                    $("#js-calls").find(":selected").val());
+        for (let i = 0; i < currAPICall.elements.required.length; i++) {
+            currAPICall.elements.required[i].val("");
+            $("#js-required").append(currAPICall.elements.required[i]);
         }
-    }
+        for (let i = 0; i < currAPICall.elements.optional.length; i++) {
+            currAPICall.elements.optional[i].val("");
+            $("#js-optional").append(currAPICall.elements.optional[i]);
+        }
+    });
 }
 
 function loadSubmit() {
     $("#js-submit").click(function() {
         //If an option hasn't been chosen yet
-        if(!currentAPICall) {
+        if(!currAPICall) {
             return;
         }
 
         let valid = true;
         let data = {};
-        let address = $("#js-address").val() + ":" + $("#js-port").val();
-        address += currentAPICall.address;
+        let address = $("#js-address").val(); //+ ":" + $("#js-port").val();
+        address += currAPICall.address;
 
         $("#js-errors").html("");
 
-        if (currentAPICall.hasOwnProperty('addressExtra') && currentAPICall['addressExtra']) {
-            $.each( currentAPICall.addressExtra, function( key, value ) {
+        if (currAPICall.hasOwnProperty('addressExtra') && currAPICall['addressExtra']) {
+            $.each( currAPICall.addressExtra, function( key, value ) {
                 let input = $('input[name="' + key + '"]', $("#js-required"));
 
                 let inputError = validateInput(input, value);
@@ -321,8 +200,8 @@ function loadSubmit() {
             });
         }
 
-        if (currentAPICall.hasOwnProperty('required') && currentAPICall['required']) {
-            $.each( currentAPICall.required, function( key, value ) {
+        if (currAPICall.hasOwnProperty('required') && currAPICall['required']) {
+            $.each( currAPICall.required, function( key, value ) {
                 let input = $('input[name="' + key + '"]', $("#js-required"));
 
                 let inputError = validateInput(input, value);
@@ -336,8 +215,8 @@ function loadSubmit() {
             });
         }
 
-        if (currentAPICall.hasOwnProperty('optional') && currentAPICall['optional']) {
-            $.each( currentAPICall.optional, function( key, value ) {
+        if (currAPICall.hasOwnProperty('optional') && currAPICall['optional']) {
+            $.each( currAPICall.optional, function( key, value ) {
                 let input = $('input[name="' + key + '"]', $("#js-optional"));
 
                 let inputError = validateInput(input, value);
@@ -356,25 +235,26 @@ function loadSubmit() {
         //Displays the finished API Call just for debug purposes
         if (valid) {
             $("#js-output-address").val(address);
-            $("#js-output-method").val(currentAPICall.method);
+            $("#js-output-method").val(currAPICall.method);
             $("#js-output-data").val(JSON.stringify(data, null, 1));
         } else {
             $("#js-output-address").val("");
             $("#js-output-method").val("");
             $("#js-output-data").val("");
+            return;
         }
 
         //TODO: Future: Handle the response from the server
         if ($("#js-send").is(":checked")) {
             $.ajax({
                 url: address,
-                type: currentAPICall.method,
+                type: currAPICall.method,
                 data: data,
                 success: function(result) {
-
+                  console.log("Success: " + result);
                 },
-                error: function(a, error, error2) {
-
+                error: function(a, error, exception) {
+                  console.log("Error: " + error + " | " + exception);
                 }
             });
         }
@@ -440,9 +320,9 @@ function createError(name, error) {
 
 
 $( document ).ready(function() {
-    createAPICalls();
-    createAPIElements();
     loadAPICalls();
+
+    selectAPICall();
 
     loadSubmit();
 });
