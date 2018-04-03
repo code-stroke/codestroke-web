@@ -101,7 +101,7 @@
                     "first_name":"VARCHAR(20)",
                     "last_name":"VARCHAR(20)",
                     "hospital_id":"INT(8)",
-                    "group":"VARCHAR(20)"
+                    "group_id":"INT(8)"
                 }
             },
             {
@@ -219,7 +219,8 @@
                 "address":"/cases",
                 "method":"GET",
                 "optional":{
-                    "query":"TODO",
+                    "date1":"DATE",
+                    "date2": "DATE",
                     "patient_id":"INT(8)",
                     "hospital_id":"INT(8)"
                 }
@@ -274,7 +275,7 @@
                 "address":"/event_types",
                 "method":"GET",
                 "optional":{
-                    "query":"TODO"
+                    "name":"VARCHAR(50)"
                 }
             },
             {
@@ -322,7 +323,13 @@
                 "address":"/events",
                 "method":"GET",
                 "optional":{
-                    "query":"TODO"
+                    "name":"VARCHAR(50)",
+                    "event_type_id": "INT(8)",
+                    "hospital_id": "INT(8)",
+                    "sender_clinician_id": "INT(8)",
+                    "receiver_clinician_id": "INT(8)",
+                    "date1": "DATE",
+                    "date2": "DATE"
                 }
             },
             {
@@ -355,7 +362,9 @@
                 "address":"/messages",
                 "method":"GET",
                 "optional":{
-                    "query":"TODO"
+                    "group_id":"INT(8)",
+                    "sender_clinician_id": "INT(8)",
+                    "receiver_clinician_id": "INT(8)"
                 }
             },
             {
@@ -408,7 +417,9 @@
                 "address":"/groups",
                 "method":"GET",
                 "optional":{
-                    "query":"TODO"
+                    "name":"VARCHAR(30)",
+                    "clinician_id": "INT(8)",
+                    "hospital_id": "INT(8)"
                 }
             },
             {
@@ -459,7 +470,7 @@
                 "address":"/vitals",
                 "method":"GET",
                 "optional":{
-                    "query":"TODO"
+                    "name":"VARCHAR(30)"
                 }
             },
             {
@@ -503,7 +514,7 @@
         ]
     },
     {
-        "category":"tokens",
+        "category":"user",
         "calls":[
             {
                 "name":"create-token",
@@ -511,6 +522,18 @@
                 "method":"POST",
                 "required":{
                     "TODO":"TODO"
+                }
+            },
+            {
+                "name":"add-user-profile",
+                "address":"/user_profiles",
+                "method":"POST",
+                "required": {
+                    "social_id": "VARCHAR(40)",
+                    "name":"VARCAHR(40)"
+                },
+                "optional": {
+                    "email":"VARCHAR(40)"
                 }
             }
         ]
