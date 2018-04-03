@@ -244,6 +244,12 @@ function loadSubmit() {
             return;
         }
 
+        //Unfortunately, JQuery doesn't properly handle PUT requests
+        //We have to manually add the data as a query string to the address
+        if (currAPICall.method == "PUT" & !$.isEmptyObject(data)) {
+            address += "?" + $.param(data);
+        }
+
         //TODO: Future: Handle the response from the server
         if ($("#js-send").is(":checked")) {
             $.ajax({
