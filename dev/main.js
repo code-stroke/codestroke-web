@@ -293,7 +293,7 @@ function validateInput(input, datatype) {
     } else if (datatype.startsWith("INT")) {
 
         //Checks if the input is actually a number
-        if (!input.val().match("^[0-9]+$")) {
+        if (!input.val().match(/^[0-9]+$/)) {
             return "Input must only contain numbers";
 
         }

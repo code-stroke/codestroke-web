@@ -1,0 +1,1037 @@
+[
+    {
+        "api-version":"0.0.1"
+    },
+    {
+        "category":"database",
+        "calls":[
+            {
+                "name":"create-db",
+                "address":"/create_db",
+                "method":"POST"
+            },
+            {
+                "name":"delete-db",
+                "address":"/delete_db",
+                "method":"POST"
+            }
+        ]
+    },
+    {
+        "category":"patient",
+        "calls":[
+            {
+                "name":"get-patients",
+                "address":"/patients",
+                "method":"GET",
+                "optional":{
+                    "first_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "First Name",
+                        "description": "Given name(s) of the patient"
+                    },
+                    "last_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Last Name",
+                        "description": "Last name of the patient"
+                    },
+                    "city": {
+                        "type": "TEXT",
+                        "length": "30",
+                        "valid": "WORD",
+                        "name": "City",
+                        "description": "The patient's city of residence"
+                    }
+                }
+            },
+            {
+                "name":"get-patient",
+                "address":"/patients",
+                "addressExtra":{
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-patient",
+                "address":"/patients",
+                "method":"POST",
+                "required":{
+                    "first_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "First Name",
+                        "description": "Given name(s) of the patient"
+                    },
+                    "last_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Last Name",
+                        "description": "Last name of the patient"
+                    },
+                    "dob": {
+                        "type": "DATE",
+                        "name": "Date of Birth",
+                        "description": "Patient's Date of Birth"
+                    },
+                    "address": {
+                        "type": "TEXT",
+                        "length": "40",
+                        "valid": "ADDRESS",
+                        "name": "Address",
+                        "description": "Patient's street number and street name"
+                    },
+                    "city": {
+                        "type": "TEXT",
+                        "length": "30",
+                        "valid": "WORD",
+                        "name": "City",
+                        "description": "The patient's city of residence"
+                    },
+                    "state": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "WORD",
+                        "name": "State",
+                        "description": "The patient's state of residence"
+                    },
+                    "postcode": {
+                        "type": "INT",
+                        "length": "4",
+                        "name": "Postcode",
+                        "description": "The patient's postcode"
+                    },
+                    "phone":  {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "PHONE",
+                        "name": "Mobile Number",
+                        "description": "The patient's primary mobile number"
+                    },
+                    "urn": {
+                        "type": "INT",
+                        "length": "8",
+                        "name": "UR Number",
+                        "description": "-todo-"
+                    }
+                },
+                "optional":{
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    }
+                },
+                "result":{
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"edit-patient",
+                "address":"/patients",
+                "addressExtra":{
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"PUT",
+                "optional":{
+                    "first_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "First Name",
+                        "description": "Given name(s) of the patient"
+                    },
+                    "last_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Last Name",
+                        "description": "Last name of the patient"
+                    },
+                    "dob": {
+                        "type": "DATE",
+                        "name": "Date of Birth",
+                        "description": "Patient's Date of Birth"
+                    },
+                    "address": {
+                        "type": "TEXT",
+                        "length": "40",
+                        "valid": "ADDRESS",
+                        "name": "Address",
+                        "description": "Patient's street number and street name"
+                    },
+                    "city": {
+                        "type": "TEXT",
+                        "length": "30",
+                        "valid": "WORD",
+                        "name": "City",
+                        "description": "The patient's city of residence"
+                    },
+                    "state": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "WORD",
+                        "name": "State",
+                        "description": "The patient's state of residence"
+                    },
+                    "postcode": {
+                        "type": "INT",
+                        "length": "4",
+                        "name": "Postcode",
+                        "description": "The patient's postcode"
+                    },
+                    "phone":  {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "PHONE",
+                        "name": "Mobile Number",
+                        "description": "The patient's primary mobile number"
+                    },
+                    "urn": {
+                        "type": "INT",
+                        "length": "8",
+                        "name": "UR Number",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"remove-patient",
+                "address":"/patients",
+                "addressExtra":{
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"clinician",
+        "calls":[
+            {
+                "name":"get-clinicians",
+                "address":"/clinicians",
+                "method":"GET",
+                "optional":{
+                    "first_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "First Name",
+                        "description": "Given name(s) of the clinician"
+                    },
+                    "last_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Last Name",
+                        "description": "Last name of the clinician"
+                    },
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    },
+                    "group_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Group ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"get-clinician",
+                "address":"/clinicians",
+                "addressExtra":{
+                    "clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Clinician ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-clinician",
+                "address":"/clinicians",
+                "method":"POST",
+                "required":{
+                    "first_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "First Name",
+                        "description": "Given name(s) of the clinician"
+                    },
+                    "last_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Last Name",
+                        "description": "Last name of the clinician"
+                    },
+                    "hospitals": {
+                        "type": "LIST",
+                        "-todo-": "?Extra fields",
+                        "name": "Hospitals",
+                        "description": "-todo"
+                    },
+                    "groups": {
+                        "type": "LIST",
+                        "-todo-": "?Extra fields",
+                        "name": "Groups",
+                        "description": "-todo"
+                    }
+                },
+                "result":{
+                    "clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Clinician ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"edit-clinician",
+                "address":"/clinicians",
+                "addressExtra":{
+                    "clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Clinician ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"PUT",
+                "optional":{
+                    "first_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "First Name",
+                        "description": "Given name(s) of the clinician"
+                    },
+                    "last_name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Last Name",
+                        "description": "Last name of the clinician"
+                    },
+                    "hospitals": {
+                        "type": "LIST",
+                        "-todo-": "?Extra fields",
+                        "name": "Hospitals",
+                        "description": "-todo"
+                    },
+                    "groups": {
+                        "type": "LIST",
+                        "-todo-": "?Extra fields",
+                        "name": "Groups",
+                        "description": "-todo"
+                    }
+                }
+            },
+            {
+                "name":"remove-clinician",
+                "address":"/clinicians",
+                "addressExtra":{
+                    "clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Clinician ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"hospital",
+        "calls":[
+            {
+                "name":"get-hospitals",
+                "address":"/hospitals",
+                "method":"GET",
+                "optional":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Hospital Name",
+                        "description": "Name of the Hospital"
+                    },
+                    "city": {
+                        "type": "TEXT",
+                        "length": "30",
+                        "valid": "WORD",
+                        "name": "City",
+                        "description": "The city the Hospital is in"
+                    },
+                    "state": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "WORD",
+                        "name": "State",
+                        "description": "The state the Hospital is in"
+                    },
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    },
+                    "coordinates": {
+                        "type": "COORDS",
+                        "lat": "(10,8)",
+                        "lon": "(11,8)"
+                    }
+                }
+            },
+            {
+                "name":"get-hospital",
+                "address":"/hospitals",
+                "addressExtra":{
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-hospital",
+                "address":"/hospitals",
+                "method":"POST",
+                "required":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Hospital Name",
+                        "description": "Name of the Hospital"
+                    },
+                    "city": {
+                        "type": "TEXT",
+                        "length": "30",
+                        "valid": "WORD",
+                        "name": "City",
+                        "description": "The city the Hospital is in"
+                    },
+                    "state": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "WORD",
+                        "name": "State",
+                        "description": "The state the Hospital is in"
+                    },
+                    "postcode": {
+                        "type": "INT",
+                        "length": "4",
+                        "name": "Postcode",
+                        "description": "The patient's postcode"
+                    },
+                    "coordinates": {
+                        "type": "COORDS",
+                        "lat": "(10,8)",
+                        "lon": "(11,8)"
+                    }
+                },
+                "result":{
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"edit-hospital",
+                "address":"/hospitals",
+                "addressExtra":{
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"PUT",
+                "optional":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "NAME",
+                        "name": "Hospital Name",
+                        "description": "Name of the Hospital"
+                    },
+                    "city": {
+                        "type": "TEXT",
+                        "length": "30",
+                        "valid": "WORD",
+                        "name": "City",
+                        "description": "The city the Hospital is in"
+                    },
+                    "state": {
+                        "type": "TEXT",
+                        "length": "20",
+                        "valid": "WORD",
+                        "name": "State",
+                        "description": "The state the Hospital is in"
+                    },
+                    "postcode": {
+                        "type": "INT",
+                        "length": "4",
+                        "name": "Postcode",
+                        "description": "The patient's postcode"
+                    },
+                    "coordinates": {
+                        "type": "COORDS",
+                        "lat": "(10,8)",
+                        "lon": "(11,8)"
+                    }
+                }
+            },
+            {
+                "name":"remove-hospital",
+                "address":"/hospitals",
+                "addressExtra":{
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"cases",
+        "calls":[
+            {
+                "name":"get-cases",
+                "address":"/cases",
+                "method":"GET",
+                "optional":{
+                    "dates": {
+                        "type": "DATERANGE",
+                        "date1": "DATE",
+                        "date2": "DATE"
+                    },
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    },
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"get-case",
+                "address":"/cases",
+                "addressExtra":{
+                    "case_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Case ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-case",
+                "address":"/cases",
+                "method":"POST",
+                "required":{
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    },
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    },
+                    "date":{
+                        "type": "DATE",
+                        "name": "Date",
+                        "description": "The date that this case occured on"
+                    }
+                },
+                "result":{
+                    "case_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Case ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"edit-case",
+                "address":"/cases",
+                "addressExtra":{
+                    "case_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Case ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"PUT",
+                "optional":{
+                    "patient_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Patient ID",
+                        "description": "-todo-"
+                    },
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    },
+                    "date":{
+                        "type": "DATE",
+                        "name": "Date",
+                        "description": "The date that this case occured on"
+                    }
+                }
+            },
+            {
+                "name":"remove-case",
+                "address":"/cases",
+                "addressExtra":{
+                    "case_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Case ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"events",
+        "calls":[
+            {
+                "name":"get-event-types",
+                "address":"/event_types",
+                "method":"GET",
+                "optional":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "50",
+                        "valid": "ANY",
+                        "name": "Event Name",
+                        "description": "Name of the event"
+                    }
+                }
+            },
+            {
+                "name":"get-event-type",
+                "address":"/event_types",
+                "addressExtra":{
+                    "event_type_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event Type ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-event-type",
+                "address":"/event_types",
+                "method":"POST",
+                "required":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "50",
+                        "valid": "ANY",
+                        "name": "Event Type Name",
+                        "description": "Name of the event type (eg. -todo-)"
+                    },
+                    "description": {
+                        "type": "TEXTAREA",
+                        "length": "200",
+                        "valid": "ANY",
+                        "name": "Event Type Description",
+                        "description": "Describe the tpye of event"
+                    }
+                },
+                "result":{
+                    "event_type_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event Type ID",
+                        "description": "-todo-"
+                    }
+                }
+            },
+            {
+                "name":"edit-event-type",
+                "address":"/event_types",
+                "addressExtra":{
+                    "event_type_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event Type ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"PUT",
+                "optional":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "50",
+                        "valid": "ANY",
+                        "name": "Event Name",
+                        "description": "Name of the event"
+                    },
+                    "description": {
+                        "type": "TEXTAREA",
+                        "length": "200",
+                        "valid": "ANY",
+                        "name": "Event Description",
+                        "description": "Describe the tpye of event"
+                    }
+                }
+            },
+            {
+                "name":"remove-event-type",
+                "address":"/event_types",
+                "addressExtra":{
+                    "event_type_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event Type ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"DELETE"
+            },
+            {
+                "name":"get-events",
+                "address":"/events",
+                "method":"GET",
+                "optional":{
+                    "name": {
+                        "type": "TEXT",
+                        "length": "50",
+                        "valid": "ANY",
+                        "name": "Event Title",
+                        "description": "Title for the event (eg. -todo-)"
+                    },
+                    "event_type_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event Type ID",
+                        "description": "-todo-"
+                    },
+                    "hospital_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Hospital ID",
+                        "description": "-todo-"
+                    },
+                    "sender_clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Sender Clinician ID",
+                        "description": "-todo-"
+                    },
+                    "receiver_clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Receiver Clinician ID",
+                        "description": "-todo-"
+                    },
+                    "dates": {
+                        "type": "DATERANGE",
+                        "date1": "DATE",
+                        "date2": "DATE"
+                    },
+                }
+            },
+            {
+                "name":"get-event",
+                "address":"/events",
+                "addressExtra":{
+                    "event_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event ID",
+                        "description": "-todo-"
+                    }
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-event",
+                "address":"/events",
+                "method":"POST",
+                "required":{
+                    "event_type_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event Type ID",
+                        "description": "-todo-"
+                    },
+                    "clinician_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Clinician ID",
+                        "description": "-todo-"
+                    },
+                    "date": {
+
+                    }
+                },
+                "result":{
+                    "event_id":{
+                        "type": "INT",
+                        "length": "8",
+                        "name": "Event ID",
+                        "description": "-todo-"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "category":"messages",
+        "calls":[
+            {
+                "name":"get-messages",
+                "address":"/messages",
+                "method":"GET",
+                "optional":{
+                    "group_id":"INT(8)",
+                    "sender_clinician_id": "INT(8)",
+                    "receiver_clinician_id": "INT(8)"
+                }
+            },
+            {
+                "name":"get-message",
+                "address":"/messages",
+                "addressExtra":{
+                    "message_id":"INT(8)"
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-message",
+                "address":"/messages",
+                "method":"POST",
+                "required":{
+                    "clinician_id":"INT(8)",
+                    "body":"TEXT"
+                },
+                "result":{
+                    "message_id":"INT(8)"
+                }
+            },
+            {
+                "name":"edit-message",
+                "address":"/messages",
+                "addressExtra":{
+                    "hospital_id":"INT(8)"
+                },
+                "method":"PUT",
+                "optional":{
+                    "message_id":"INT(8)",
+                    "body":"TEXT"
+                }
+            },
+            {
+                "name":"remove-message",
+                "address":"/messages",
+                "addressExtra":{
+                    "message_id":"INT(8)"
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"groups",
+        "calls":[
+            {
+                "name":"get-groups",
+                "address":"/groups",
+                "method":"GET",
+                "optional":{
+                    "name":"VARCHAR(30)",
+                    "clinician_id": "INT(8)",
+                    "hospital_id": "INT(8)"
+                }
+            },
+            {
+                "name":"get-group",
+                "address":"/groups",
+                "addressExtra":{
+                    "group_id":"INT(8)"
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-group",
+                "address":"/groups",
+                "method":"POST",
+                "required":{
+                    "name":"VARCHAR(30)"
+                },
+                "result":{
+                    "group_id":"INT(8)"
+                }
+            },
+            {
+                "name":"edit-group",
+                "address":"/groups",
+                "addressExtra":{
+                    "group_id":"INT(8)"
+                },
+                "method":"PUT",
+                "optional":{
+                    "name":"VARCHAR(30)"
+                }
+            },
+            {
+                "name":"remove-group",
+                "address":"/groups",
+                "addressExtra":{
+                    "group_id":"INT(8)"
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"vitals",
+        "calls":[
+            {
+                "name":"get-vitals",
+                "address":"/vitals",
+                "method":"GET",
+                "optional":{
+                    "name":"VARCHAR(30)"
+                }
+            },
+            {
+                "name":"get-vital",
+                "address":"/vitals",
+                "addressExtra":{
+                    "vital_id":"INT(8)"
+                },
+                "method":"GET"
+            },
+            {
+                "name":"add-vital",
+                "address":"/vitals",
+                "method":"POST",
+                "required":{
+                    "name":"VARCHAR(30)"
+                },
+                "result":{
+                    "vital_id":"INT(8)"
+                }
+            },
+            {
+                "name":"edit-vital",
+                "address":"/vitals",
+                "addressExtra":{
+                    "vital_id":"INT(8)"
+                },
+                "method":"PUT",
+                "optional":{
+                    "name":"VARCHAR(30)"
+                }
+            },
+            {
+                "name":"remove-vital",
+                "address":"/vitals",
+                "addressExtra":{
+                    "vital_id":"INT(8)"
+                },
+                "method":"DELETE"
+            }
+        ]
+    },
+    {
+        "category":"user",
+        "calls":[
+            {
+                "name":"create-token",
+                "address":"/tokens",
+                "method":"POST",
+                "required":{
+                    "-todo-":"-todo-"
+                }
+            },
+            {
+                "name":"add-user-profile",
+                "address":"/user_profiles",
+                "method":"POST",
+                "required": {
+                    "social_id": "VARCHAR(40)",
+                    "name":"VARCAHR(40)"
+                },
+                "optional": {
+                    "email":"VARCHAR(40)"
+                }
+            }
+        ]
+    }
+]
