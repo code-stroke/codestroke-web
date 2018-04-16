@@ -1,10 +1,262 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <title>Codestroke - Triage</title>
 
-  </body>
+        <!-- External Scripts -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <!-- Local Scripts -->
+        <script src="main.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <nav class="sidebar-container">
+            <div class="sidebar-logo">
+                <img src="logo.png" />
+            </div>
+            <div class="sidebar-user">
+                <div class="sidebar-user-welcome">
+                    Welcome Back,
+                </div>
+                <div class="sidebar-user-name">
+                    <span title="Alan Ravinara Munteya">Alan Ravinara munteya</span>
+                </div>
+            </div>
+            <div class="sidebar-alert">
+                <div class="sidebar-button alert">
+                    Alerts
+                </div>
+                <div class="sidebar-button notif active">
+                    3
+                </div>
+            </div>
+
+            <div class="sidebar-button main selected">
+                Main Page
+            </div>
+            <div class="sidebar-button">
+                Cases
+            </div>
+            <div class="sidebar-button">
+                Activity Feed
+            </div>
+            <div class="sidebar-button">
+                Search Databse
+            </div>
+
+            <div class="sidebar-button account">
+                Account Options
+            </div>
+            <div class="sidebar-button logout">
+                Logout
+            </div>
+
+        </nav>
+        <aside class="main-padding">
+
+        </aside>
+        <main class="main-container">
+            <header class="main-header"></header>
+
+            <div class="main-heading">Active Cases</div>
+            <div class="content-box">
+                <div class="cases-container incoming">
+                    <header class="cases-header">
+                        <div class="cases-header-name">
+                            Incoming
+                        </div>
+                        <div class="cases-header-num">
+                            2
+                        </div>
+                        <div class="cases-header-icon">
+                            <img src="icons/up.png"/>
+                        </div>
+                    </header>
+                    <section class="cases-list open">
+
+                        <article class="case-box">
+                            <div class="case-name" title="Anthony Von Zilberstein">
+                                Anthony Von Zilberstein
+                            </div>
+                            <div class="case-age_sex">
+                                57 M
+                            </div>
+                            <hr />
+                            <div class="case-presentation" title="Complaints:">
+                                <img src="icons/ami.png"/>
+                                <img src="icons/mva.png"/>
+                            </div>
+                            <div class="case-well">
+                                00:35 Since well
+                            </div>
+                            <hr />
+                            <div class="case-action">
+                                <img class="feed-icon" src="icons/new-patient.png"/>
+                            </div>
+                            <div class="case-eta">
+                                15m ETA
+                            </div>
+                        </article>
+
+                    </section>
+                </div>
+                <div class="cases-container active">
+                    <header class="cases-header">
+                        <div class="cases-header-name">
+                            Active
+                        </div>
+                        <div class="cases-header-num">
+                            1
+                        </div>
+                        <div class="cases-header-icon">
+                            <img src="icons/up.png"/>
+                        </div>
+                    </header>
+                    <section class="cases-list open">
+
+                        <article class="case-box">
+                            <div class="case-name" title="Anthony Von Zilberstein">
+                                Noel Pattycakes
+                            </div>
+                            <div class="case-age_sex">
+                                57 M
+                            </div>
+                            <hr />
+                            <div class="case-presentation" title="Complaints:">
+                                <img src="icons/stroke.png"/>
+                                <img src="icons/overdose.png"/>
+                            </div>
+                            <div class="case-well">
+                                00:35 Since well
+                            </div>
+                            <hr />
+                            <div class="case-action">
+                                <img class="feed-icon" src="icons/radiology.png"/>
+                            </div>
+                            <div class="case-eta">
+                                At Radiology
+                            </div>
+                        </article>
+
+                    </section>
+                </div>
+                <div class="cases-container completed">
+                    <header class="cases-header">
+                        <div class="cases-header-name">
+                            Completed
+                        </div>
+                        <div class="cases-header-num empty">
+                            0
+                        </div>
+                        <div class="cases-header-icon">
+                            <img src="icons/down.png"/>
+                        </div>
+                    </header>
+                    <section class="cases-list open">
+                        Nothing to see here
+                    </section>
+                </div>
+
+            </div>
+
+            <div class="main-heading">Recent Feed</div>
+            <div class="content-box feed">
+                <section class="feed-container">
+                    <div class="feed-header">
+                        <div class="feed-header-patient">
+                            Patient
+                        </div>
+                        <div class="feed-header-clin_icon">
+
+                        </div>
+                        <div class="feed-header-clinicians">
+                            Clinicians
+                        </div>
+                        <div class="feed-header-act_icon">
+
+                        </div>
+                        <div class="feed-header-action">
+                            Action
+                        </div>
+                        <div class="feed-header-time">
+                            Time
+                        </div>
+                    </div>
+
+                    <div class="feed-divider">
+                    </div>
+
+                    <div class="feed-item incoming">
+                        <div class="feed-item-patient">
+                            <span title="Anthony Von Zilberstein">Anthony Von Zilberstein</span>
+                        </div>
+                        <div class="feed-item-clin_icon">
+                            <img class="feed-icon" src="icons/paramedic.png"/>
+                        </div>
+                        <div class="feed-item-clinicians">
+                            <span title="Marco the Paramedic">Marco the Paramedic</span>
+                        </div>
+                        <div class="feed-item-act_icon">
+                            <img class="feed-icon" src="icons/new-patient.png"/>
+                        </div>
+                        <div class="feed-item-action">
+                            Patient has presented with a ?AMI
+                        </div>
+                        <div class="feed-item-time">
+                            5m ago
+                        </div>
+                    </div>
+                    <div class="feed-item active">
+                        <div class="feed-item-patient">
+                            <span title="Noel Pattycakes">Noel Pattycakes</span>
+                        </div>
+                        <div class="feed-item-clin_icon">
+                            <img class="feed-icon" src="icons/doctor.png"/>
+                        </div>
+                        <div class="feed-item-clinicians">
+                            <span title="Dr Asia Scallopia">Dr George Malavoloids</span>
+                        </div>
+                        <div class="feed-item-act_icon">
+                            <img class="feed-icon" src="icons/radiology.png"/>
+                        </div>
+                        <div class="feed-item-action">
+                            Radiology is ready for the patient
+                        </div>
+                        <div class="feed-item-time">
+                            8m ago
+                        </div>
+                    </div>
+                    <div class="feed-item active">
+                        <div class="feed-item-patient">
+                            <span title="Noel Pattycakes">Noel Pattycakes</span>
+                        </div>
+                        <div class="feed-item-clin_icon">
+                            <img class="feed-icon" src="icons/triage.png"/>
+                        </div>
+                        <div class="feed-item-clinicians">
+                            <span title="Dr Asia Scallopia">Susana Ross</span>
+                        </div>
+                        <div class="feed-item-act_icon">
+                            <img class="feed-icon" src="icons/hospital.png"/>
+                        </div>
+                        <div class="feed-item-action">
+                            Patient has arrived to the ED department
+                        </div>
+                        <div class="feed-item-time">
+                            10m ago
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </main>
+        <aside class="main-padding">
+
+        </aside>
+
+    </body>
 </html>
