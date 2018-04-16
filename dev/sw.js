@@ -18,6 +18,6 @@ self.addEventListener('notificationclick', function(event) {
 
   event.waitUntil(
 /*change as needed*/
-    clients.openWindow(https://developers.google.com/web/)
+    clients.openWindow('https://developers.google.com/web/')
   );
 });
