@@ -17,7 +17,7 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
   event.waitUntil(
-/*change as needed*/
-    clients.openWindow('https://developers.google.com/web/')
+/* change as needed */
+    clients.openWindow('http://www.austin.org.au/')
   );
 });
