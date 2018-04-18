@@ -7,13 +7,20 @@
         <!-- External Scripts -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-        <!-- Local Scripts -->
-        <script src="main.js"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
+      <!--button to enable push notifications-->
+      <button disabled class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Enable Push Messaging
+      </button>
+      <section class="subscription-details js-subscription-details is-invisible">
+              <pre><code class="js-subscription-json"></code></pre>
+      </section>
+
+
         <div class="container">
 
             <section id="js-connection" class="section section-connection">
@@ -61,5 +68,8 @@
             </section>
 
         </div>
+        <!-- Local Scripts -->
+        <script src="main.js"></script>
+
     </body>
 </html>
