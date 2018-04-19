@@ -115,15 +115,14 @@ body {
     cursor: pointer;
 }
 
-.sidebar-button:not(.alert) {
+.sidebar-button:not(.alert):not(.push) {
     flex-shrink: 0;
 }
 
-.sidebar-button:hover:not(.selected):not(.alert):not(.notif){
+.sidebar-button:hover:not(.selected):not(.special_hover){
     background-color: AliceBlue;
 
-    transform: translateX(20px);
-    transition: transform 0.5s, background-color 0.5s;
+    transition: background-color 0.5s;
 }
 
 .sidebar-button.selected {
@@ -141,7 +140,7 @@ body {
     flex-direction: row;
 }
 
-.sidebar-alert * {
+.sidebar-alert > div {
     background-color: rgb(0,112,192);
     color: #FFF
 }
@@ -159,6 +158,47 @@ body {
 .sidebar-button.notif.active {
     background-color: red;
 }
+
+.sidebar-push {
+    opacity: 0.6;
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+
+    transition: opacity 0.4s;
+}
+
+.sidebar-push:hover {
+    opacity: 0.9;
+    transition: opacity 0.4s;
+}
+
+.sidebar-push > div {
+    height: 30px;
+}
+
+.sidebar-button.push_status {
+    margin-left: 10px;
+
+    width: 75px;
+}
+
+.push_status.on {
+    background-color: lightgreen;
+}
+
+.push_status.off {
+    background-color: lightcoral;
+}
+
+.sidebar-button.disabled {
+    opacity: 0.25;
+}
+
+
 
 .sidebar-button.main {
     margin-top: 30px;

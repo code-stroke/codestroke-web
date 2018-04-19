@@ -282,3 +282,8 @@
     max-width: 32px;
     max-height: 32px;
 }
+
+#js-push-debug {
+    width: 100%;
+    min-height: 200px;
+}
