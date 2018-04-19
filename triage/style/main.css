@@ -194,7 +194,7 @@
 .feed-item-patient, .feed-item-clinicians {
     margin-right: 10px;
 
-    width: 200px;
+    min-width: 200px;
     height: 100%;
     min-height: 40px;
 
@@ -203,7 +203,7 @@
 
 .feed-header-clin_icon, .feed-header-act_icon,
 .feed-item-clin_icon, .feed-item-act_icon {
-    width: 50px;
+    min-width: 50px;
     height: 100%;
     min-height: 40px;
 
@@ -215,7 +215,7 @@
     margin-right: 10px;
 
     flex: 1 1;
-    min-width: 400px;
+    min-width: 300px;
     min-height: 40px;
 
     //background-color: yellow;
@@ -223,16 +223,11 @@
 
 .feed-header-time,
 .feed-item-time {
-    width: 100px;
+    min-width: 100px;
     height: 100%;
     min-height: 40px;
 
     //background-color: yellow;
-}
-
-.feed-header-clinicians {
-    width: 200px;
-    height: 40px;
 }
 
 .feed-item {
