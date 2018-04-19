@@ -443,6 +443,7 @@ function subscribeUser() {
 function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server, for now will just print subscription
 
+
   const subscriptionJson = document.querySelector('.js-subscription-json');
   const subscriptionDetails =
     document.querySelector('.js-subscription-details');

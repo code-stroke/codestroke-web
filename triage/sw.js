@@ -4,9 +4,8 @@ self.addEventListener('push', function(event) {
 
   const title = 'Push CodeStroke';
   const options = {
-    body: 'Test successful.',
-    icon: 'logo.png',
-
+    body: 'Test successful.'
+  };
 
   const notificationPromise = self.registration.showNotification(title, options);
 
@@ -19,7 +18,6 @@ self.addEventListener('notificationclick', function(event) {
 
   event.waitUntil(
 /* change as needed */
-    clients.openWindow('http://www.austin.org.au/') 
-
+    clients.openWindow('http://www.austin.org.au/')
   );
 });
