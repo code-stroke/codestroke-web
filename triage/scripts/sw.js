@@ -2,23 +2,29 @@ self.addEventListener('push', function(event) {
   console.log('[Service Worker] Push Received.');
   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
 
-  const title = 'Push CodeStroke';
-  const options = {
-    body: 'Test successful.',
-    icon: '../icons/logo.png',
-  };
 
-  const notificationPromise = self.registration.showNotification(title, options);
+  var title = 'CodeStroke';
+  var body = event.data.text();
+  var icon = '../icons/logo.png';
+  var tag = 'tag1';
 
-});
-
-self.addEventListener('notificationclick', function(event) {
-  console.log('[Service Worker] Notification click Received.');
-
-  event.notification.close();
 
   event.waitUntil(
-/* change as needed */
-    clients.openWindow('http://www.austin.org.au/')
+    self.registration.showNotification(title, {
+      body: body,
+      icon: icon,
+      tag: tag,
+    })
   );
+});
+
+
+self.addEventListener('notificationclick', function(event) {
+   console.log('[Service Worker] Notification click Received.');
+
+   event.notification.close();
+
+   event.waitUntil(
+       clients.openWindow('http://www.austin.org.au/')
+   );
 });
