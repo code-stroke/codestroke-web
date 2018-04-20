@@ -2,7 +2,7 @@
 
 const DOM_Push = {};
 //const applicationServerPublicKey = 'BM2e4iaBRYGSs5I_jXJaXLY6p5_koeOKXK0MbPEsoTIpyrj0rZx3rDUtZ05ueOqn-Cl6W5HrxonQUHlUZtwJA9I';
-const applicationServerPublicKey = 'BNp4vAfivAwb1BYLFV6ZC-Qd0hbxPZ2LhS9H_WUOCPIEtIUzQDqfTlYLQtHj6v3MOVd6v2obn3VOQLswCvYBZlw';
+const applicationServerPublicKey = 'BKpA7tIFwqYgl7bw-TbVAAp9D9bjJkUZiOh_Sj9A9TqqJC4iKNThi4SNK064afo-h9l6JCJRaXy_Xw17IyvyQpg';
 
 let isSubscribed = false;
 let swRegistration = null;
@@ -134,7 +134,7 @@ $( document ).ready(function() {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported');
 
-        navigator.serviceWorker.register('sw.js')
+        navigator.serviceWorker.register('scripts/sw.js')
         .then(function(swReg) {
             console.log('Service Worker registered', swReg);
 

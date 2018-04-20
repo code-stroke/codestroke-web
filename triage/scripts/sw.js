@@ -5,7 +5,7 @@ self.addEventListener('push', function(event) {
   const title = 'Push CodeStroke';
   const options = {
     body: 'Test successful.',
-    icon: 'logo.png',
+    icon: '../icons/logo.png',
   };
 
   const notificationPromise = self.registration.showNotification(title, options);
