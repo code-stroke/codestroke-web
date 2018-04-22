@@ -23,7 +23,7 @@ function urlB64ToUint8Array(base64String) {
 }
 
 function initializeUI() {
-    DOM_Push.button.children().removeClass("disabled");
+    DOM_Push.button.removeClass("disabled");
 
     DOM_Push.button.click(function() {
         if (isSubscribed) {
@@ -59,17 +59,21 @@ function updateBtn() {
     }
 
     if (isSubscribed) {
-        DOM_Push.status.text("On");
-        DOM_Push.status.addClass("on");
-        DOM_Push.status.removeClass("off");
+        DOM_Push.button.text("On");
+        DOM_Push.button.addClass("on");
+        DOM_Push.button.removeClass("off");
     } else {
-        DOM_Push.status.text("Off");
-        DOM_Push.status.addClass("off");
-        DOM_Push.status.removeClass("on");
+        DOM_Push.button.text("Off");
+        DOM_Push.button.addClass("off");
+        DOM_Push.button.removeClass("on");
     }
+
+    $("body").removeClass("loading");
 }
 
 function subscribeUser() {
+    $("body").addClass("loading");
+
     const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
     swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
@@ -116,18 +120,17 @@ function unsubscribeUser() {
 }
 
 function disableBtn(message) {
-    DOM_Push.status.text("Disabled");
-    DOM_Push.status.removeClass("on off");
+    DOM_Push.button.text("Disabled");
+    DOM_Push.button.removeClass("on off");
 
     DOM_Push.button.prop("title", message);
-    DOM_Push.button.children().addClass("disabled");
+    DOM_Push.button.addClass("disabled");
 
     DOM_Push.button.off();
 }
 
 $( document ).ready(function() {
     DOM_Push.button = $("#js-push-button");
-    DOM_Push.status = DOM_Push.button.find(".push_status");
     DOM_Push.debug = $("#js-push-debug");
 
     /*register service worker and enable button if browser supports push notifications*/

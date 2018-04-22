@@ -17,6 +17,16 @@ body {
     align-items: flex-start;
 }
 
+body.loading * {
+    cursor: wait;
+}
+
+ul, li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 /******************
  * SIDEBAR        *
  ******************/
@@ -39,8 +49,14 @@ body {
 }
 
 /*Stop menu items from collapsing on eachother*/
-.sidebar-container > div {
+.sidebar-container > div:not(.sidebar-spacer) {
     flex-shrink: 0;
+}
+
+.sidebar-spacer {
+    flex-shrink: 1;
+    height: 30px;
+    min-height: 5px;
 }
 
 .sidebar-logo {
@@ -129,8 +145,6 @@ body {
 }
 
 .sidebar-alert {
-    margin-top: 30px;
-
     width: 100%;
     height: auto;
 
@@ -158,20 +172,11 @@ body {
 }
 
 .sidebar-push {
-    opacity: 0.6;
-
     width: 100%;
     height: auto;
 
     display: flex;
     flex-direction: row;
-
-    transition: opacity 0.4s;
-}
-
-.sidebar-push:hover {
-    opacity: 0.9;
-    transition: opacity 0.4s;
 }
 
 .sidebar-push > div {
@@ -180,6 +185,8 @@ body {
 
 .sidebar-button.push {
     flex: 1;
+    opacity: 0.6;
+    cursor: default;
 }
 
 
@@ -187,6 +194,14 @@ body {
     margin-left: 10px;
 
     width: 75px;
+
+    opacity: 0.6;
+    transition: opacity 0.4s;
+}
+
+.sidebar-button.push_status:hover {
+    opacity: 0.9;
+    transition: opacity 0.4s;
 }
 
 .push_status.on {
@@ -204,11 +219,11 @@ body {
 
 
 .sidebar-button.main {
-    margin-top: 30px;
+
 }
 
 .sidebar-button.account {
-    margin-top: 30px;
+
 
     background-color: rgb(191,191,191);
 }
