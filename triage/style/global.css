@@ -27,6 +27,22 @@ ul, li {
   padding: 0;
 }
 
+hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+    width: 100%;
+
+    border: none;
+    background-color: darkgray;
+    height: 1px;
+}
+
+.icon {
+    max-width: 32px;
+    max-height: 32px;
+}
+
 /******************
  * SIDEBAR        *
  ******************/
@@ -214,6 +230,8 @@ ul, li {
 
 .sidebar-button.disabled {
     opacity: 0.25;
+
+    cursor: default;
 }
 
 

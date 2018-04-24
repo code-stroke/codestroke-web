@@ -1,38 +1,338 @@
-/* Overriding main container */
-.main-container {
-    flex-direction: row;
-}
-
 .overview-container {
-    margin-right: 30px;
+    margin-bottom: 20px;
 
     flex: 1;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
 }
 
-.overview-patient {
+.overview-patient, .overview-actions {
     flex: 1;
 
     display: flex;
     flex-direction: column;
 
+}
+
+.overview-spacer {
+    min-width: 5px;
+    width: 20px;
+
+    display: flex;
+    //flex: 1;
+    flex-shrink: 200;
 }
 
 .overview-box {
-    margin-bottom: 20px;
 
     border: 1px solid black;
 
     min-height: 50px;
+    height: auto;
     flex: 1;
 
     padding: 20px;
 
+}
+
+/*****************************
+ * OVERVIEW PATIENT          *
+ *****************************/
+
+.overview-box.patient {
     display: flex;
     flex-direction: column;
 }
+
+.overview-box.patient > hr {
+    width: 100%;
+    background-color: lightgray;
+}
+
+.overview-patient-heading {
+    flex: 1;
+    min-height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.overview-patient-row {
+    margin-bottom: 5px;
+
+    //background-color: red;
+    flex: 1;
+    min-height: 30px;
+
+    display: flex;
+
+
+}
+
+.patient-row-label {
+    flex: 1;
+    flex-shrink: 0;
+    min-width: 140px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.1em;
+    white-space: nowrap;
+
+    //border-top: 1px solid darkgray;
+}
+
+.patient-row-value {
+    padding-left: 5px;
+
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    text-align: left;
+    //background-color: orange;
+}
+
+.patient-row-value.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.patient-row-value-item {
+    flex-shrink: 0;
+
+    padding: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    white-space: nowrap;
+
+    background-color: lightgray;
+}
+
+.patient-row-value-item:not(:last-of-type) {
+    margin-bottom: 5px;
+}
+
+.patient-row-value-item > img {
+    margin-right: 5px;
+}
+
+.patient-row-value-item.high {
+    background-color: rgb(249,179,167);
+}
+
+.patient-row-value-item.medium {
+    background-color: rgb(255,204,166);
+}
+
+.patient-row-value-item.yes {
+    background-color: lightgreen;
+}
+
+
+
+/******************
+ * ACTION        *
+ *****************/
+
+.overview-actions {
+    flex: 1.5;
+}
+
+ .overview-box.action {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+ }
+
+ .action-container {
+     flex: 1;
+
+     display: flex;
+     flex-direction: column;
+ }
+
+ .action-container > .main-heading {
+     align-self: center;
+ }
+
+ .action-buttons {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+ }
+
+ .action-button {
+     min-height: 60px;
+     max-height: 60px;
+     min-width: 200px;
+     width: 250px;
+
+     padding-top: 4px;
+
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+
+     background-color: rgb(189,215,238);
+
+     cursor: pointer;
+ }
+
+ .action-button.special {
+     background-color: rgb(180,199,231);
+ }
+
+ .action-button:hover {
+     background-color: rgb(75,145,209);
+ }
+
+ .action-button.selected {
+     outline: 1px solid black;
+     z-index: 2;
+      background-color: rgb(75,145,209);
+ }
+
+ .action-break {
+  flex-basis: 100%;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+ }
+
+ /********
+  * MAIN *
+  ********/
+
+.hidden {
+    display: none;
+}
+
+/********
+ * HISTORY *
+ ********/
+.overview-box.history {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.history-container {
+    margin-bottom: 20px;
+
+    display: flex;
+
+
+}
+
+.history-container > div:not(:last-of-type) {
+    margin-right: 10px;
+}
+
+.history-title {
+    min-width: 200px;
+    max-width: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.history-edit > * {
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history-edit-title {
+    font-weight: bold;
+}
+
+.history-edit-clinician {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history-edit-clinician > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightgray;
+}
+
+.history-edit-clinician-icon {
+    min-width: 50px;
+    min-height: 40px;
+}
+
+.history-edit-clinician-name {
+    min-width: 150px;
+    min-height: 40px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.history-edit-buttons {
+    flex-direction: column;
+}
+
+.history-edit-button {
+    border: 2px solid black;
+
+    min-width: 100px;
+
+    background-color: rgb(189,215,238);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.history-edit-button:not(:last-of-type) {
+    margin-top: 5px;
+    border-bottom: 0;
+}
+
+.history-edit-button:hover {
+    background-color: rgb(75,145,209);
+}
+
+
+ /********
+  * FEED *
+  ********/
+
 
 .overview-feed {
     flex: 1;
@@ -157,48 +457,3 @@
     max-width: 32px;
     max-height: 32px;
 }
-
-/******************
- * ACTION        *
- *****************/
-
- .action-container {
-     flex: 1;
-
-     display: flex;
-     flex-direction: column;
- }
-
- .action-container > .main-heading {
-     align-self: center;
- }
-
- .action-buttons {
-     display: flex;
-     flex-direction: row;
-     flex-wrap: wrap;
-     justify-content: center;
- }
-
- .action-button {
-     min-height: 60px;
-     max-height: 60px;
-     min-width: 200px;
-
-     padding-top: 4px;
-
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-
-     background-color: DeepSkyBlue;
- }
-
- .action-button.special {
-     background-color: DarkTurquoise;
- }
-
- .action-button:hover {
-     background-color: RoyalBlue;
-
- }

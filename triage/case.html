@@ -27,14 +27,27 @@
                     <span title="Alan Ravinara Munteya">Alan Ravinara munteya</span>
                 </div>
             </div>
+
+            <div class="sidebar-spacer"></div>
+
             <div class="sidebar-alert">
-                <div class="sidebar-button alert">
+                <div class="sidebar-button alert special_hover">
                     Alerts
                 </div>
-                <div class="sidebar-button notif active">
+                <div class="sidebar-button notif active special_hover">
                     3
                 </div>
             </div>
+            <div class="sidebar-push">
+                <div class="sidebar-button push special_hover">
+                    Push Notifications
+                </div>
+                <div id="js-push-button" class="sidebar-button push_status special_hover disabled">
+
+                </div>
+            </div>
+
+            <div class="sidebar-spacer"></div>
 
             <div class="sidebar-button main">
                 Main Page
@@ -49,6 +62,8 @@
                 Search Databse
             </div>
 
+            <div class="sidebar-spacer"></div>
+
             <div class="sidebar-button account">
                 Account Options
             </div>
@@ -62,74 +77,178 @@
 
         </aside>
         <main class="main-container">
-
+            <header class="main-header"></header>
 
             <section class="overview-container">
-                <header class="main-header"></header>
                 <article class="overview-patient">
                     <div class="main-heading">Case Overview</div>
-                    <div class="overview-box">
-                        Test
-                    </div>
-                </article>
+                    <div class="overview-box patient">
+                        <div class="overview-patient-heading">
+                            Anthony Von Zilberstein
+                        </div>
+                        <div class="overview-patient-heading">
+                            58M
+                        </div>
 
-                <article class="overview-feed">
-                    <div class="main-heading">Patient Feed</div>
-                    <div class="overview-box feed">
+                        <ul class="overview-patient-row">
+                            <div class="patient-row-label">
+                                Presentation
+                            </div>
+                            <div class="patient-row-value column">
+                                <li class="patient-row-value-item">
+                                    <img src="icons/diagnosis/ami.png"/> AMI / STEMI / NSTEMI
+                                </li>
+                                <li class="patient-row-value-item">
+                                    <img src="icons/diagnosis/stroke.png"/> CVA / STROKE
+                                </li>
+                                <li class="patient-row-value-item">
+                                    <img src="icons/diagnosis/mva.png"/> MVA / CRASH
+                                </li>
+                            </div>
+                        </ul>
 
-                        <div class="feed-header">
-                            <div class="feed-header-clin_icon">
+                        <hr />
 
+                        <div class="overview-patient-row">
+                            <div class="patient-row-label">
+                                Time Since Well:
                             </div>
-                            <div class="feed-header-clinicians">
-                                Clinicians
+                            <div class="patient-row-value">
+                                <span class="patient-row-value-item high"> 3h 15m</span>
                             </div>
-                            <div class="feed-header-act_icon">
+                        </div>
 
+                        <hr />
+
+                        <div class="overview-patient-row">
+                            <div class="patient-row-label">
+                                Anticoagulation
                             </div>
-                            <div class="feed-header-action">
-                                Action
+                            <div class="patient-row-value column">
+                                <span class="patient-row-value-item yes">Yes</span>
+                                <span class="patient-row-value-item">Last taken 5h 18m</span>
                             </div>
-                            <div class="feed-header-time">
-                                Time
+                        </div>
+
+                        <hr />
+
+                        <div class="overview-patient-row">
+                            <div class="patient-row-label">
+                                Fasting
+                            </div>
+                            <div class="patient-row-value">
+                                <span class="patient-row-value-item medium">Last meal 9h 23m</span>
                             </div>
                         </div>
 
                     </div>
                 </article>
 
-            </section>
+                <div class="overview-spacer"></div>
 
-            <section class="action-container">
-                <header class="main-header"></header>
+                <nav class="overview-actions">
+                    <div class="main-heading">Actions</div>
+                    <div class="overview-box action">
+                        <div class="action-button">
+                            <span>Activity Feed</span>
+                            <img src="icons/button/activity.png"/>
+                        </div>
+                        <div class="action-button">
+                            <span>Patient Details</span>
+                            <img src="icons/button/contact.png"/>
+                        </div>
+                        <div class="action-button selected">
+                            <span>Case History</span>
+                            <img src="icons/button/history.png"/>
+                        </div>
+                        <div class="action-button">
+                            <span>Clinical Assessment</span>
+                            <img src="icons/button/assessment.png"/>
+                        </div>
+                        <div class="action-button">
+                            <span>Investigations</span>
+                            <img src="icons/button/investigations.png"/>
+                        </div>
+                        <div class="action-button">
+                            <span>Management</span>
+                            <img src="icons/button/management.png"/>
+                        </div>
 
-                <div class="main-heading">Actions</div>
-                <nav class="action-buttons">
-                    <div class="action-button">
-                        <span>Patient Details</span>
-                        <img src="icons/button/contact.png"/>
-                    </div>
-                    <div class="action-button">
-                        <span>Case History</span>
-                        <img src="icons/button/history.png"/>
-                    </div>
-                    <div class="action-button">
-                        <span>Clinical Assessment</span>
-                        <img src="icons/button/assessment.png"/>
-                    </div>
-                    <div class="action-button">
-                        <span>Investigations</span>
-                        <img src="icons/button/investigations.png"/>
-                    </div>
-                    <div class="action-button">
-                        <span>Management</span>
-                        <img src="icons/button/management.png"/>
-                    </div>
-                    <div class="action-button special">
-                        <span>Triage</span>
-                        <img src="icons/button/triage.png"/>
+                        <div class="action-break"></div>
+
+                        <div class="action-button special">
+                            <span>Triage</span>
+                            <img src="icons/button/triage.png"/>
+                        </div>
                     </div>
                 </nav>
+
+            </section>
+
+            <section class="main-section">
+                <div class="main-heading">Case History</div>
+                <div class="overview-box history">
+                    <article class="history-container">
+                        <div class="history-title">
+                            <span>History of Presenting Complaint</span>
+                        </div>
+                        <div class="history-box">
+                            <textarea cols="40" rows="10" style="resize: vertical"># Central crushing chest pain</textarea>
+                        </div>
+                        <div class="history-edit">
+                            <div class="history-edit-title">
+                                Last edited by:
+                            </div>
+                            <div class="history-edit-clinician">
+                                <div class="history-edit-clinician-icon">
+                                    <img class="icon" src="icons/staff/paramedic.png"/>
+                                </div>
+                                <div class="history-edit-clinician-name">
+                                    <span title="Dr Asia Scallopia">Marco the Paramedic</span>
+                                </div>
+                            </div>
+                            <div class="history-edit-time">
+                                12m ago
+                            </div>
+                            <hr />
+                            <div class="history-edit-buttons">
+                                <div class="history-edit-button">Reset</div>
+                                <div class="history-edit-button">Update</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="history-container">
+                        <div class="history-title">
+                            <span>Past History & Family History</span>
+                        </div>
+                        <div class="history-box">
+                            <textarea cols="40" rows="10" style="resize: vertical">Previous CABG</textarea>
+                        </div>
+                        <div class="history-edit">
+                            <div class="history-edit-title">
+                                Last edited by:
+                            </div>
+                            <div class="history-edit-clinician">
+                                <div class="history-edit-clinician-icon">
+                                    <img class="icon" src="icons/staff/paramedic.png"/>
+                                </div>
+                                <div class="history-edit-clinician-name">
+                                    <span title="Dr Asia Scallopia">Marco the Paramedic</span>
+                                </div>
+                            </div>
+                            <div class="history-edit-time">
+                                12m ago
+                            </div>
+                            <hr />
+                            <div class="history-edit-buttons">
+                                <div class="history-edit-button">Reset</div>
+                                <div class="history-edit-button">Update</div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
             </section>
 
 
