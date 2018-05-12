@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <meta name="google-signin-client_id"
+	  content="793424577227-s7mkm3mc6tgse2d7tp3075vcqpff2nno.apps.googleusercontent.com">
+    
+    <title>Welcome to Codestroke!</title>
+    
+    <!-- External Scripts -->    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Local Scripts -->
+    <script src="scripts/login.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/login.css">
+  </head>
+  <body>
+    <div class="main-logo">
+      <img src="logo.png" width="240px">
+    </div>
+    <div id="sign-in-container">
+      <div id="google-signin" class="g-signin2" data-onsuccess="onSignIn"
+	   data-width="240" data-height="50" data-longtitle="true"></div>
+    </div>
+  </body>
+</html>
+
+	
+      
+    
