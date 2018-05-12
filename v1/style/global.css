@@ -1,0 +1,44 @@
+* {
+    font-family: "Helvetica";
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+body.loading * {
+    cursor: wait;
+}
+
+ul, li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+    width: 100%;
+
+    border: none;
+    background-color: darkgray;
+    height: 1px;
+}
+
+.icon {
+    max-width: 32px;
+    max-height: 32px;
+}
