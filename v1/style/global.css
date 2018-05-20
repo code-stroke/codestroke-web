@@ -8,11 +8,13 @@ html, body {
 
     padding: 0px;
     margin: 0px;
+
+    overflow-y: hidden;
 }
 
 body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
@@ -38,7 +40,147 @@ hr {
     height: 1px;
 }
 
+input {
+    outline: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+button {
+    outline: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: inherit;
+}
+
 .icon {
     max-width: 32px;
     max-height: 32px;
+}
+
+/**********
+ * Header *
+ **********/
+
+.header-container{
+    border-bottom: 1px solid #f2994a;
+
+     min-width: 100%;
+     height: 50px;
+     flex-shrink: 0;
+     flex-grow: 1;
+
+     background: #2980b9;  /* fallback for old browsers */
+     background: linear-gradient(to bottom, #2980b9, #2980b9 80%, #2c3e50 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     background: #f2994a; /* fallback for old browsers */
+     background: linear-gradient(to bottom, #f2c94c, #f2c94c 85%, #f2994a 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+     display: flex;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: stretch;
+}
+
+.header-box {
+     margin-left: 10px;
+
+     padding-top: 5px;
+     padding-bottom: 5px;
+
+     display: flex;
+     flex-direction: column;
+}
+
+.header-box.logo img {
+     height: 40px;
+     width: auto;
+}
+
+.header-box.user {
+    margin-left: 20px;
+    justify-content: center;
+}
+
+.header-box.btn {
+    margin-left: 0;
+
+    border-right: 1px solid rgba(242, 153, 74, 0.6);
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    background: rgba(242, 153, 74, 0.35);
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-box.btn:hover {
+    cursor: pointer;
+    background: rgba(242, 153, 74, 0.6);
+}
+
+.header-box.notif {
+    margin-left: 30px;
+
+    border-left: 1px solid rgba(242, 153, 74, 0.6);
+}
+
+.header-user-welcome {
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.header-user-name {
+    font-size: 1.2em;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-box.btns {
+    justify-content: flex-end;
+}
+
+.header-btn {
+    //width: 100%;
+    height: 100%;
+
+    background: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-vr {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    width: 1px;
+    height: 80%;
+
+    background: #2c3e50;
+}
+
+/********
+ * Main *
+ ********/
+
+.main-container {
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
