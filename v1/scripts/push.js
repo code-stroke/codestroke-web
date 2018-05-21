@@ -1,8 +1,12 @@
 /* Push Notification Handler */
 
 const DOM_Push = {};
+
+const TEMP_Push = {}
+TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
+
 //const applicationServerPublicKey = 'BM2e4iaBRYGSs5I_jXJaXLY6p5_koeOKXK0MbPEsoTIpyrj0rZx3rDUtZ05ueOqn-Cl6W5HrxonQUHlUZtwJA9I';
-const applicationServerPublicKey = 'BKpA7tIFwqYgl7bw-TbVAAp9D9bjJkUZiOh_Sj9A9TqqJC4iKNThi4SNK064afo-h9l6JCJRaXy_Xw17IyvyQpg';
+const applicationServerPublicKey = 'BPoPq2CwB_9zkUmRzUjMwym7uE_3ROm9YScjqAb6-CabXCJKe_mtHpu5t4rwyzT9OYqN2Du4-dDHw3hhol9Wq1Q';
 
 let isSubscribed = false;
 let swRegistration = null;
@@ -59,13 +63,9 @@ function updateBtn() {
     }
 
     if (isSubscribed) {
-        DOM_Push.button.text("On");
-        DOM_Push.button.addClass("on");
-        DOM_Push.button.removeClass("off");
+        DOM_Push.button.html(TEMP_Push.button({status: "on"}));
     } else {
-        DOM_Push.button.text("Off");
-        DOM_Push.button.addClass("off");
-        DOM_Push.button.removeClass("on");
+        DOM_Push.button.html(TEMP_Push.button({status: "off"}));
     }
 
     $("body").removeClass("loading");
@@ -96,7 +96,7 @@ function subscribeUser() {
 
 function updateSubscriptionOnServer(subscription) {
     // TODO: Send subscription to application server, for now will just print subscription
-    DOM_Push.debug.text(JSON.stringify(subscription));
+    console.log("Subscription: " + JSON.stringify(subscription));
 }
 
 function unsubscribeUser() {
@@ -120,18 +120,17 @@ function unsubscribeUser() {
 }
 
 function disableBtn(message) {
-    DOM_Push.button.text("Disabled");
-    DOM_Push.button.removeClass("on off");
+    DOM_Push.button.html(TEMP_Push.button({status: "disabled"}));
+    DOM_Push.button.addClass("disabled");
 
     DOM_Push.button.prop("title", message);
-    DOM_Push.button.addClass("disabled");
 
     DOM_Push.button.off();
 }
 
 $( document ).ready(function() {
     DOM_Push.button = $("#js-push-button");
-    DOM_Push.debug = $("#js-push-debug");
+    //DOM_Push.debug = $("#js-push-debug");
 
     /*register service worker and enable button if browser supports push notifications*/
     if ('serviceWorker' in navigator && 'PushManager' in window) {
