@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+}
+
+#sign-in-container {
+    width: 240px;
+}
+
+input {
+    width: 100%;
+    margin: 2px;
+    padding: 8px;
+    font-size: 1.2em;
+    background-color: white;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+input[type="submit"]:hover {
+    background-color: lightgray;
+}
+
+#error-container {
+    width: 100%
+    margin: 2px;
+    padding: 8px;
+    font-size: 1.2em;
+    background-color: Tomato;
+    color: white;
+    visibility: hidden;
+}
+    

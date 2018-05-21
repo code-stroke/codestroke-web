@@ -4,7 +4,7 @@ var localserver = "http://localhost:5000/";
 $(document).ready(function(){
     var user_name = Cookies.get("user_name");
     if (user_name !== undefined) {
-	window.location.replace("/triage");
+	window.location.replace("/");
     } else {
 	console.log("Not logged in.");
     }
