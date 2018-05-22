@@ -25,6 +25,9 @@ self.addEventListener('notificationclick', function(event) {
    event.notification.close();
 
    event.waitUntil(
-       clients.openWindow('http://www.austin.org.au/')
+      /* clients.openWindow('http://www.austin.org.au/') */
+      clients.openWindow('http://127.0.0.1:8887/v1/')
+
+
    );
 });
