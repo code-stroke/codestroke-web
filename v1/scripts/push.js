@@ -6,7 +6,7 @@ const TEMP_Push = {}
 TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
 
 //const applicationServerPublicKey = 'BM2e4iaBRYGSs5I_jXJaXLY6p5_koeOKXK0MbPEsoTIpyrj0rZx3rDUtZ05ueOqn-Cl6W5HrxonQUHlUZtwJA9I';
-const applicationServerPublicKey = 'BPoPq2CwB_9zkUmRzUjMwym7uE_3ROm9YScjqAb6-CabXCJKe_mtHpu5t4rwyzT9OYqN2Du4-dDHw3hhol9Wq1Q';
+const applicationServerPublicKey = 'BGwoGYtRfMl2E8aBtyJZJskhYuq4wtfczu-OCK1swClArSRdE6LoOqcLWTKEqFUHa8Thhpq0UJQIu4HsMGoLBZk';
 
 let isSubscribed = false;
 let swRegistration = null;
