@@ -139,24 +139,114 @@
 
  }
 
+ .case-container {
+     display: flex;
+     flex-direction: column;
+ }
+
+ .case-row {
+     min-height: 40px;
+
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+ }
+
+ .case-row.last > .case-label {
+      border-bottom: 1px solid gray;
+ }
+
+ .case-input {
+     border: 1px solid darkgray;
+     border-radius: 5px;
+
+     height: 30px;
+     width: 100%;
+     box-sizing: border-box;
+
+     padding-left: 10px;
+     padding-right: 10px;
+
+     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+     background: #F5F5F5;
+
+     font-size: 1.1em;
+ }
+
+ .case-input.text:focus {
+     background: white;
+     border: 1px solid #ffb347;
+ }
+
+ .case-input.check {
+     display: block;
+
+     min-height: 40px;
+     max-height: 40px;
+     min-width: 40px;
+     max-width: 40px;
+     flex-shrink: 0;
+
+     background-size: contain;
+
+     cursor: pointer;
+ }
+
+ .case-input.check:checked {
+     //background-color: white;
+     background: url("../icons/button/checked1.png") center no-repeat;
+     border: 1px solid #ffb347;
+ }
+
+ .case-label {
+     margin-right: 10px;
+
+     border: 1px solid gray;
+     border-bottom: none;
+
+     width: 100%;
+     min-height: 30px;
+
+     padding-top: 5px;
+     padding-bottom: 5px;
+     padding-left: 10px;
+     padding-right: 10px;
+
+     font-size: 1.1em;
+
+     display: flex;
+     align-items: center;
+ }
+
+ .case-submit {
+     margin-top: 30px;
+
+     border: 2px solid black;
+
+     width: 100%;
+     min-height: 40px;
+
+     background: white;
+     cursor: pointer;
+
+     transition: background 0.5s ease;
+ }
+
+ .case-submit:hover {
+     background-color: #FDD5B1;
+
+     transition: background 0.5s ease;
+ }
+
  /********
   * ED *
   ********/
 
-.ed-container {
-    //height: 100%;
+.case-section.ed {
     min-width: 400px;
-
-    display: flex;
-    flex-direction: column;
 }
 
-.ed-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.ed-row.loc {
+.case-row.ed-loc {
     margin-bottom: 10px;
 
     justify-content: center;
@@ -165,213 +255,47 @@
     font-size: 1.4em;
 }
 
-.ed-row.loc span {
+.case-row.ed-loc span {
     margin-left: 10px;
 
     font-weight: bold;
     font-size: 1.6em;
 }
 
-.ed-row.input {
+.case-row.ed-loc-input {
     margin-bottom: 30px;
 }
 
-.ed-input {
-    border: 1px solid darkgray;
-    border-radius: 5px;
-
-    height: 30px;
-    width: 100%;
-
-    padding-left: 10px;
-    padding-right: 10px;
-
-    box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-    background: #F5F5F5;
-
-    font-size: 1.1em;
-}
-
-.ed-input:focus {
-    background: white;
-    border: 1px solid #ffb347;
-}
-
-.ed-row.check {
-    flex-direction: row;
-}
-
-.ed-row.check.last {
-    margin-bottom: 30px;
-}
-
-.ed-row.check.complete {
-    margin-bottom: 10px;
-}
-
-.ed-row.check.complete > .ed-label {
-    border-bottom: 1px solid gray;
+.case-section.ed .case-row.ed-complete .case-label {
     background-color: #dfd;
 }
 
-.ed-row.check.complete > .ed-check {
+.case-section.ed .case-row.ed-complete .case-input.check {
     border-radius: 0;
 
     box-shadow: none;
     background-color: white;
     background: url("../icons/button/tick.png") center no-repeat;
 
+    pointer-events: none;
     cursor: auto;
 }
 
-.ed-label {
-    margin-right: 10px;
-
-    border: 1px solid gray;
-    border-bottom: none;
-
-    width: 100%;
-    min-height: 35px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-
-    font-size: 1.1em;
-
-    display: flex;
-    align-items: center;
-}
-
-
-.ed-label.last {
-    border-bottom: 1px solid gray;
-}
-
-.ed-check {
-    display: block;
-
-    min-height: 35px;
-    min-width: 35px;
-    flex-shrink: 0;
-
-    border: 1px solid darkgray;
-    border-radius: 5px;
-
-    box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-
-    background: #F5F5F5;
-    background-size: contain;
-
-    cursor: pointer;
-}
-
-.ed-check:checked {
-    //background-color: white;
-    background: url("../icons/button/checked1.png") center no-repeat;
-    border: 1px solid #ffb347;
-}
-
-.ed-submit {
-    border: 2px solid black;
-
-    width: 100%;
-    min-height: 40px;
-
-    background: white;
-    cursor: pointer;
-
-    transition: background 0.5s ease;
-}
-
-.ed-submit:hover {
-    background-color: #FDD5B1;
-
-    transition: background 0.5s ease;
-}
 
 /***********
  * DETAILS *
  ***********/
-.details-container {
+.case-section.details {
     min-width: 500px;
 
     display: flex;
     flex-direction: column;
 }
 
-.details-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    min-height: 40px;
-}
-
-.details-label {
-    margin-right: 10px;
-
-    border: 1px solid gray;
-    border-bottom: none;
-
-    width: 100%;
-    min-height: 30px;
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    font-size: 1.1em;
-
-    display: flex;
-    align-items: center;
-}
-
-.details-label.last {
-    border-bottom: 1px solid gray;
-}
-
-.details-input {
-    border: 1px solid darkgray;
-    border-radius: 5px;
-
-    height: 30px;
+.case-section.details .case-input {
     min-width: 300px;
-    box-sizing:content-box;
-
-    padding-left: 10px;
-    padding-right: 10px;
-
-    box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-    background: #F5F5F5;
-
-    font-size: 1.1em;
-
-    display: flex;
 }
 
-.details-input.empty {
+.case-input.empty {
     color: gray;
-}
-
-.details-row.button {
-    margin-top: 20px;
-}
-
-.details-submit {
-    border: 2px solid black;
-
-    width: 100%;
-    min-height: 40px;
-
-    background: white;
-    cursor: pointer;
-
-    transition: background 0.5s ease;
-}
-
-.details-submit:hover {
-    background-color: #FDD5B1;
-
-    transition: background 0.5s ease;
 }
