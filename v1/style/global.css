@@ -40,7 +40,7 @@ hr {
     height: 1px;
 }
 
-input {
+input, textarea {
     outline: 0;
     border: 0;
     padding: 0;
@@ -134,7 +134,7 @@ button {
 
 .header-box.notif {
     margin-left: 30px;
-    
+
     border-left: 1px solid rgba(242, 153, 74, 0.6);
 }
 
@@ -153,17 +153,6 @@ button {
 
 .header-box.btns {
     justify-content: flex-end;
-}
-
-
-.header-vr {
-    margin-left: 10px;
-    margin-right: 10px;
-
-    width: 1px;
-    height: 80%;
-
-    background: #2c3e50;
 }
 
 /********

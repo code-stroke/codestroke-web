@@ -133,34 +133,39 @@
      background: white;
  }
 
- .js-input.active {
-
+ /*.js-input.active {
      border: 1px solid #ffb347;
-
- }
-
- .case-container {
-     display: flex;
-     flex-direction: column;
- }
+ }*/
 
  .case-row {
      min-height: 40px;
+     width: 100%;
+
+     padding-top: 5px;
+     padding-bottom: 5px;
 
      display: flex;
      flex-direction: row;
      align-items: center;
  }
 
- .case-row.last > .case-label {
-      border-bottom: 1px solid gray;
- }
+ /*.case-row-group {
+     margin-bottom: 5px;
+
+     width: 100%;
+
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+
+     background: red;
+ }*/
 
  .case-input {
      border: 1px solid darkgray;
      border-radius: 5px;
 
-     height: 30px;
+     height: 40px;
      width: 100%;
      box-sizing: border-box;
 
@@ -170,12 +175,24 @@
      box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
      background: #F5F5F5;
 
-     font-size: 1.1em;
+     font-size: 1.0em;
  }
 
  .case-input.text:focus {
      background: white;
      border: 1px solid #ffb347;
+ }
+
+ .case-input.empty {
+     color: gray;
+ }
+
+ .case-input.area {
+     min-height: 100px;
+     min-width: 300px;
+
+     padding-top: 5px;
+     padding-bottom: 5px;
  }
 
  .case-input.check {
@@ -194,7 +211,7 @@
 
  .case-input.check:checked {
      //background-color: white;
-     background: url("../icons/button/checked1.png") center no-repeat;
+     background: url("../icons/button/checked.png") center no-repeat;
      border: 1px solid #ffb347;
  }
 
@@ -202,7 +219,6 @@
      margin-right: 10px;
 
      border: 1px solid gray;
-     border-bottom: none;
 
      width: 100%;
      min-height: 30px;
@@ -219,7 +235,7 @@
  }
 
  .case-submit {
-     margin-top: 30px;
+     margin-top: 20px;
 
      border: 2px solid black;
 
@@ -246,7 +262,7 @@
     min-width: 400px;
 }
 
-.case-row.ed-loc {
+.case-row.ed_loc {
     margin-bottom: 10px;
 
     justify-content: center;
@@ -255,22 +271,22 @@
     font-size: 1.4em;
 }
 
-.case-row.ed-loc span {
+.case-row.ed_loc span {
     margin-left: 10px;
 
     font-weight: bold;
     font-size: 1.6em;
 }
 
-.case-row.ed-loc-input {
-    margin-bottom: 30px;
+.case-row.ed_loc_input {
+    margin-bottom: 20px;
 }
 
-.case-section.ed .case-row.ed-complete .case-label {
+.case-row.ed_complete .case-label {
     background-color: #dfd;
 }
 
-.case-section.ed .case-row.ed-complete .case-input.check {
+.case-row.ed_complete .case-input.check {
     border-radius: 0;
 
     box-shadow: none;
@@ -283,19 +299,72 @@
 
 
 /***********
- * DETAILS *
+ * Details *
  ***********/
 .case-section.details {
     min-width: 500px;
-
-    display: flex;
-    flex-direction: column;
 }
 
 .case-section.details .case-input {
     min-width: 300px;
 }
 
-.case-input.empty {
-    color: gray;
+/********
+ * History *
+ ********/
+.case-section.history {
+    width: 550px;
+}
+
+.case-section.history .case-label {
+    max-width: 200px;
+    min-width: 200px;
+}
+
+/**/
+
+.case-row.history_textarea > .case-label {
+    align-self: flex-start;
+}
+
+/**/
+
+.case-row.history_heading {
+    padding-bottom: 0;
+}
+
+.case-row.history_subheading {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.case-row.history_subheading.last {
+    margin-bottom: 10px;
+}
+
+.case-row.history_subheading > .case-label {
+    margin-left: 50px;
+
+    border-top: none;
+    border-bottom: 1px solid gray;
+
+    max-width: 150px;
+    min-width: 150px;
+
+    font-size: 1.0em;
+}
+
+.case-row.history_subheading > .case-input {
+    height: 30px;
+    font-size: 0.95em;
+}
+
+/********
+ * Assessment *
+ ********/
+
+
+
+.yes {
+    background: green !important;
 }
