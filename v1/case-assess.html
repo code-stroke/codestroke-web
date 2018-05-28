@@ -1,0 +1,387 @@
+<header class="assess-header">
+    <a data-anchor="mass" class="assess-header-button js-assess-button">
+        MASS
+    </a>
+    <a data-anchor="vitals" class="assess-header-button js-assess-button">
+        Vitals
+    </a>
+    <a data-anchor="race" class="assess-header-button js-assess-button">
+        RACE
+    </a>
+    <a data-anchor="cannula" class="assess-header-button js-assess-button">
+        Cannula
+    </a>
+    <a data-anchor="nihss" class="assess-header-button js-assess-button">
+        NIHSS
+    </a>
+    <a data-anchor="mrs" class="assess-header-button js-assess-button">
+        mRS
+    </a>
+    <a data-anchor="submit" class="assess-header-button js-assess-button">
+        <img class="icon" src="icons/button/down.png"/>
+    </a>
+</header>
+<section id="js-assess-section" class="case-section assess">
+    <div class="assess-container">
+
+    <section id="js-assess-mass" class="case-row-group top">
+        <div class="case-row assess_heading">
+            <label class="case-label">MASS</label>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Facial Droop</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+                <option value="u">Unknown</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Arm Drift</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+                <option value="u">Unknown</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Weak Grip</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+                <option value="u">Unknown</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Speech Difficulty</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+                <option value="u">Unknown</option>
+            </select>
+        </div>
+    </section>
+
+    <section id="js-assess-vitals" class="case-row-group">
+        <div class="case-row assess_heading">
+            <label class="case-label">Vital Signs</label>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Blood pressure (mmHg)</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Heart Rate (bpm)</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Regular/Irregular</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Respiratory Rate (BPM)</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">O<sub>2</sub> &nbsp Saturation (%)</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Temperature (<sup>o</sup>C)</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">GCS</label>
+            <input class="case-input text"></input>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Blood Glucose (mmol/L)</label>
+            <input class="case-input text"></input>
+        </div>
+    </section>
+
+    <section id="js-assess-race" class="case-row-group">
+        <div class="case-row assess_heading">
+            <label class="case-label">RACE Score</label>
+            <label class="case-label assess_score">8</label>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Facial Palsy</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Absent 0</option>
+                <option value="1">Mild 1</option>
+                <option value="2">Mod-Severe 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Arm Motor Impairment</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal-Mild 0</option>
+                <option value="1">Mod 1</option>
+                <option value="2">Severe 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Leg Motor Impairment</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal-Mild 0</option>
+                <option value="1">Mod 1</option>
+                <option value="2">Severe 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Head & Gaze Deviation</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Absent 0</option>
+                <option value="1">Present 1</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Hemiparesis</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Left</option>
+                <option value="1">Right</option>
+            </select>
+        </div>
+    </section>
+
+    <section id="js-assess-cannula" class="case-row-group">
+        <div class="case-row assess_heading">
+            <label class="case-label">18G IV Cannula in Cub. Fossa</label>
+            <label class="case-label assess_score">Yes</label>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Cannula</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+                <option value="u">Unable to get access</option>
+            </select>
+        </div>
+    </section>
+
+    <section id="js-assess-nihss" class="case-row-group">
+        <div class="case-row assess_heading">
+            <label class="case-label">NIHSS</label>
+            <label class="case-label assess_score">18</label>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Level of Consciousness</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Alert 0</option>
+                <option value="1">Minor Stimulation 1</option>
+                <option value="2">Repeated Stimulation 2</option>
+                <option value="3">Movement to Pain 3</option>
+                <option value="4">Postures or Unresponsive 4</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Month and Age</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Both Correct 0</option>
+                <option value="1">One Correct 1</option>
+                <option value="2">Zero Correct 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Blink Eyes & Squeeze Hands</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Both Correct 0</option>
+                <option value="1">One Correct 1</option>
+                <option value="2">Zero Correct 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Horizontal Gaze</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal 0</option>
+                <option value="1">Partial Palsy 1</option>
+                <option value="2">Forced Gaze Palsy 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Visual Fields</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal 0</option>
+                <option value="1">Partial Hemianopia 1</option>
+                <option value="2">Complete Hemianopia 2</option>
+                <option value="3">Bilateral Hemianopia 3</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Facial Palsy</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal 0</option>
+                <option value="1">Minor Paralysis 1</option>
+                <option value="2">Partial Paralysis 2</option>
+                <option value="3">Unilateral/Bilateral Complete Paralysis 3</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Left Arm Drift</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">No drift for 10 seconds 0</option>
+                <option value="1">Mild Drift 1</option>
+                <option value="2">Drift/Some effort against gravity 2</option>
+                <option value="3">No effort against gravity 3</option>
+                <option value="4">No movement 4</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Right Arm Drift</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">No drift for 10 seconds 0</option>
+                <option value="1">Mild Drift 1</option>
+                <option value="2">Drift/Some effort against gravity 2</option>
+                <option value="3">No effort against gravity 3</option>
+                <option value="4">No movement 4</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Left Leg Drift</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">No drift for 10 seconds 0</option>
+                <option value="1">Mild Drift 1</option>
+                <option value="2">Drift/Some effort against gravity 2</option>
+                <option value="3">No effort against gravity 3</option>
+                <option value="4">No movement 4</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Right Leg Drift</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">No drift for 10 seconds 0</option>
+                <option value="1">Mild Drift 1</option>
+                <option value="2">Drift/Some effort against gravity 2</option>
+                <option value="3">No effort against gravity 3</option>
+                <option value="4">No movement 4</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Limb Ataxia</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">No ataxia/Paralysed/Amputation/Does not understand 0</option>
+                <option value="1">One limb 1</option>
+                <option value="2">Two limbs 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Sensation</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal 0</option>
+                <option value="1">Mild-Moderate Loss 1</option>
+                <option value="2">Compelete loss/Unresponsive 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Aphasia</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal 0</option>
+                <option value="1">Mild-Moderate 1</option>
+                <option value="2">Severe Aphasia (Fragmentary Expression) 2</option>
+                <option value="3">Mute/Global Aphasia/Unresponsive 3</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Dysarthria</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal/Intubated 0</option>
+                <option value="1">Mild-Moderate 1</option>
+                <option value="2">Severe/Mute 2</option>
+            </select>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Extinction/Inattention/Neglect</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">Normal 0</option>
+                <option value="1">Inattention to 1 Modality/Bilaterally 1</option>
+                <option value="2">Profoudn neglect/More than 1 modality 2</option>
+            </select>
+        </div>
+    </section>
+
+    <section id="js-assess-mrs" class="case-row-group">
+        <div class="case-row assess_heading">
+            <label class="case-label">Modified Rankin Scale (Premorbid)</label>
+            <label class="case-label assess_score">1</label>
+        </div>
+
+        <div class="case-row assess_subheading">
+            <label class="case-label">Level of Consciousness</label>
+            <select class="case-input empty">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="0">No Symptoms</option>
+                <option value="1">No disability despite symptoms</option>
+                <option value="2">Slight disability but independent</option>
+                <option value="3">Moderate disability but able to walk</option>
+                <option value="4">Mod to Severe disability requiring assistance</option>
+                <option value="5">Bedridden</option>
+            </select>
+        </div>
+    </section>
+
+    <div id="js-assess-submit" class="case-row submit">
+        <button class="case-submit">Submit</button>
+    </div>
+
+
+</div>
+</section>

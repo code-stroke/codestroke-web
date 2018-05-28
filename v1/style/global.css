@@ -58,6 +58,12 @@ button {
     background: inherit;
 }
 
+a ,a:link, a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
 .icon {
     max-width: 32px;
     max-height: 32px;
@@ -70,20 +76,20 @@ button {
 .header-container{
     border-bottom: 1px solid #f2994a;
 
-     min-width: 100%;
-     height: 50px;
-     flex-shrink: 0;
-     flex-grow: 1;
+    min-width: 100%;
+    height: 50px;
+    flex-shrink: 0;
+    flex-grow: 1;
 
-     background: #2980b9;  /* fallback for old browsers */
-     background: linear-gradient(to bottom, #2980b9, #2980b9 80%, #2c3e50 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-     background: #f2994a; /* fallback for old browsers */
-     background: linear-gradient(to bottom, #f2c94c, #f2c94c 85%, #f2994a 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #2980b9;  /* fallback for old browsers */
+    background: linear-gradient(to bottom, #2980b9, #2980b9 80%, #2c3e50 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #f2994a; /* fallback for old browsers */
+    background: linear-gradient(to bottom, #f2c94c, #f2c94c 85%, #f2994a 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-     display: flex;
-     flex-direction: row;
-     justify-content: flex-start;
-     align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .header-box {
