@@ -169,58 +169,17 @@
      //background: red;
  }
 
- .case-input {
-     border: 1px solid darkgray;
-     border-radius: 5px;
-
-     height: 40px;
-     width: 100%;
-     box-sizing: border-box;
-
-     padding-left: 10px;
-     padding-right: 10px;
-
-     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-     background: #F5F5F5;
-
-     font-size: 1.0em;
+ .case-section input, .case-section .input {
+     min-width: 300px;
  }
 
- .case-input.text:focus {
-     background: white;
-     border: 1px solid #ffb347;
- }
 
- .case-input.empty {
-     color: gray;
- }
-
- .case-input.area {
+.case-section textarea {
      min-height: 100px;
      min-width: 300px;
 
      padding-top: 5px;
      padding-bottom: 5px;
- }
-
- .case-input.check {
-     display: block;
-
-     min-height: 40px;
-     max-height: 40px;
-     min-width: 40px;
-     max-width: 40px;
-     flex-shrink: 0;
-
-     background-size: contain;
-
-     cursor: pointer;
- }
-
- .case-input.check:checked {
-     //background-color: white;
-     background: url("../icons/button/checked.png") center no-repeat;
-     border: 1px solid #ffb347;
  }
 
  .case-label {
@@ -321,7 +280,7 @@
  * History *
  ********/
 .case-section.history {
-    width: 550px;
+
 }
 
 .case-section.history .case-label {
@@ -466,11 +425,7 @@
     transition: height 0.5s ease, background 0.5s ease;
 }
 
-.case-section.assess > .case-row-group.top {
-    //margin-top: 80px;
-}
-
- .case-row.assess_heading > .case-label {
+.case-row.assess_heading > .case-label {
      margin-right: 0;
 
      border: 2px gray solid;
@@ -479,17 +434,17 @@
 
      font-size: 1.2em;
      font-weight: bold;
- }
+}
 
- .case-label.assess_score {
+.case-label.assess_score {
      margin-left: 20px;
 
      max-width: 40px;
 
      justify-content: center;
- }
+}
 
- .case-section.assess .case-submit{
+.case-section.assess .case-submit{
      margin-top: 0;
      margin-bottom: 40px;
- }
+}
