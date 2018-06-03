@@ -169,7 +169,7 @@
      //background: red;
  }
 
- .case-section input, .case-section .input {
+ .case-section input:not([type="checkbox"]), .case-section .input {
      min-width: 300px;
  }
 
@@ -247,13 +247,16 @@
 
 .case-row.ed_loc_input {
     margin-bottom: 20px;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .case-row.ed_complete .case-label {
     background-color: #dfd;
 }
 
-.case-row.ed_complete .case-input.check {
+.case-row.ed_complete input[type="checkbox"] {
     border-radius: 0;
 
     box-shadow: none;

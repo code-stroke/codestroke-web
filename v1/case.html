@@ -9,12 +9,15 @@
         <script src="scripts/faker.js"></script>
 
         <!-- Local Scripts -->
+        <script src="scripts/ui.js"></script>
         <script src="scripts/case.js"></script>
         <script src="scripts/push.js"></script>
+
 
         <!-- CSS -->
         <link rel="stylesheet" href="style/global.css">
         <link rel="stylesheet" href="style/case.css">
+        <link rel="stylesheet" href="style/ui.css">
     </head>
     <body scroll="no">
         <header class="header-container">
@@ -60,29 +63,28 @@
                     </div>
                 </div>
 
-                <div class="sidebar-button">
+                <div data-section="ed" class="sidebar-button js-case-button">
                      ED
                 </div>
-                <div class="sidebar-button">
+                <div data-section="details" class="sidebar-button js-case-button">
                      Patient Details
                 </div>
-                <div class="sidebar-button">
+                <div data-section="history" class="sidebar-button js-case-button">
                      Clinical History
                 </div>
-                <div class="sidebar-button selected">
+                <div data-section="assess" class="sidebar-button selected js-case-button">
                      Clinical Assessment
                 </div>
-                <div class="sidebar-button">
+                <div data-section="radiology" class="sidebar-button js-case-button">
                      Radiology
                 </div>
-                <div class="sidebar-button">
+                <div data-section="manage" class="sidebar-button js-case-button">
                      Management
                 </div>
             </nav>
 
-            <main class="case-container">
-
-
+            <main id="js-case-main" class="case-container">
+                
             </main>
 
         </main>

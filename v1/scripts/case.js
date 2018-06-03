@@ -1,4 +1,28 @@
+const DOM_Case = {};
+
 const DOM_Assess = {};
+
+function loadPageLoader() {
+    DOM_Case["btns"].click(function() {
+        if ($(this).hasClass("selected")) {
+            return;
+        }
+
+        //Change the page
+        DOM_Case["main"].html("");
+        DOM_Case["main"].load(`case-${$(this).data("section")}.html`, function() {
+            //Make UI inputs work
+            $(document).trigger("case:refresh");
+        });
+
+
+        //Change the selected button
+        $(this).siblings(".js-case-button").removeClass("selected");
+        $(this).addClass("selected");
+    });
+
+    $("div[data-section='ed']").trigger("click");
+}
 
 function loadInputs() {
     $(".js-input").change(function() {
@@ -11,11 +35,11 @@ function loadInputs() {
 }
 
 function loadAssessLinks() {
-    DOM_Assess["btns"].click(function() {
+    $("body").on("click", DOM_Assess["btns"], function() {
         let loc = $(this).data("anchor");
-        let val = DOM_Assess[loc].offset().top - DOM_Assess["section"].offset().top + DOM_Assess["section"].scrollTop();
+        let val = $(DOM_Assess[loc]).offset().top - $(DOM_Assess["section"]).offset().top + $(DOM_Assess["section"]).scrollTop();
 
-        DOM_Assess["section"].animate({
+        $(DOM_Assess["section"]).animate({
             scrollTop: val
         }, {
             duration: 500,
@@ -27,17 +51,23 @@ function loadAssessLinks() {
 
 function loadDOM() {
     let assess = {
-        section: $("#js-assess-section"),
-        btns: $(".js-assess-button"),
-        mass: $("#js-assess-mass"),
-        vitals: $("#js-assess-vitals"),
-        race: $("#js-assess-race"),
-        cannula: $("#js-assess-cannula"),
-        nihss: $("#js-assess-nihss"),
-        mrs: $("#js-assess-mrs"),
-        submit: $("#js-assess-submit")
+        btns: ".js-assess-button",
+        section: "#js-assess-section",
+        mass: "#js-assess-mass",
+        vitals: "#js-assess-vitals",
+        race: "#js-assess-race",
+        cannula: "#js-assess-cannula",
+        nihss: "#js-assess-nihss",
+        mrs: "#js-assess-mrs",
+        submit: "#js-assess-submit"
     }
     $.extend(DOM_Assess, assess);
+
+    let cased = {
+        btns: $(".js-case-button"),
+        main: $("#js-case-main")
+    }
+    $.extend(DOM_Case, cased);
 }
 
 /************
@@ -46,6 +76,8 @@ function loadDOM() {
 
 $(document).ready(function() {
     loadDOM();
+
+    loadPageLoader();
 
     loadAssessLinks();
 

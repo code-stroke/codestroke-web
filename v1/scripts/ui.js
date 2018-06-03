@@ -39,7 +39,8 @@ const SELECT = {
 
         child.addClass("selected");
         child.siblings("li").removeClass("selected");
-    }
+    },
+    isRegistered: false
 }
 
 function setUpSelect() {
@@ -62,21 +63,25 @@ function setUpSelect() {
     });
 
     /* Events */
-    $(".-ui-select").on("focusout", function() {
-        SELECT.close($(this));
-    });
-
-    $(".-ui-select").on("click", function() {
-        if (!$(this).data("open")) {
-            SELECT.open($(this));
-        } else {
+    if (!SELECT.isRegistered) {
+        $("body").on("focusout", ".-ui-select", function() {
             SELECT.close($(this));
-        }
-    });
+        });
 
-    $(".-ui-select li").on("click", function(event) {
-        SELECT.value($(this));
-    });
+        $("body").on("click", ".-ui-select", function() {
+            if (!$(this).data("open")) {
+                SELECT.open($(this));
+            } else {
+                SELECT.close($(this));
+            }
+        });
+
+        $("body").on("click", ".-ui-select li", function() {
+            SELECT.value($(this));
+        });
+
+        SELECT.isRegistered = true;
+    }
 }
 
 const TOGGLE = {
@@ -89,28 +94,36 @@ const TOGGLE = {
         child.addClass(child.data("class"));
 
         child.siblings("li").removeClass();
-    }
+    },
+    isRegistered: false
 }
 
-function setUpMulti() {
+function setUpToggle() {
     $(".-ui-toggle").each(function() {
         $(this).data("background", $(this).css("background"));
         $(this).prepend("<input type=hidden>");
         $(this).addClass("empty");
     });
 
-    $(".-ui-toggle li").on("click", function() {
-        TOGGLE.value($(this));
-    });
+    if (!TOGGLE.isRegistered) {
+        $("body").on("click", ".-ui-toggle li", function() {
+            TOGGLE.value($(this));
+        });
 
+        TOGGLE.isRegistered = true;
+    }
 }
 
-
-
-$(document).ready(function() {
+function refreshUI() {
     setUpSelect();
 
-    setUpMulti()
+    setUpToggle();
+}
 
+$(document).ready(function() {
+    refreshUI();
 
+    $(document).on("case:refresh", function() {
+        refreshUI();
+    });
 });

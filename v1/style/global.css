@@ -98,21 +98,19 @@ input.empty, .input.empty {
     color: gray;
 }
 
-input[type="check"] {
+input[type="checkbox"] {
     display: block;
 
     min-height: 40px;
-    max-height: 40px;
     min-width: 40px;
-    max-width: 40px;
-    flex-shrink: 0;
+    flex: 0;
 
     background-size: contain;
 
     cursor: pointer;
 }
 
-input[type="check"]:checked {
+input[type="checkbox"]:checked {
     //background-color: white;
     background: url("../icons/button/checked.png") center no-repeat;
     border: 1px solid #ffb347;
