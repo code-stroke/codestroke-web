@@ -169,19 +169,6 @@
      //background: red;
  }
 
- .case-section input:not([type="checkbox"]), .case-section .input {
-     min-width: 300px;
- }
-
-
-.case-section textarea {
-     min-height: 100px;
-     min-width: 300px;
-
-     padding-top: 5px;
-     padding-bottom: 5px;
- }
-
  .case-label {
      margin-right: 10px;
 
@@ -219,6 +206,82 @@
      background-color: #FDD5B1;
 
      transition: background 0.5s ease;
+ }
+
+ /********
+  * INPUT *
+  ********/
+
+.case-input {
+     border: 1px solid darkgray;
+     border-radius: 5px;
+
+     height: 40px;
+     box-sizing: border-box;
+
+     padding-left: 10px;
+     padding-right: 10px;
+
+     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+     background: #F5F5F5;
+
+     font-size: 1.0em;
+ }
+
+ .case-input:not([type]):focus, .case-input[type="text"]:focus {
+     background: white;
+     border: 1px solid #ffb347;
+ }
+
+  .case-section .case-input:not([type="checkbox"]) {
+      min-width: 300px;
+  }
+
+
+ .case-section textarea {
+      min-height: 100px;
+      min-width: 300px;
+
+      padding-top: 5px;
+      padding-bottom: 5px;
+  }
+
+  .case-input.empty {
+      color: gray;
+  }
+
+.case-input.date {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.case-input.time {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    min-width: 100px !important;
+    max-width: 100px !important;
+}
+
+ .case-input[type="checkbox"] {
+     display: block;
+
+     min-height: 40px;
+     min-width: 40px;
+     flex: 0;
+
+     background-size: contain;
+
+     cursor: pointer;
+ }
+
+ .case-input[type="checkbox"]:checked {
+     //background-color: white;
+     background: url("../icons/button/checked.png") center no-repeat;
+     border: 1px solid #ffb347;
  }
 
  /********
@@ -272,11 +335,7 @@
  * Details *
  ***********/
 .case-section.details {
-    min-width: 500px;
-}
-
-.case-section.details .case-input {
-    min-width: 300px;
+    min-width: 600px;
 }
 
 /********
@@ -287,8 +346,9 @@
 }
 
 .case-section.history .case-label {
-    max-width: 200px;
-    min-width: 200px;
+    min-width: 300px;
+    max-width: 300px;
+    flex: 0;
 }
 
 /**/
@@ -318,8 +378,8 @@
     border-top: none;
     border-bottom: 1px solid gray;
 
-    max-width: 150px;
-    min-width: 150px;
+    min-width: 250px;
+    max-width: 250px;
 
     font-size: 1.0em;
 }
@@ -327,6 +387,10 @@
 .case-row.history_subheading > .case-input {
     height: 30px;
     font-size: 0.95em;
+}
+
+.case-section.history .case-submit {
+    max-width: 630px;
 }
 
 /********
@@ -447,7 +511,90 @@
      justify-content: center;
 }
 
+.case-label.assess_score.empty {
+    color: grey;
+}
+
 .case-section.assess .case-submit{
      margin-top: 0;
      margin-bottom: 40px;
+}
+
+.assess-alert {
+    border: 2px solid black;
+
+    width: 100%;
+    min-height: 40px;
+
+    background-color: rgb(249,179,167);
+    cursor: pointer;
+
+    transition: background 0.5s ease;
+}
+
+.assess-alert:hover {
+    background-color: rgb(247,141,124);;
+
+    transition: background 0.5s ease;
+}
+
+/********
+ * MANAGE *
+ ********/
+
+
+
+.case-row.manage_heading {
+    padding-bottom: 0;
+}
+
+.case-row.manage_heading > .case-label {
+    width: 300px;
+    flex: 0;
+}
+
+.case-row.manage_subheading {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.case-row.manage_subheading.last {
+    margin-bottom: 10px;
+}
+
+.case-row.manage_subheading > .case-label {
+    margin-left: 50px;
+
+    border-top: none;
+    border-bottom: 1px solid gray;
+
+    max-width: 250px;
+    min-width: 250px;
+
+    font-size: 1.0em;
+}
+
+.case-row.manage_subheading.top > .case-label {
+    border-top: 1px solid gray;
+    background-color: #fceabb;
+
+    font-weight: bold;
+}
+
+.case-row.manage_subheading > .case-input {
+    height: 30px;
+    font-size: 0.95em;
+}
+
+.case-input.manage_filled {
+    min-width: 150px !important;
+    max-width: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.case-input.manage_filled.-ui-toggle-no {
+    margin-left: auto;
 }

@@ -73,49 +73,6 @@ a ,a:link, a:visited {
     max-height: 32px;
 }
 
-input, textarea, .input, select {
-    border: 1px solid darkgray;
-    border-radius: 5px;
-
-    height: 40px;
-    box-sizing: border-box;
-
-    padding-left: 10px;
-    padding-right: 10px;
-
-    box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-    background: #F5F5F5;
-
-    font-size: 1.0em;
-}
-
-input:not([type]):focus, input[type="text"]:focus, .input:focus {
-    background: white;
-    border: 1px solid #ffb347;
-}
-
-input.empty, .input.empty {
-    color: gray;
-}
-
-input[type="checkbox"] {
-    display: block;
-
-    min-height: 40px;
-    min-width: 40px;
-    flex: 0;
-
-    background-size: contain;
-
-    cursor: pointer;
-}
-
-input[type="checkbox"]:checked {
-    //background-color: white;
-    background: url("../icons/button/checked.png") center no-repeat;
-    border: 1px solid #ffb347;
-}
-
 /**********
  * Header *
  **********/
@@ -147,6 +104,10 @@ input[type="checkbox"]:checked {
 
      display: flex;
      flex-direction: column;
+}
+
+.header-box.logo {
+    cursor: pointer;
 }
 
 .header-box.logo img {
