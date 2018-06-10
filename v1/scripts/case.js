@@ -1,6 +1,7 @@
 const DOM_Case = {};
 
 const DOM_Assess = {};
+const DOM_Radiology = {};
 
 function loadPageLoader() {
     DOM_Case["btns"].click(function() {
@@ -21,7 +22,7 @@ function loadPageLoader() {
         $(this).addClass("selected");
     });
 
-    $("div[data-section='assess']").trigger("click");
+    $("div[data-section='radiology']").trigger("click");
 }
 
 function loadInputs() {
@@ -50,7 +51,7 @@ function loadAssessSection() {
     });
 
     //Load score calculations
-    $("body").on("ui:select", ".-ui-select", function() {
+    $("body").on("ui:select", DOM_Assess["section"] + " .-ui-select", function() {
         calcAssessScore("race", "race_score");
         calcAssessScore("nihss", "nihss_score");
         calcAssessScore("mrs", "mrs_score");
@@ -79,6 +80,71 @@ function calcAssessScore(container_name, score_name) {
     }
 }
 
+function loadRadiologySection() {
+    //Go down the progress pathway
+    //TODO: Do this smarter?
+    $("body").on("ui:toggle", DOM_Radiology["progress"] + " .-ui-toggle", function() {
+        let progress = 0;
+
+        while (true) {
+            if (checkRadiologyProgress(DOM_Radiology["progress"] + "-0", "y")) {
+                progress++;
+            } else {
+                break;
+            }
+
+            if (checkRadiologyProgress(DOM_Radiology["progress"] + "-1", "y")) {
+                progress++;
+            } else {
+                break;
+            }
+
+            if (checkRadiologyProgress(DOM_Radiology["progress"] + "-2", "n")) {
+                progress++;
+            } else {
+                break;
+            }
+
+            if (checkRadiologyProgress(DOM_Radiology["progress"] + "-3", "y")) {
+                progress++;
+            } else {
+                break;
+            }
+
+            if (checkRadiologyProgress(DOM_Radiology["progress"] + "-4", "y")) {
+                progress++;
+            } else {
+                break;
+            }
+
+            break;
+        }
+
+        for (let i = 0; i < 6; i++) {
+            if (i <= progress) {
+                $(DOM_Radiology["progress"] + "-" + i).removeClass("hidden");
+            } else {
+                $(DOM_Radiology["progress"] + "-" + i).addClass("hidden");
+                $(DOM_Radiology["progress"] + "-" + i).find(".-ui-toggle").trigger("ui:clear");
+            }
+        }
+    });
+
+    //Ensure the proper progress is loaded when the page is loaded
+    $(document).on("case:refresh", function() {
+        $(DOM_Radiology["progress"] + "-0").trigger("ui:toggle");
+    });
+}
+
+function checkRadiologyProgress(id, wanted) {
+    let input = $(id).find("input");
+    if (input.val() == wanted) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function loadDOM() {
     let assess = {
         btns: ".js-assess-button",
@@ -95,6 +161,11 @@ function loadDOM() {
         submit: "#js-assess-submit"
     }
     $.extend(DOM_Assess, assess);
+
+    let radiology = {
+        progress: "#js-radiology-progress"
+    }
+    $.extend(DOM_Radiology, radiology);
 
     let cased = {
         btns: $(".js-case-button"),
@@ -113,6 +184,7 @@ $(document).ready(function() {
     loadPageLoader();
 
     loadAssessSection();
+    loadRadiologySection()
 
     loadInputs();
 });

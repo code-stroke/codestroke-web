@@ -91,13 +91,17 @@ const TOGGLE = {
         let parent = child.closest(".-ui-toggle");
         parent.removeClass("empty");
 
-        parent.children("input").val(child.data("val"))
+        parent.children("input").val(child.data("val"));
 
         child.addClass(child.data("class"));
 
         child.siblings("li").removeClass();
 
         parent.trigger("ui:toggle");
+    },
+    clear: function(parent) {
+        parent.children("li").removeClass();
+        parent.children("input").val("");
     },
     isRegistered: false
 }
@@ -112,6 +116,11 @@ function setUpToggle() {
     if (!TOGGLE.isRegistered) {
         $("body").on("click", ".-ui-toggle li", function() {
             TOGGLE.value($(this));
+        });
+
+        $("body").on("ui:clear", ".-ui-toggle", function() {
+            console.log("CLEAR");
+            TOGGLE.clear($(this));
         });
 
         TOGGLE.isRegistered = true;

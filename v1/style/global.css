@@ -68,6 +68,10 @@ a ,a:link, a:visited {
     display: flex !important;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .icon {
     max-width: 32px;
     max-height: 32px;

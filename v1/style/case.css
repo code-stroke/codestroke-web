@@ -530,6 +530,8 @@
     cursor: pointer;
 
     transition: background 0.5s ease;
+
+    font-weight: bold;
 }
 
 .assess-alert:hover {
@@ -539,18 +541,46 @@
 }
 
 /********
- * MANAGE *
+ * RADIOLOGY *
  ********/
 
+ .case-section.radiology {
+     min-width: 600px;
+ }
 
+ .case-row.radiology_heading > .case-label {
+      margin-right: 0;
+
+      border: 2px gray solid;
+
+      width: 100%;
+
+      font-size: 1.2em;
+      font-weight: bold;
+ }
+
+
+/********
+ * MANAGE *
+ ********/
 
 .case-row.manage_heading {
     padding-bottom: 0;
 }
 
 .case-row.manage_heading > .case-label {
-    width: 300px;
-    flex: 0;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.case-row.manage_thrombolysis > .case-label {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.case-label .manage_description {
+    font-size: 0.8em;
 }
 
 .case-row.manage_subheading {
