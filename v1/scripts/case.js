@@ -21,7 +21,7 @@ function loadPageLoader() {
         $(this).addClass("selected");
     });
 
-    $("div[data-section='ed']").trigger("click");
+    $("div[data-section='assess']").trigger("click");
 }
 
 function loadInputs() {
@@ -34,7 +34,8 @@ function loadInputs() {
     })
 }
 
-function loadAssessLinks() {
+function loadAssessSection() {
+    // Load the Anchor links
     $("body").on("click", DOM_Assess["btns"], function() {
         let loc = $(this).data("anchor");
         let val = $(DOM_Assess[loc]).offset().top - $(DOM_Assess["section"]).offset().top + $(DOM_Assess["section"]).scrollTop();
@@ -47,6 +48,35 @@ function loadAssessLinks() {
         })
 
     });
+
+    //Load score calculations
+    $("body").on("ui:select", ".-ui-select", function() {
+        calcAssessScore("race", "race_score");
+        calcAssessScore("nihss", "nihss_score");
+        calcAssessScore("mrs", "mrs_score");
+    });
+}
+
+function calcAssessScore(container_name, score_name) {
+    let score = 0;
+    $(DOM_Assess[container_name]).find("input").each(function(){
+        //Don't add Toggle inputs
+        if (!$(this).parent().hasClass("-ui-select")) {
+            return;
+        }
+
+        score += parseInt($(this).val());
+
+    });
+
+    //Print out
+    if (score) {
+        $(DOM_Assess[score_name]).text(score);
+        $(DOM_Assess[score_name]).removeClass("empty");
+    } else {
+        $(DOM_Assess[score_name]).text("??");
+        $(DOM_Assess[score_name]).addClass("empty");
+    }
 }
 
 function loadDOM() {
@@ -56,9 +86,12 @@ function loadDOM() {
         mass: "#js-assess-mass",
         vitals: "#js-assess-vitals",
         race: "#js-assess-race",
+        race_score: "#js-assess-race-score",
         cannula: "#js-assess-cannula",
         nihss: "#js-assess-nihss",
+        nihss_score: "#js-assess-nihss-score",
         mrs: "#js-assess-mrs",
+        mrs_score: "#js-assess-mrs-score",
         submit: "#js-assess-submit"
     }
     $.extend(DOM_Assess, assess);
@@ -79,7 +112,7 @@ $(document).ready(function() {
 
     loadPageLoader();
 
-    loadAssessLinks();
+    loadAssessSection();
 
     loadInputs();
 });

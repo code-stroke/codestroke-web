@@ -39,6 +39,8 @@ const SELECT = {
 
         child.addClass("selected");
         child.siblings("li").removeClass("selected");
+
+        parent.trigger("ui:select");
     },
     isRegistered: false
 }
@@ -94,6 +96,8 @@ const TOGGLE = {
         child.addClass(child.data("class"));
 
         child.siblings("li").removeClass();
+
+        parent.trigger("ui:toggle");
     },
     isRegistered: false
 }

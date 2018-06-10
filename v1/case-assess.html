@@ -22,7 +22,7 @@
     </a>
 </header>
 <section id="js-assess-section" class="case-section assess">
-    <div class="assess-container">
+<div class="assess-container">
 
     <section id="js-assess-mass" class="case-row-group top">
         <div class="case-row assess_heading">
@@ -31,7 +31,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Facial Droop</label>
-            <ul class="input -ui-toggle">
+            <ul class="case-input -ui-toggle">
                     <li data-val="y" data-class="-ui-toggle-yes">Yes</li>
                     <li data-val="n" data-class="-ui-toggle-no">No</li>
                     <li data-val="u" data-class="-ui-toggle-unknown">Unknown</li>
@@ -40,7 +40,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Arm Drift</label>
-            <ul class="input -ui-toggle">
+            <ul class="case-input -ui-toggle">
                     <li data-val="y" data-class="-ui-toggle-yes">Yes</li>
                     <li data-val="n" data-class="-ui-toggle-no">No</li>
                     <li data-val="u" data-class="-ui-toggle-unknown">Unknown</li>
@@ -49,7 +49,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Weak Grip</label>
-            <ul class="input -ui-toggle">
+            <ul class="case-input -ui-toggle">
                     <li data-val="y" data-class="-ui-toggle-yes">Yes</li>
                     <li data-val="n" data-class="-ui-toggle-no">No</li>
                     <li data-val="u"  data-class="-ui-toggle-unknown">Unknown</li>
@@ -58,7 +58,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Speech Difficulty</label>
-            <ul class="input -ui-toggle">
+            <ul class="case-input -ui-toggle">
                     <li data-val="y" data-class="-ui-toggle-yes">Yes</li>
                     <li data-val="n" data-class="-ui-toggle-no">No</li>
                     <li data-val="u" data-class="-ui-toggle-unknown">Unknown</li>
@@ -83,7 +83,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label" style="visibility:hidden;"></label>
-            <ul class="input -ui-toggle">
+            <ul class="case-input -ui-toggle">
                 <li data-val="r" data-class="-ui-toggle-yes">Regular</li>
                 <li data-val="i" data-class="-ui-toggle-no">Irregular</li>
             </ul>
@@ -118,12 +118,12 @@
     <section id="js-assess-race" class="case-row-group">
         <div class="case-row assess_heading">
             <label class="case-label">RACE Score</label>
-            <label class="case-label assess_score">8</label>
+            <label id="js-assess-race-score" class="case-label assess_score empty">??</label>
         </div>
 
         <div class="case-row assess_subheading">
             <label class="case-label">Facial Palsy</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Absent</li>
                     <li data-val="1">Mild</li>
@@ -134,7 +134,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Arm Motor Impairment</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal-Mild</li>
                     <li data-val="1">Mod</li>
@@ -145,7 +145,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Leg Motor Impairment</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal-Mild</li>
                     <li data-val="1">Mod</li>
@@ -156,7 +156,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Head & Gaze Deviation</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Absent</li>
                     <li data-val="1">Present</li>
@@ -166,7 +166,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Hemiparesis</label>
-            <ul class="input -ui-toggle">
+            <ul class="case-input -ui-toggle">
                 <li data-val="l" data-class="-ui-toggle-unknown">Left</li>
                 <li data-val="r" data-class="-ui-toggle-unknown">Right</li>
             </ul>
@@ -175,13 +175,8 @@
 
     <section id="js-assess-cannula" class="case-row-group">
         <div class="case-row assess_heading">
-            <label class="case-label">18G IV Cannula in Cub. Fossa</label>
-            <label class="case-label assess_score">Yes</label>
-        </div>
-
-        <div class="case-row assess_subheading">
-            <label class="case-label">Cannula</label>
-            <ul class="input -ui-toggle">
+            <label class="case-label" style="text-align: center;">18G IV Cannula in Cubital Fossa</label>
+            <ul class="case-input -ui-toggle" style="margin-left: 20px; min-width: 150px; font-size: 1.2em; font-weight: bold;">
                 <li data-val="y" data-class="-ui-toggle-yes">Yes</li>
                 <li data-val="n" data-class="-ui-toggle-no">No</li>
             </ul>
@@ -191,12 +186,12 @@
     <section id="js-assess-nihss" class="case-row-group">
         <div class="case-row assess_heading">
             <label class="case-label">NIHSS</label>
-            <label class="case-label assess_score">18</label>
+            <label id="js-assess-nihss-score" class="case-label assess_score empty">??</label>
         </div>
 
         <div class="case-row assess_subheading">
             <label class="case-label">Level of Consciousness</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Alert</li>
                     <li data-val="1">Minor Stimulation</li>
@@ -209,7 +204,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Month and Age</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Both Correct</li>
                     <li data-val="1">One Correct</li>
@@ -220,7 +215,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Blink Eyes & Squeeze Hands</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Both Correct</li>
                     <li data-val="1">One Correct</li>
@@ -231,7 +226,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Horizontal Gaze</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal</li>
                     <li data-val="1">Partial Palsy</li>
@@ -242,7 +237,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Visual Fields</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal</li>
                     <li data-val="1">Partial Hemianopia</li>
@@ -254,7 +249,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Facial Palsy</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal</li>
                     <li data-val="1">Minor Paralysis</li>
@@ -266,7 +261,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Left Arm Drift</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">No drift for 10 seconds</li>
                     <li data-val="1">Mild Drift</li>
@@ -279,7 +274,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Right Arm Drift</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">No drift for 10 seconds</li>
                     <li data-val="1">Mild Drift</li>
@@ -292,7 +287,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Left Leg Drift</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">No drift for 10 seconds</li>
                     <li data-val="1">Mild Drift</li>
@@ -305,7 +300,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Right Leg Drift</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">No drift for 10 seconds</li>
                     <li data-val="1">Mild Drift</li>
@@ -318,7 +313,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Limb Ataxia</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">No ataxia/Paralysed/Amputation/Does not understand</li>
                     <li data-val="1">One limb</li>
@@ -329,7 +324,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Sensation</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal</li>
                     <li data-val="1">Mild-Moderate Loss</li>
@@ -340,7 +335,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Aphasia</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal</li>
                     <li data-val="1">Mild-Moderate</li>
@@ -352,7 +347,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Dysarthria</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal/Intubated</li>
                     <li data-val="1">Mild-Moderate</li>
@@ -363,7 +358,7 @@
 
         <div class="case-row assess_subheading">
             <label class="case-label">Extinction/Inattention/Neglect</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">Normal</li>
                     <li data-val="1">Inattention to 1 Modality/Bilaterally</li>
@@ -376,12 +371,12 @@
     <section id="js-assess-mrs" class="case-row-group">
         <div class="case-row assess_heading">
             <label class="case-label">Modified Rankin Scale (Premorbid)</label>
-            <label class="case-label assess_score">1</label>
+            <label id="js-assess-mrs-score" class="case-label assess_score empty">??</label>
         </div>
 
         <div class="case-row assess_subheading">
             <label class="case-label">Level of Consciousness</label>
-            <div class="input -ui-select">
+            <div class="case-input -ui-select">
                 <ul>
                     <li data-val="0">No Symptoms</li>
                     <li data-val="1">No disability despite symptoms</li>
@@ -393,6 +388,10 @@
             </div>
         </div>
     </section>
+
+    <div class="case-row">
+        <button class="assess-alert">Likely LVO - pre-notify Angriography Staff</button>
+    </div>
 
     <div id="js-assess-submit" class="case-row submit">
         <button class="case-submit">Submit</button>
