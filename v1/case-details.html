@@ -5,8 +5,6 @@
             First Name
         </div>
         <input class="case-input text">
-
-        </input>
     </div>
 
     <div class="case-row">
@@ -14,8 +12,6 @@
             Last Name
         </div>
         <input class="case-input text">
-
-        </input>
     </div>
 
     <div class="case-row">
@@ -23,45 +19,39 @@
             DOB
         </div>
         <input class="case-input empty" type="date">
-
-        </input>
     </div>
 
     <div class="case-row">
         <div class="case-label">
             Address
         </div>
-        <input class="case-input text">
-
-        </input>
+        <input class="case-input">
     </div>
 
     <div class="case-row">
         <div class="case-label">
             Gender
         </div>
-        <select class="case-input empty">
-            <option value="" disabled selected hidden>Select option</option>
-            <option value="m">Male</option>
-            <option value="f">Female</option>
-            <option value="u">Unspecified</option>
-        </select>
+        <ul class="case-input -ui-toggle">
+            <li data-val="m" data-class="-ui-toggle-unknown" class="">Male</li>
+            <li data-val="f" data-class="-ui-toggle-unknown" class="">Female</li>
+            <li data-val="u" data-class="-ui-toggle-unknown" class="">Unspecified</li>
+        </ul>
     </div>
 
     <div class="case-row">
         <div class="case-label">
             Last Well
         </div>
-        <input class="case-input empty" type="datetime-local">
-
-        </input>
+        <input class="case-input empty date" type="date">
+        <input class="case-input empty time" type="time">
     </div>
 
     <div class="case-row">
         <div class="case-label">
             Next of Kin
         </div>
-        <input class="case-input text">
+        <input class="case-input">
 
         </input>
     </div>
@@ -70,9 +60,7 @@
         <div class="case-label">
             NOK Contact No.
         </div>
-        <input class="case-input text">
-
-        </input>
+        <input class="case-input">
     </div>
 
     <div class="case-row last">
@@ -80,8 +68,6 @@
             Medicare No.
         </div>
         <input class="case-input">
-
-        </input>
     </div>
 
     <div class="case-row submit">
