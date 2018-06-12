@@ -324,7 +324,7 @@
 
     box-shadow: none;
     background-color: white;
-    background: url("../icons/button/tick.png") center no-repeat;
+    background: url("../icons/button/tick-green.png") center no-repeat;
 
     pointer-events: none;
     cursor: auto;

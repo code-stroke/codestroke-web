@@ -1,7 +1,10 @@
 <section class="case-section manage">
 
-    <div class="case-row history_heading">
-        <label class="case-label">Thrombolysis</label>
+    <div class="case-row manage_heading manage_thrombolysis">
+        <label class="case-label">
+            <span>Thrombolysis</span>
+            <span class="manage_description">(Click "Yes" to see a list of contraindications)</span>
+        </label>
         <ul class="case-input text -ui-toggle">
             <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
             <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
@@ -11,7 +14,7 @@
     <div class="case-row-group">
         <div class="case-row manage_subheading top">
             <div class="case-label" style="border-top: 0;">
-                Pre-filled
+                Eligibility for tPA
             </div>
         </div>
 
@@ -42,7 +45,7 @@
         </div>
         <div class="case-row manage_subheading last">
             <div class="case-label">
-                ICH on Non-Contrast CT
+                No evidence of ICH
             </div>
             <div class="case-input manage_filled -ui-toggle-no">
                 No
@@ -228,12 +231,11 @@
             <div class="case-label">
                 Time when thrombolysis given??
             </div>
-            <input class="case-input empty date" type="date">
-            <input class="case-input empty time" type="time">
+            <div class="case-input -ui-since"></div>
         </div>
     </div>
 
-    <div class="case-row history_heading">
+    <div class="case-row manage_heading">
         <label class="case-label">ECR</label>
         <ul class="case-input text -ui-toggle">
             <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
@@ -241,7 +243,7 @@
         </ul>
     </div>
 
-    <div class="case-row history_heading">
+    <div class="case-row manage_heading">
         <label class="case-label">Surgical Mx</label>
         <ul class="case-input text -ui-toggle">
             <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
@@ -249,7 +251,7 @@
         </ul>
     </div>
 
-    <div class="case-row history_heading">
+    <div class="case-row manage_heading">
         <label class="case-label">Conservative Mx</label>
         <ul class="case-input text -ui-toggle">
             <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>

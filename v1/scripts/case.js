@@ -22,7 +22,7 @@ function loadPageLoader() {
         $(this).addClass("selected");
     });
 
-    $("div[data-section='radiology']").trigger("click");
+    $("div[data-section='details']").trigger("click");
 }
 
 function loadInputs() {

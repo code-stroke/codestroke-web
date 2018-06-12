@@ -157,3 +157,69 @@
 .-ui-toggle-unknown {
     background: rgba(186,186,186, 0.5);
 }
+
+/**********
+ * SINCE *
+ **********/
+
+ .-ui-since {
+     padding: 0;
+
+     display: flex;
+     flex-direction: row;
+ }
+
+ .-ui-since button {
+     cursor: pointer;
+ }
+
+ .-ui-since > * > * {
+     min-width: unset !important;
+
+     padding-left: 10px;
+     padding-right: 10px;
+
+     background: transparent;
+
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .-ui-since-result, .-ui-since-edit {
+     display: flex;
+     flex-direction: row;
+
+     width: 100%;
+ }
+
+ .-ui-since-result > span {
+     width: 100%;
+     justify-content: flex-start;
+ }
+
+ .-ui-since-result > button {
+     margin-left: auto;
+
+     border-left: 1px solid darkgray;
+
+     width: auto;
+
+     background: url("../icons/button/date-edit.png") center no-repeat;
+     background-size: contain;
+ }
+
+ .-ui-since-edit > input:not(:last-child) {
+     border-right: 1px solid darkgray;
+ }
+
+ .-ui-since-edit > *:last-child {
+     background: url("../icons/button/tick-black.png") center no-repeat;
+     background-size: contain;
+ }
+
+ .-ui-since-edit > *:last-child:hover {
+
+     background: url("../icons/button/tick-green.png") center no-repeat;
+     background-size: contain;
+ }

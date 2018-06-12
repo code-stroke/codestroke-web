@@ -119,7 +119,6 @@ function setUpToggle() {
         });
 
         $("body").on("ui:clear", ".-ui-toggle", function() {
-            console.log("CLEAR");
             TOGGLE.clear($(this));
         });
 
@@ -127,10 +126,102 @@ function setUpToggle() {
     }
 }
 
+const SINCE = {
+    toggle: function(child) {
+        let parent = child.closest(".-ui-since");
+        if (parent.data("state") == "result") {
+            parent.find(".-ui-since-result").addClass("hidden");
+            parent.find(".-ui-since-edit").removeClass("hidden");
+            parent.data("state", "edit");
+        } else {
+            let date = parent.find("input[type='date']").val();
+            let time = parent.find("input[type='time']").val();
+
+            //If input is valid, calculate time since, else display 'unknown'
+            if (date != "" && time != "") {
+                let datetime = new Date(date + " " + time).getTime();
+                parent.children("input").val(datetime);
+
+                let since = new Date().getTime() - datetime;
+                let obj = convertSince(since);
+                //Only display hours if it's been >1hr since event
+                if (obj.hour > 0) {
+                    parent.find("span").html(`${obj.hour}h ${obj.minute}m ago`);
+                } else {
+                    parent.find("span").html(`${obj.minute}m ago`);
+                }
+
+            } else {
+                parent.children("input").val("");
+                parent.find("span").html("Unknown");
+            }
+
+            parent.find(".-ui-since-edit").addClass("hidden");
+            parent.find(".-ui-since-result").removeClass("hidden");
+            parent.data("state", "result");
+        }
+    },
+    clear: function(parent) {
+        parent.find("input").val("");
+        parent.find("span").html("Unknown");
+    },
+    isRegistered: false
+};
+
+//Only displays up to Hours as days aren't useful?
+function convertSince(milliseconds) {
+    var day, hour, minute, seconds;
+    seconds = Math.floor(milliseconds / 1000);
+    minute = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    hour = Math.floor(minute / 60);
+    minute = minute % 60;
+    //day = Math.floor(hour / 24);
+    //hour = hour % 24;
+    return {
+        //day: day,
+        hour: hour,
+        minute: minute,
+        seconds: seconds
+    };
+}
+
+function setUpSince() {
+    $(".-ui-since").each(function() {
+        $(this).data("state", "result");
+        $(this).append(`
+            <input class="hidden" type="hidden">
+            <div class="-ui-since-result">
+                <span class="">Unknown</span>
+                <button class=""></button>
+            </div>
+            <div class="-ui-since-edit hidden">
+                <input class="" type="date">
+                <input class="" type="time">
+                <button class=""></button>
+            </div>
+            `);
+    });
+
+    if (!SINCE.isRegistered) {
+        $("body").on("click", ".-ui-since button", function() {
+            SINCE.toggle($(this));
+        });
+
+        $("body").on("ui:clear", ".-ui-since", function() {
+            SINCE.clear($(this));
+        });
+
+        SINCE.isRegistered = true;
+    }
+}
+
 function refreshUI() {
     setUpSelect();
 
     setUpToggle();
+
+    setUpSince();
 }
 
 $(document).ready(function() {
