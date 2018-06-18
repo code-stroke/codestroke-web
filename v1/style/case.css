@@ -238,32 +238,16 @@
   }
 
 
- .case-section textarea {
-      min-height: 100px;
-      min-width: 300px;
+.case-section textarea {
+    min-height: 100px;
+    min-width: 300px;
 
-      padding-top: 5px;
-      padding-bottom: 5px;
-  }
-
-  .case-input.empty {
-      color: gray;
-  }
-
-.case-input.date {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-
-    min-width: 200px !important;
-    max-width: 200px !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.case-input.time {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-
-    min-width: 100px !important;
-    max-width: 100px !important;
+.case-input.empty {
+    color: gray;
 }
 
  .case-input[type="checkbox"] {
@@ -627,4 +611,26 @@
 
 .case-input.manage_filled.-ui-toggle-no {
     margin-left: auto;
+}
+
+.manage-button {
+    margin-left: 50px;
+
+    border: 2px solid black;
+
+    width: 100%;
+    min-height: 40px;
+
+    background: #fceabb;
+    cursor: pointer;
+
+    transition: background 0.5s ease;
+
+    font-weight: bold;
+}
+
+.manage-button:hover {
+    background: #ffb347;
+
+    transition: background 0.5s ease;
 }

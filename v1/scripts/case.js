@@ -22,7 +22,7 @@ function loadPageLoader() {
         $(this).addClass("selected");
     });
 
-    $("div[data-section='details']").trigger("click");
+    $("div[data-section='manage']").trigger("click");
 }
 
 function loadInputs() {

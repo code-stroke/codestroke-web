@@ -2,16 +2,16 @@
 
     <div class="case-row history_textarea">
         <label class="case-label">Past Medical History</label>
-        <textarea class="case-input text area"></textarea>
+        <textarea id="db-pmhx" class="case-input text area"></textarea>
     </div>
     <div class="case-row history_textarea">
         <label class="case-label">Medications</label>
-        <textarea class="case-input text area"></textarea>
+        <textarea id="db-meds" class="case-input text area"></textarea>
     </div>
 
     <div class="case-row history_heading">
         <label class="case-label">Anticoagulants</label>
-        <ul class="case-input -ui-toggle">
+        <ul id="db-anticoags" class="case-input -ui-toggle">
             <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
             <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
         </ul>
@@ -21,26 +21,26 @@
         <div class="case-label">
             Last Dose
         </div>
-        <div class="case-input -ui-since"></div>
+        <div id="db-anticoags_last_dose" class="case-input -ui-since"></div>
     </div>
 
     <div class="case-row history_textarea">
-        <label class="case-label">Situation</label>
-        <textarea class="case-input text area"></textarea>
+        <label class="case-label">Situation (HOPC)</label>
+        <textarea id="db-hopc" class="case-input text area"></textarea>
     </div>
 
     <div class="case-row">
         <div class="case-label">
             Weight (Kg)
         </div>
-        <input class="case-input text">
+        <input id="db-weight" class="case-input text">
     </div>
 
     <div class="case-row last">
         <div class="case-label">
             Last Oral Intake
         </div>
-        <div class="case-input -ui-since"></div>
+        <div id="db-last_meal" class="case-input -ui-since"></div>
     </div>
 
     <div class="case-row submit">
