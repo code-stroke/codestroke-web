@@ -1,21 +1,3 @@
-const template = {
-
-};
-
-template.row = ({ name, age, time }) => `
-    <div class="case-row">
-        <div class="case-row-field name" title="${name}">
-            <span>${name}</span>
-        </div>
-        <div class="case-row-field age">
-            ${age}
-        </div>
-        <div class="case-row-field time">
-            ${time}
-        </div>
-    </div>
-`;
-
 const DOM_Main = {
     load: function() {
         DOM_Main.search_input = $("#js-cases-search-input");
@@ -32,9 +14,7 @@ const DOM_Main = {
 const Search = {
     searching: false,
     input: "",
-    incoming: [],
-    active: [],
-    completed: [],
+    list: [],
     load: function() {
         DOM_Main.search_input.on("keyup", function() {
             DOM_Main.cases_container.scrollTop(0);
@@ -48,33 +28,15 @@ const Search = {
                 Search.searching = true;
             }
 
-            Search.incoming = [];
-            Search.active = [];
-            Search.completed = [];
+            Search.list = [];
 
             let regEx = new RegExp(escapeRegExp(Search.input), "ig");
 
-            for (let i = 0 ; i < Cases.incoming.length; i++) {
-                if (Cases.incoming[i].name.match(regEx)) {
-                    let match = Object.assign({},Cases.incoming[i]);
+            for (let i = 0; i < Cases.list.length; i++) {
+                if (Cases.list[i].name.match(regEx)) {
+                    let match = Object.assign({},Cases.list[i]);
                     match.name = match.name.replace(regEx, str => `<mark>${str}</mark>`);
-                    Search.incoming.push(match);
-                }
-            }
-
-            for (let i = 0 ; i < Cases.active.length; i++) {
-                if (Cases.active[i].name.match(regEx)) {
-                    let match = Object.assign({},Cases.active[i]);
-                    match.name = match.name.replace(regEx, str => `<mark>${str}</mark>`);
-                    Search.active.push(match);
-                }
-            }
-
-            for (let i = 0 ; i < Cases.completed.length; i++) {
-                if (Cases.completed[i].name.match(regEx)) {
-                    let match = Object.assign({},Cases.completed[i]);
-                    match.name = match.name.replace(regEx, str => `<mark>${str}</mark>`);
-                    Search.completed.push(match);
+                    Search.list.push(match);
                 }
             }
 
@@ -102,41 +64,81 @@ const Search = {
 }
 
 const Cases = {
+    list: [],
     incoming: [],
     active: [],
     completed: [],
+    template_row: ({ case_id, name, age_gender, time }) => `
+        <div class="case-row" data-case_id="${case_id}">
+            <div class="case-row-field name" title="${name}">
+                <span>${name}</span>
+            </div>
+            <div class="case-row-field age">
+                ${age_gender}
+            </div>
+            <div class="case-row-field time">
+                ${time}
+            </div>
+        </div>
+    `,
     load: function() {
-        DOM_Main.cases_incoming.html("");
+        //Cases.loadFake();
+
+        $.ajax({
+            url: "http://codestroke.pythonanywhere.com/cases/",
+            method: "GET",
+            dataType: "json",
+            crossDomain: true,
+            success: function(data) {
+                console.log(data);
+                Cases.list = data.result;
+
+                //Add a 'full name' so searching can be easier
+                for (let i = 0; i < Cases.list.length; i++) {
+                    Cases.list[i].name = Cases.list[i].first_name + " " + Cases.list[i].last_name;
+                }
+
+                Cases.display();
+            },
+            error: function() {
+
+            }
+        });
+    },
+    loadFake: function() {
+
         for (let i=0; i < 14; i++) {
             let item = {
                 name: faker.name.findName(),
                 age: (i + 35) + "M",
-                time: i + "min"
+                time: i + "min",
+                status: 0
             };
 
-            Cases.incoming.push(item);
+            Cases.list.push(item);
         }
 
-        DOM_Main.cases_active.html("");
+
         for (let i=0; i < 10; i++) {
             let item = {
                 name: faker.name.findName(),
                 age: ((2*i) + 8) + "F",
-                time: "1hr " + i + "min"
+                time: "1hr " + i + "min",
+                status: 1
             };
 
-            Cases.active.push(item);
+            Cases.list.push(item);
         }
 
-        DOM_Main.cases_completed.html("");
         for (let i=0; i < 44; i++) {
             let item = {
                 name: faker.name.findName(),
                 age: (i + 22) + "M",
-                time: "4hr " + i + "min"
+                time: "4hr " + i + "min",
+                status: 2
             };
 
-            Cases.completed.push(item);
+            Cases.list.push(item);
         }
     },
     display: function() {
@@ -144,45 +146,83 @@ const Cases = {
         DOM_Main.cases_active.html("");
         DOM_Main.cases_completed.html("");
 
-        if (!Search.searching) {
-            for (let i = 0 ; i < Cases.incoming.length; i++) {
-
-                DOM_Main.cases_incoming.append(
-                    template.row(Cases.incoming[i])
-                );
-            }
-
-            for (let i = 0 ; i < Cases.active.length; i++) {
-                DOM_Main.cases_active.append(
-                    template.row(Cases.active[i])
-                );
-            }
-
-            for (let i = 0 ; i < Cases.completed.length; i++) {
-                DOM_Main.cases_completed.append(
-                    template.row(Cases.completed[i])
-                );
-            }
+        let dlist;
+        if (Search.searching) {
+            dlist = Search.list;
         } else {
-
-            for (let i = 0 ; i < Search.incoming.length; i++) {
-                DOM_Main.cases_incoming.append(
-                    template.row(Search.incoming[i])
-                );
-            }
-
-            for (let i = 0 ; i < Search.active.length; i++) {
-                DOM_Main.cases_active.append(
-                    template.row(Search.active[i])
-                );
-            }
-
-            for (let i = 0 ; i < Search.completed.length; i++) {
-                DOM_Main.cases_completed.append(
-                    template.row(Search.completed[i])
-                );
-            }
+            dlist = Cases.list;
         }
+
+        for (let i = 0; i < dlist.length; i++) {
+            let row = {};
+
+            row.case_id = dlist[i].case_id;
+            row.name = dlist[i].name;
+
+            let agemilli = new Date().getTime() - new Date(dlist[i].dob).getTime();
+            let age = Math.floor(agemilli / 31536000000);
+            let gender;
+            switch (dlist[i].gender) {
+                case 0:
+                    gender = "F";
+                    break;
+                case 1:
+                    gender = "M";
+                    break;
+                default:
+                    gender = "?";
+                    break;
+            }
+            row.age_gender = age + "" + gender;
+
+            let timemilli = new Date().getTime() - new Date(dlist[i].status_time).getTime();
+            let past = false;
+            if (dlist[i].status == 0) {
+                if (timemilli < 0) {
+                    timemilli = -timemilli;
+                } else {
+                    past = true;
+                }
+            }
+            let minutes = Math.floor(timemilli / 60000);
+            let hours = Math.floor(minutes / 60);
+            minutes = minutes % 60;
+            if (hours == 0) {
+                row.time = `${minutes}m`;
+            } else {
+                row.time = `${hours}h ${minutes}m`;
+            }
+
+            switch (dlist[i].status) {
+                case 0:
+                    if (!past) {
+                        row.time = "In " + row.time;
+                    } else {
+                        row.time = row.time + " late";
+                    }
+
+                    DOM_Main.cases_incoming.append(
+                        Cases.template_row(row)
+                    );
+                    break;
+                case 1:
+                    row.time = row.time + " ago";
+                    DOM_Main.cases_active.append(
+                        Cases.template_row(row)
+                    );
+                    break;
+                case 2:
+                    row.time = row.time + " ago";
+                    DOM_Main.cases_completed.append(
+                        Cases.template_row(row)
+                    );
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+
     }
 };
 
@@ -209,7 +249,6 @@ $(document).ready(function() {
     DOM_Main.load();
 
     Cases.load();
-    Cases.display();
 
     Search.load();
 
