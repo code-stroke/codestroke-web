@@ -132,9 +132,9 @@ $( document ).ready(function() {
         OneSignal.registerForPushNotifications()
         initializeUI();
 
-        .catch(function(error) {
+/*        .catch(function(error) {
             disableBtn("Error: Error enabling push notifications. Please contact IT staff");
-            console.error('Service Worker Error', error);
+            console.error('Service Worker Error', error); */
         });
 
     } else {
