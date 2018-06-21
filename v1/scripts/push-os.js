@@ -132,11 +132,6 @@ $( document ).ready(function() {
         OneSignal.registerForPushNotifications()
         initializeUI();
 
-/*        .catch(function(error) {
-            disableBtn("Error: Error enabling push notifications. Please contact IT staff");
-            console.error('Service Worker Error', error); */
-        });
-
     } else {
         disableBtn("Error: Push Messaging not supported in your current browser");
         console.warn('Push messaging is not supported');
