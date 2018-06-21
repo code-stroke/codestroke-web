@@ -3,25 +3,19 @@
     <head>
         <meta charset="utf-8">
         <title>Codestroke - Home</title>
+        <link rel="manifest" href="manifest.json" />
 
         <!-- External Scripts -->
         <script src="scripts/external/jquery-3.3.1.min.js"></script>
         <script src="scripts/external/faker.js"></script>
 	    <script src="scripts/external/js.cookie.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 
         <!-- Local Scripts -->
         <script src="scripts/index.js"></script>
-<!--      <script src="scripts/push.js"></script> -->
-        <link rel="manifest" href="manifest.json" />
-        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-        <script>
-          var OneSignal = window.OneSignal || [];
-          OneSignal.push(function() {
-            OneSignal.init({
-              appId: "a704a88e-9e37-41f6-99b8-6ded41926c03",
-            });
-          });
-        </script>
+        <script src="scripts/osinit.js"></script>
+        <script src="scripts/push-os"></script>
+<!--    <script src="scripts/push.js"></script> -->
 
         <!-- CSS -->
         <link rel="stylesheet" href="style/global.css">
