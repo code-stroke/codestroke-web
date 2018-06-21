@@ -15,11 +15,13 @@ function initializeUI() {
           if (state.isPushEnabled) {
               /* Subscribed, opt them out */
               OneSignal.setSubscription(false)
+              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is no longer subscribed');
           } else {
               if (state.isOptedOut) {
                   /* Opted out, opt them back in */
                   OneSignal.setSubscription(true)
+                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
                   console.log('User is now subscribed');
               } else {
                   /* Unsubscribed, subscribe them */
@@ -27,7 +29,7 @@ function initializeUI() {
               }
           }
       });
-      updateBtn()
+
       event.preventDefault();
     });
 
