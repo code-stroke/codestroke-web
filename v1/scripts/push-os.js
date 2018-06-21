@@ -1,49 +1,36 @@
-//push UI handler//
+/* Push Notification Handler */
 
-function onManageWebPushSubscriptionButtonClicked(event) {
-    getSubscriptionState().then(function(state) {
-        if (state.isPushEnabled) {
-            /* Subscribed, opt them out */
-            DOM_Push.button.html(TEMP_Push.button({status: "on"}))
-            OneSignal.setSubscription(false);
-        } else {
-            if (state.isOptedOut) {
-                /* Opted out, opt them back in */
-                OneSignal.setSubscription(true)
-                DOM_Push.button.html(TEMP_Push.button({status: "off"}));
-            } else {
-                /* Unsubscribed, subscribe them */
-                OneSignal.registerForPushNotifications()
-                DOM_Push.button.html(TEMP_Push.button({status: "off"}));
-            }
-        }
+const DOM_Push = {};
+
+const TEMP_Push = {}
+TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
+
+
+
+function initializeUI() {
+    DOM_Push.button.removeClass("disabled");
+
+    DOM_Push.button.click(function() {
+      getSubscriptionState().then(function(state) {
+          if (state.isPushEnabled) {
+              /* Subscribed, opt them out */
+              OneSignal.setSubscription(false)
+              console.log('User is no longer subscribed');
+          } else {
+              if (state.isOptedOut) {
+                  /* Opted out, opt them back in */
+                  OneSignal.setSubscription(true)
+                  console.log('User is now subscribed');
+              } else {
+                  /* Unsubscribed, subscribe them */
+                  OneSignal.registerForPushNotifications();
+              }
+          }
+      });
+      updateBtn()
+      event.preventDefault();
     });
-    event.preventDefault();
-}
 
-function updateMangeWebPushSubscriptionButton(buttonSelector) {
-    var hideWhenSubscribed = false;
-    var subscribeText = "Subscribe to Notifications";
-    var unsubscribeText = "Unsubscribe from Notifications";
-
-    getSubscriptionState().then(function(state) {
-        var buttonText = !state.isPushEnabled || state.isOptedOut ? subscribeText : unsubscribeText;
-
-        var element = document.querySelector(buttonSelector);
-        if (element === null) {
-            return;
-        }
-
-        element.removeEventListener('click', onManageWebPushSubscriptionButtonClicked);
-        element.addEventListener('click', onManageWebPushSubscriptionButtonClicked);
-        element.textContent = buttonText;
-
-        if (state.hideWhenSubscribed && state.isPushEnabled) {
-            element.style.display = "none";
-        } else {
-            element.style.display = "";
-        }
-    });
 }
 
 function getSubscriptionState() {
@@ -61,21 +48,98 @@ function getSubscriptionState() {
     });
 }
 
-var OneSignal = OneSignal || [];
-var buttonSelector = "js-push-button";
 
-/* This example assumes you've already initialized OneSignal */
-OneSignal.push(function() {
-    // If we're on an unsupported browser, do nothing
-    if (!OneSignal.isPushNotificationsSupported()) {
+
+
+
+function updateBtn() {
+    if (Notification.permission === 'denied') {
         console.log("Push messaging blocked by browser!");
         disableBtn("Error: Push Messaging blocked. Please contact IT staff");
         updateSubscriptionOnServer(null);
         return;
     }
-    updateMangeWebPushSubscriptionButton(buttonSelector);
-    OneSignal.on("subscriptionChange", function(isSubscribed) {
-        /* If the user's subscription state changes during the page's session, update the button text */
-        updateMangeWebPushSubscriptionButton(buttonSelector);
+
+    if (isSubscribed) {
+        DOM_Push.button.html(TEMP_Push.button({status: "on"}));
+    } else {
+        DOM_Push.button.html(TEMP_Push.button({status: "off"}));
+    }
+
+    $("body").removeClass("loading");
+}
+
+function subscribeUser() {
+    $("body").addClass("loading");
+
+    const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+    swRegistration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+    })
+    .then(function(subscription) {
+        console.log('User is subscribed.');
+
+        updateSubscriptionOnServer(subscription);
+
+        isSubscribed = true;
+
+        updateBtn();
+    })
+    .catch(function(err) {
+        console.log('Failed to subscribe the user: ', err);
+        updateBtn();
     });
+}
+
+
+function unsubscribeUser() {
+    swRegistration.pushManager.getSubscription()
+    .then(function(subscription) {
+        if (subscription) {
+            return subscription.unsubscribe();
+        }
+    })
+    .catch(function(error) {
+        console.log('Error unsubscribing', error);
+    })
+    .then(function() {
+        updateSubscriptionOnServer(null);
+
+        console.log('User is unsubscribed.');
+        isSubscribed = false;
+
+        updateBtn();
+    });
+}
+
+function disableBtn(message) {
+    DOM_Push.button.html(TEMP_Push.button({status: "disabled"}));
+    DOM_Push.button.addClass("disabled");
+
+    DOM_Push.button.prop("title", message);
+
+    DOM_Push.button.off();
+}
+
+$( document ).ready(function() {
+    DOM_Push.button = $("#js-push-button");
+    //DOM_Push.debug = $("#js-push-debug");
+
+/*register service worker and enable button if browser supports push notifications*/
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+        console.log('Service Worker and Push is supported')
+        OneSignal.registerForPushNotifications()
+        initializeUI();
+
+        .catch(function(error) {
+            disableBtn("Error: Error enabling push notifications. Please contact IT staff");
+            console.error('Service Worker Error', error);
+        });
+
+    } else {
+        disableBtn("Error: Push Messaging not supported in your current browser");
+        console.warn('Push messaging is not supported');
+    }
+
 });
