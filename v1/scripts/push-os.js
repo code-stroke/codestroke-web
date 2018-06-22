@@ -5,6 +5,8 @@ const DOM_Push = {};
 const TEMP_Push = {}
 TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
 
+let isSubscribed = false;
+
 function initializeUI() {
     DOM_Push.button.removeClass("disabled");
 
@@ -35,7 +37,9 @@ function initializeUI() {
       });
 
       event.preventDefault();
-    });
+    })
+
+    updateBtn();
 
 }
 
@@ -52,6 +56,22 @@ function getSubscriptionState() {
             isOptedOut: isOptedOut
         };
     });
+}
+
+
+function updateBtn() {
+  getSubscriptionState().then(function(state) {
+      if (state.isPushEnabled) {
+          DOM_Push.button.html(TEMP_Push.button({status: "on"}))
+          console.log('User is currently subscribed');
+      } else {
+          if (state.isOptedOut) {
+              DOM_Push.button.html(TEMP_Push.button({status: "off"}));
+              console.log('User is not currently subscribed');
+          }
+      }
+  });
+
 }
 
 function disableBtn(message) {
