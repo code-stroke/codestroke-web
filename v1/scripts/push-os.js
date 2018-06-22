@@ -66,13 +66,14 @@ function updateBtn() {
           console.log('User is currently subscribed');
       } else {
           if (state.isOptedOut) {
-              DOM_Push.button.html(TEMP_Push.button({status: "off"}));
+              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is not currently subscribed');
+              else {
+                DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
+                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
+              }
           }
-      } else {
-          DOM_Push.button.html(TEMP_Push.button({status: "disabled"}));
-          console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
-        };
+      }
   });
 
 }
