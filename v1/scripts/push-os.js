@@ -84,7 +84,6 @@ $( document ).ready(function() {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported')
         OneSignal.registerForPushNotifications()
-        updateBtn()
         initializeUI();
 
     } else {
