@@ -72,7 +72,7 @@ function updateBtn() {
       } else {
           DOM_Push.button.html(TEMP_Push.button({status: "disabled"}));
           console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
-          }
+        };
   });
 
 }
