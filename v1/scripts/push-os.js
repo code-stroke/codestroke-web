@@ -12,7 +12,10 @@ function initializeUI() {
       getSubscriptionState().then(function(state) {
           if (state.isPushEnabled) {
               /* Subscribed, opt them out */
-              OneSignal.setSubscription(false)
+              OneSignal.push(function() {
+                OneSignal.setSubscription(false);
+              });
+
               DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is no longer subscribed');
           } else {
@@ -23,7 +26,10 @@ function initializeUI() {
                   console.log('User is now subscribed');
               } else {
                   /* Unsubscribed, subscribe them */
-                  OneSignal.registerForPushNotifications();
+                  OneSignal.push(function() {
+                    OneSignal.registerForPushNotifications;
+                  });
+
               }
           }
       });
@@ -57,6 +63,20 @@ function disableBtn(message) {
     DOM_Push.button.off();
 }
 
+function updateBtn()
+    getSubscriptionState().then(function(state) {
+        if (state.isPushEnabled) {
+            DOM_Push.button.html(TEMP_Push.button({status: "on"}))
+            console.log('User currently subscribed');
+        } else {
+            if (state.isOptedOut) {
+                DOM_Push.button.html(TEMP_Push.button({status: "off"}));
+                console.log('User is currently unsubscribed');
+            }
+        }
+    }
+
+
 $( document ).ready(function() {
     DOM_Push.button = $("#js-push-button");
 
@@ -64,6 +84,7 @@ $( document ).ready(function() {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported')
         OneSignal.registerForPushNotifications()
+        updateBtn()
         initializeUI();
 
     } else {
