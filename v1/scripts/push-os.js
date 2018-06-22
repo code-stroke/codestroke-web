@@ -63,20 +63,6 @@ function disableBtn(message) {
     DOM_Push.button.off();
 }
 
-function updateBtn()
-    getSubscriptionState().then(function(state) {
-        if (state.isPushEnabled) {
-            DOM_Push.button.html(TEMP_Push.button({status: "on"}))
-            console.log('User currently subscribed');
-        } else {
-            if (state.isOptedOut) {
-                DOM_Push.button.html(TEMP_Push.button({status: "off"}));
-                console.log('User is currently unsubscribed');
-            }
-        }
-    }
-
-
 $( document ).ready(function() {
     DOM_Push.button = $("#js-push-button");
 
