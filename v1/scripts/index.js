@@ -5,6 +5,7 @@ const DOM_Main = {
         DOM_Main.search_icon = $("#js-cases-search-cancel");
 
         DOM_Main.cases_container = $("#js-cases-container");
+        DOM_Main.cases_row = $(".case-row");
         DOM_Main.cases_incoming = $("#js-cases-incoming");
         DOM_Main.cases_active = $("#js-cases-active");
         DOM_Main.cases_completed = $("#js-cases-completed");
@@ -69,7 +70,7 @@ const Cases = {
     active: [],
     completed: [],
     template_row: ({ case_id, name, age_gender, time }) => `
-        <div class="case-row" data-case_id="${case_id}">
+        <a class="case-row" href="/case.html?case_id=${case_id}">
             <div class="case-row-field name" title="${name}">
                 <span>${name}</span>
             </div>
@@ -79,13 +80,13 @@ const Cases = {
             <div class="case-row-field time">
                 ${time}
             </div>
-        </div>
+        </a>
     `,
     load: function() {
         //Cases.loadFake();
 
         $.ajax({
-            url: "http://codestroke.pythonanywhere.com/cases/",
+            url: "https://codestroke.pythonanywhere.com/cases/",
             method: "GET",
             dataType: "json",
             crossDomain: true,
@@ -220,7 +221,7 @@ const Cases = {
                 default:
                     break;
             }
-            
+
         }
 
     }

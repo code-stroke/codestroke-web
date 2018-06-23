@@ -36,6 +36,14 @@ const SELECT = {
                 SELECT.value($(this));
             });
 
+            $("body").on("ui:set", ".-ui-select", function(event, value) {
+                SELECT.set($(this), value);
+            });
+
+            $("body").on("ui:get", ".-ui-select", function(event, obj) {
+                SELECT.get($(this), obj);
+            });
+
             SELECT.isRegistered = true;
         }
     },
@@ -82,6 +90,13 @@ const SELECT = {
 
         parent.trigger("ui:select");
     },
+    set: function(parent, value) {
+        parent.find(`li[data-val="${value}"]`).trigger("click");
+        parent.trigger("focusout");
+    },
+    get: function(parent, obj) {
+        obj.val = parent.children("input").val();
+    },
     isRegistered: false
 }
 
@@ -102,6 +117,14 @@ const TOGGLE = {
                 TOGGLE.clear($(this));
             });
 
+            $("body").on("ui:set", ".-ui-toggle", function(event, value) {
+                TOGGLE.set($(this), value);
+            });
+
+            $("body").on("ui:get", ".-ui-toggle", function(event, obj) {
+                TOGGLE.get($(this), obj);
+            });
+
             TOGGLE.isRegistered = true;
         }
     },
@@ -120,6 +143,12 @@ const TOGGLE = {
     clear: function(parent) {
         parent.children("li").removeClass();
         parent.children("input").val("");
+    },
+    set: function(parent, value) {
+        parent.find(`li[data-val="${value}"]`).trigger("click");
+    },
+    get: function(parent, obj) {
+        obj.val = parent.children("input").val();
     },
     isRegistered: false
 }
@@ -149,6 +178,14 @@ const SINCE = {
 
             $("body").on("ui:clear", ".-ui-since", function() {
                 SINCE.clear($(this));
+            });
+
+            $("body").on("ui:set", ".-ui-since", function(event, value) {
+                SINCE.set($(this), value);
+            });
+
+            $("body").on("ui:get", ".-ui-since", function(event, obj) {
+                SINCE.get($(this), obj);
             });
 
             SINCE.isRegistered = true;
@@ -182,10 +219,10 @@ const SINCE = {
 
             //If input is valid, calculate time since, else display 'unknown'
             if (date != "" && time != "") {
-                let datetime = new Date(date + " " + time).getTime();
+                let datetime = new Date(date + " " + time);
                 parent.children("input").val(datetime);
 
-                let since = new Date().getTime() - datetime;
+                let since = new Date().getTime() - datetime.getTime();
                 let obj = SINCE.convertTime(since);
                 //Only display hours if it's been >1hr since event
                 if (obj.hour > 0) {
@@ -207,6 +244,31 @@ const SINCE = {
     clear: function(parent) {
         parent.find("input").val("");
         parent.find("span").html("Unknown");
+    },
+    set: function(parent, value) {
+        if (!value) {
+            return;
+        }
+
+        parent.children("input").val(new Date(value).toDateString());
+
+        let date = new Date(value);
+        let currentDate = date.toISOString().slice(0,10);
+        let currentTime = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours())
+                            + ':'
+                            + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+
+        parent.find("input[type='date']").val(currentDate);
+        parent.find("input[type='time']").val(currentTime);
+        //.val(dt.toLocaleTimeString());
+        //parent.data("state", "edit");
+        parent.find("button").trigger("click");
+    },
+    get: function(parent, obj) {
+        let date = parent.children("input").val();
+        if (date) {
+            obj.val = new Date(parent.children("input").val()).toISOString().substring(0, 19).replace('T', ' ');
+        }
     },
     isRegistered: false
 };

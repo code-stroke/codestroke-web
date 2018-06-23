@@ -5,9 +5,9 @@
             <span>Thrombolysis</span>
             <span class="manage_description">(Click "Yes" to see a list of contraindications)</span>
         </label>
-        <ul class="case-input text -ui-toggle">
-            <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-            <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+        <ul id="db-thrombolysis" class="case-input text -ui-toggle">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
         </ul>
     </div>
 
@@ -22,7 +22,7 @@
             <div class="case-label">
                 Age >18
             </div>
-            <div class="case-input manage_filled -ui-toggle-yes">
+            <div class="case-inputs manage_filled -ui-toggle-yes">
                 Yes
             </div>
 
@@ -31,7 +31,7 @@
             <div class="case-label">
                 LVO
             </div>
-            <div class="case-input manage_filled -ui-toggle-no">
+            <div class="case-inputs manage_filled -ui-toggle-no">
                 No
             </div>
         </div>
@@ -39,7 +39,7 @@
             <div class="case-label">
                 Time of Onset < 4.5hr
             </div>
-            <div class="case-input manage_filled -ui-toggle-no">
+            <div class="case-inputs manage_filled -ui-toggle-no">
                 No
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="case-label">
                 No evidence of ICH
             </div>
-            <div class="case-input manage_filled -ui-toggle-no">
+            <div class="case-inputs manage_filled -ui-toggle-no">
                 No
             </div>
         </div>
@@ -65,81 +65,72 @@
             <div class="case-label">
                 New Head Trauma or Stroke ??
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-new_trauma_haemorrhage" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Uncontrolled HTN (SBP > 180)
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-uncontrolled_htn" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 History of ICH
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-history_ich" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Known Intracranial ??
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-known_intracranial" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Active Bleeding
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
-        </div>
-        <div class="case-row manage_subheading ">
-            <div class="case-label">
-                Unctrolled HTN (SBP > 180)
-            </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-active_bleed" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Endocarditis (incl. Suspected)
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-endocarditis" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Known bleeding diathesis
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-bleeding_diathesis" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Abnormal Blood Glucose
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-abnormal_blood_glucose" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
     </div>
@@ -155,72 +146,72 @@
             <div class="case-label">
                 Rapidly Improving
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-rapidly_improving" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Major Trauma or Surgery in last 3 weeks
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-recent_trauma_surgery" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Active bleeding in last 3 weeks
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-recent_active_bleed" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Seizure at onset
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-seizure_onset" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Recent arterial puncture
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-recent_arterial_puncture" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Recent lumbar puncture
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-recent_lumbar_puncture" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Post ACS pericarditis
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-post_acs_pericarditis" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
         <div class="case-row manage_subheading ">
             <div class="case-label">
                 Pregnant
             </div>
-            <ul class="case-input text -ui-toggle">
-                <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+            <ul id="db-pregnant" class="case-input text -ui-toggle">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
     </div>
@@ -234,31 +225,31 @@
             <div class="case-label">
                 Time when thrombolysis given??
             </div>
-            <div class="case-input -ui-since"></div>
+            <div id="db-thrombolysis_time_given" class="case-input -ui-since"></div>
         </div>
     </div>
 
     <div class="case-row manage_heading">
         <label class="case-label">ECR</label>
-        <ul class="case-input text -ui-toggle">
-            <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-            <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+        <ul id="db-ecr" class="case-input text -ui-toggle">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
         </ul>
     </div>
 
     <div class="case-row manage_heading">
         <label class="case-label">Surgical Mx</label>
-        <ul class="case-input text -ui-toggle">
-            <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-            <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+        <ul id="db-surgical_rx" class="case-input text -ui-toggle">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
         </ul>
     </div>
 
     <div class="case-row manage_heading">
         <label class="case-label">Conservative Mx</label>
-        <ul class="case-input text -ui-toggle">
-            <li data-val="y" data-class="-ui-toggle-yes" class="">Yes</li>
-            <li data-val="n" data-class="-ui-toggle-no" class="">No</li>
+        <ul id="db-conservative_rx" class="case-input text -ui-toggle">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
         </ul>
     </div>
 

@@ -1,6 +1,7 @@
 const DOM_Case = {
     load: function() {
         DOM_Case.case.load();
+        DOM_Case.ed.load();
         DOM_Case.assess.load();
         DOM_Case.radiology.load();
     },
@@ -8,6 +9,22 @@ const DOM_Case = {
         load: function() {
             DOM_Case.case.btns = $(".js-case-button");
             DOM_Case.case.main = $("#js-case-main");
+
+            DOM_Case.case.inputs = ".case-input";
+            DOM_Case.case.submits = ".case-submit";
+
+            DOM_Case.case.patient = $("#js-patient");
+            DOM_Case.case.name = $("#js-patient-name");
+            DOM_Case.case.age_gender = $("#js-patient-age_gender");
+            DOM_Case.case.status = $("#js-patient-status");
+            DOM_Case.case.time = $("#js-patient-time");
+            DOM_Case.case.well = $("#js-patient-well");
+        }
+    },
+    ed: {
+        load: function() {
+            DOM_Case.ed.loc = "#js-ed-loc";
+            DOM_Case.ed.complete = "ed_complete";
         }
     },
     assess: {
@@ -34,26 +51,239 @@ const DOM_Case = {
 };
 
 const Case = {
+    case_id: null,
+    section: "",
+    load: function() {
+        Case.case_id = new URL(window.location.href).searchParams.get("case_id");
+        console.log(Case.case_id);
+
+        if (!Case.case_id) {
+            window.location.href = "/index.html";
+        } else {
+            Case.loadPatient();
+        }
+
+        Case.loadPageLoader();
+        Case.loadSubmit();
+    },
+    loadSubmit: function() {
+        $("body").on("click", DOM_Case.case.submits, function() {
+            let data = {};
+            data.case_id = Case.case_id;
+
+            $(DOM_Case.case.inputs).each(function() {
+                let key = $(this).attr("id").slice(3);
+
+                if (Case.section == "case_eds" && $(this).is("[type='checkbox']")) {
+                    if ($(this).is(":checked")) {
+                        data[key] = 1;
+                    } else {
+                        data[key] = 0;
+                    }
+                    return;
+                }
+
+                if ($(this).hasClass("-ui-since") || $(this).hasClass("-ui-toggle") || $(this).hasClass("-ui-select")) {
+                    let obj = {val: null};
+                    $(this).trigger("ui:get", obj);
+                    data[key] = obj.val;
+                    return;
+                }
+
+                if ($(this).prop("type") == "date") {
+                    data[key] = new Date($(this).val()).toISOString().substring(0, 10);
+
+                    return;
+                }
+
+                data[key] = $(this).val();
+            });
+
+            console.log(data);
+
+            $.ajax({
+                url: `https://codestroke.pythonanywhere.com/${Case.section}/${Case.case_id}/`,
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function(obj, e1, e2) {
+                    console.log(`ERROR | e1: ${e1} , e2: ${e2}`);
+                }
+
+            });
+        });
+    },
+    loadPatient: function() {
+        $.ajax({
+            url: `https://codestroke.pythonanywhere.com/cases/${Case.case_id}/`,
+            method: "GET",
+            dataType: "json",
+            crossDomain: true,
+            success: function(data) {
+                console.log(data);
+
+                let patient = data.result[0];
+                if (!patient) {
+                    window.location.href = "/index.html";
+                }
+
+                DOM_Case.case.name.text(patient.first_name + " " + patient.last_name);
+
+                let agemilli = new Date().getTime() - new Date(patient.dob).getTime();
+                let age = Math.floor(agemilli / 31536000000);
+                let gender;
+                switch (patient.gender) {
+                    case 0:
+                        gender = "F";
+                        break;
+                    case 1:
+                        gender = "M";
+                        break;
+                    default:
+                        gender = "?";
+                        break;
+                }
+                DOM_Case.case.age_gender.text(age + "" + gender);
+
+
+                let wellmilli = new Date().getTime() - new Date(patient.last_well).getTime();
+                let wellminutes = Math.floor(wellmilli / 60000);
+                let wellhours = Math.floor(wellminutes / 60);
+                wellminutes = wellminutes % 60;
+                if (wellhours == 0) {
+                    DOM_Case.case.well.text(`Last Well ${wellminutes}m ago`);
+                } else {
+                    DOM_Case.case.well.text(`Last Well ${wellhours}h ${wellminutes}m ago`);
+                }
+
+                let status_time;
+                let timemilli = new Date().getTime() - new Date(patient.status_time).getTime();
+                let past = false;
+                if (patient.status == 0) {
+                    if (timemilli < 0) {
+                        timemilli = -timemilli;
+                    } else {
+                        past = true;
+                    }
+                }
+                let minutes = Math.floor(timemilli / 60000);
+                let hours = Math.floor(minutes / 60);
+                minutes = minutes % 60;
+                if (hours == 0) {
+                    status_time = `${minutes}m`;
+                } else {
+                    status_time = `${hours}h ${minutes}m`;
+                }
+
+
+                DOM_Case.case.patient.removeClass("incoming active completed");
+                switch (patient.status) {
+                    case 0:
+                        DOM_Case.case.patient.addClass("incoming");
+                        DOM_Case.case.status.text("Incoming");
+
+                        if (!past) {
+                            DOM_Case.case.time.text("In " + status_time);
+                        } else {
+                            DOM_Case.case.time.text(status_time + " late");
+                        }
+                        break;
+                    case 1:
+                        DOM_Case.case.patient.addClass("active");
+                        DOM_Case.case.status.text("Active");
+                        DOM_Case.case.time.text(status_time + " ago");
+                        break;
+                    case 2:
+                        DOM_Case.case.patient.addClass("completed");
+                        DOM_Case.case.status.text("Completed");
+                        DOM_Case.case.time.text(status_time + " ago");
+                        break;
+                }
+
+            },
+            error: function() {
+
+            }
+        });
+    },
     loadPageLoader: function() {
         DOM_Case.case["btns"].click(function() {
             if ($(this).hasClass("selected")) {
                 return;
             }
 
-            //Change the page
-            DOM_Case.case["main"].html("");
-            DOM_Case.case["main"].load(`case-${$(this).data("section")}.html`, function() {
-                //Make UI inputs work
-                $(document).trigger("case:refresh");
+            let section = $(this).data("section");
+            let button = $(this);
+
+            $.ajax({
+                url: `https://codestroke.pythonanywhere.com/${section}/${Case.case_id}/`,
+                method: "GET",
+                dataType: "json",
+                crossDomain: true,
+                success: function(d) {
+                    let data = d.result[0];
+                    console.log(data);
+
+                    Case.section = section;
+
+                    //Change the page
+                    DOM_Case.case["main"].html("");
+                    DOM_Case.case["main"].load(`${Case.section}.html`, function() {
+                        //Make UI inputs work
+                        $(document).trigger("case:refresh");
+
+                        $.each(data, function(key, value) {
+                            Case.setInput(key, value);
+                        });
+                    });
+
+                    //Change the selected button
+                    button.siblings(".js-case-button").removeClass("selected");
+                    button.addClass("selected");
+                },
+                error: function() {
+
+                }
             });
 
-
-            //Change the selected button
-            $(this).siblings(".js-case-button").removeClass("selected");
-            $(this).addClass("selected");
         });
 
-        $("div[data-section='ed']").trigger("click");
+        $("div[data-section='case_eds']").trigger("click");
+    },
+    setInput: function(name, value) {
+        let input = $("#db-" + name);
+
+        if (Case.section == "case_eds") {
+            if (name == "location") {
+                $(DOM_Case.ed.loc).children("span").text(value);
+            } else {
+                if (value == 1) {
+                    input.closest("div").addClass(DOM_Case.ed.complete);
+                }
+            }
+            return;
+        }
+
+        if (input.hasClass("-ui-since") || input.hasClass("-ui-toggle") || input.hasClass("-ui-select")) {
+            input.trigger("ui:set", value);
+
+            return;
+        }
+
+        if (input.prop("type") == "date") {
+            let date = new Date(value);
+            let currentDate = date.toISOString().slice(0,10);
+            input.val(currentDate);
+            input.removeClass("empty");
+
+            return;
+        }
+
+        input.val(value);
+
     }
 };
 
@@ -110,31 +340,31 @@ const Radiology = {
             let progress = 0;
 
             while (true) {
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-0", "y")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-0", "1")) {
                     progress++;
                 } else {
                     break;
                 }
 
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-1", "y")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-1", "1")) {
                     progress++;
                 } else {
                     break;
                 }
 
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-2", "n")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-2", "0")) {
                     progress++;
                 } else {
                     break;
                 }
 
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-3", "y")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-3", "1")) {
                     progress++;
                 } else {
                     break;
                 }
 
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-4", "y")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-4", "1")) {
                     progress++;
                 } else {
                     break;
@@ -176,7 +406,7 @@ const Radiology = {
 $(document).ready(function() {
     DOM_Case.load();
 
-    Case.loadPageLoader();
+    Case.load();
 
     Assess.load();
     Radiology.load();
