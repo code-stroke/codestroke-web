@@ -18,13 +18,13 @@ function initializeUI() {
                 OneSignal.setSubscription(false);
               });
 
-              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
+//              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is no longer subscribed');
           } else {
               if (state.isOptedOut) {
                   /* Opted out, opt them back in */
                   OneSignal.setSubscription(true)
-                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
+//                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
                   console.log('User is now subscribed');
               } else {
                   /* Unsubscribed, subscribe them */
@@ -69,8 +69,9 @@ function updateBtn() {
               DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is not currently subscribed');
           } else {
-                DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
-                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
+//              DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
+                disableBtn("Please contact your IT staff. OneSignal API not functioning");
+//                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
               }
           }
 
