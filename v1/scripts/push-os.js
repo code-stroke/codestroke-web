@@ -5,8 +5,6 @@ const DOM_Push = {};
 const TEMP_Push = {}
 TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
 
-let isSubscribed = false;
-
 function initializeUI() {
     DOM_Push.button.removeClass("disabled");
 
@@ -17,7 +15,7 @@ function initializeUI() {
               OneSignal.push(function() {
                 OneSignal.setSubscription(false);
               });
-
+                updateBtn();
 //              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is no longer subscribed');
           } else {
@@ -25,11 +23,13 @@ function initializeUI() {
                   /* Opted out, opt them back in */
                   OneSignal.setSubscription(true)
 //                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
-                  console.log('User is now subscribed');
+                  console.log('User is now subscribed')
+                  updateBtn();
               } else {
                   /* Unsubscribed, subscribe them */
                   OneSignal.push(function() {
-                    OneSignal.registerForPushNotifications;
+                    OneSignal.registerForPushNotifications
+                    updateBtn();
                   });
 
               }
@@ -38,8 +38,6 @@ function initializeUI() {
 
       event.preventDefault();
     })
-
-    updateBtn();
 
 }
 
@@ -71,7 +69,7 @@ function updateBtn() {
           } else {
 //              DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
                 disableBtn("Please contact your IT staff. OneSignal API not functioning");
-//                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
+                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
               }
           }
 
