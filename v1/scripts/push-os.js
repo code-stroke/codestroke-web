@@ -29,7 +29,8 @@ function initializeUI() {
               } else {
                   /* Unsubscribed, subscribe them */
                   OneSignal.push(function() {
-                    OneSignal.registerForPushNotifications;
+                    OneSignal.registerForPushNotifications()
+                    console.log('User has been registered for push notifications');
                   });
 
               }
