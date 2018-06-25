@@ -5,6 +5,8 @@ const DOM_Push = {};
 const TEMP_Push = {}
 TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
 
+let isSubscribed = false;
+
 function initializeUI() {
     DOM_Push.button.removeClass("disabled");
 
@@ -15,21 +17,19 @@ function initializeUI() {
               OneSignal.push(function() {
                 OneSignal.setSubscription(false);
               });
-                updateBtn();
-//              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
+
+              DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is no longer subscribed');
           } else {
               if (state.isOptedOut) {
                   /* Opted out, opt them back in */
                   OneSignal.setSubscription(true)
-//                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
-                  console.log('User is now subscribed')
-                  updateBtn();
+                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
+                  console.log('User is now subscribed');
               } else {
                   /* Unsubscribed, subscribe them */
                   OneSignal.push(function() {
-                    OneSignal.registerForPushNotifications
-                    updateBtn();
+                    OneSignal.registerForPushNotifications;
                   });
 
               }
@@ -38,6 +38,8 @@ function initializeUI() {
 
       event.preventDefault();
     })
+
+    updateBtn();
 
 }
 
@@ -67,8 +69,7 @@ function updateBtn() {
               DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is not currently subscribed');
           } else {
-//              DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
-                disableBtn("Please contact your IT staff. OneSignal API not functioning");
+                DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
                 console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
               }
           }
