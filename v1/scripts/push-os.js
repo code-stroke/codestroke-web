@@ -21,16 +21,19 @@ function initializeUI() {
           } else {
               if (state.isOptedOut) {
                   /* Opted out, opt them back in */
-                  OneSignal.setSubscription(true)
+                  OneSignal.push(function() {
+                      OneSignal.setSubscription(true);
+                  });
                   DOM_Push.button.html(TEMP_Push.button({status: "on"}));
                   console.log('User is now subscribed');
               } else {
                   /* Unsubscribed, subscribe them */
                   OneSignal.push(function() {
                     OneSignal.registerForPushNotifications();
-                    console.log('User has been registered for push notifications');
+                    OneSignal.setSubscription(true);
                   });
-
+                  DOM_Push.button.html(TEMP_Push.button({status: "on"}));
+                  console.log('User has been registered for push notifications');
               }
           }
       });
@@ -68,8 +71,13 @@ function updateBtn() {
               DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is not currently subscribed');
           } else {
-                DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
-                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
+                OneSignal.push(function() {
+                    OneSignal.registerForPushNotifications();
+                    OneSignal.setSubscription(true);
+                });
+                console.log('user has been subscribed')
+//                DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
+//                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
               }
           }
 
@@ -92,7 +100,10 @@ $( document ).ready(function() {
 /*register service worker and enable button if browser supports push notifications*/
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported')
-        OneSignal.registerForPushNotifications();
+        OneSignal.push(function() {
+            OneSignal.registerForPushNotifications();
+            OneSignal.setSubscription(true);
+        });
         initializeUI();
 
     } else {
