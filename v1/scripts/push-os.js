@@ -5,8 +5,6 @@ const DOM_Push = {};
 const TEMP_Push = {}
 TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
 
-let isSubscribed = false;
-
 function initializeUI() {
     DOM_Push.button.removeClass("disabled");
 
@@ -29,7 +27,7 @@ function initializeUI() {
               } else {
                   /* Unsubscribed, subscribe them */
                   OneSignal.push(function() {
-                    OneSignal.registerForPushNotifications()
+                    OneSignal.registerForPushNotifications();
                     console.log('User has been registered for push notifications');
                   });
 
@@ -94,7 +92,7 @@ $( document ).ready(function() {
 /*register service worker and enable button if browser supports push notifications*/
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported')
-        OneSignal.registerForPushNotifications()
+        OneSignal.registerForPushNotifications();
         initializeUI();
 
     } else {
