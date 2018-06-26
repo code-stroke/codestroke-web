@@ -162,23 +162,11 @@ const Cases = {
 
             let agemilli = new Date().getTime() - new Date(dlist[i].dob).getTime();
             let age = Math.floor(agemilli / 31536000000);
-            let gender;
-            switch (dlist[i].gender) {
-                case 0:
-                    gender = "F";
-                    break;
-                case 1:
-                    gender = "M";
-                    break;
-                default:
-                    gender = "?";
-                    break;
-            }
-            row.age_gender = age + "" + gender;
+            row.age_gender = age + "" + dlist[i].gender.toUpperCase();
 
             let timemilli = new Date().getTime() - new Date(dlist[i].status_time).getTime();
             let past = false;
-            if (dlist[i].status == 0) {
+            if (dlist[i].status == "incoming") {
                 if (timemilli < 0) {
                     timemilli = -timemilli;
                 } else {
@@ -195,7 +183,7 @@ const Cases = {
             }
 
             switch (dlist[i].status) {
-                case 0:
+                case "incoming":
                     if (!past) {
                         row.time = "In " + row.time;
                     } else {
@@ -206,13 +194,13 @@ const Cases = {
                         Cases.template_row(row)
                     );
                     break;
-                case 1:
+                case "active":
                     row.time = row.time + " ago";
                     DOM_Main.cases_active.append(
                         Cases.template_row(row)
                     );
                     break;
-                case 2:
+                case "completed":
                     row.time = row.time + " ago";
                     DOM_Main.cases_completed.append(
                         Cases.template_row(row)

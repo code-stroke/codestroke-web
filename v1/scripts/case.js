@@ -134,19 +134,7 @@ const Case = {
 
                 let agemilli = new Date().getTime() - new Date(patient.dob).getTime();
                 let age = Math.floor(agemilli / 31536000000);
-                let gender;
-                switch (patient.gender) {
-                    case 0:
-                        gender = "F";
-                        break;
-                    case 1:
-                        gender = "M";
-                        break;
-                    default:
-                        gender = "?";
-                        break;
-                }
-                DOM_Case.case.age_gender.text(age + "" + gender);
+                DOM_Case.case.age_gender.text(age + "" + patient.gender.toUpperCase());
 
 
                 let wellmilli = new Date().getTime() - new Date(patient.last_well).getTime();
@@ -162,7 +150,7 @@ const Case = {
                 let status_time;
                 let timemilli = new Date().getTime() - new Date(patient.status_time).getTime();
                 let past = false;
-                if (patient.status == 0) {
+                if (patient.status == "incoming") {
                     if (timemilli < 0) {
                         timemilli = -timemilli;
                     } else {
@@ -181,7 +169,7 @@ const Case = {
 
                 DOM_Case.case.patient.removeClass("incoming active completed");
                 switch (patient.status) {
-                    case 0:
+                    case "incoming":
                         DOM_Case.case.patient.addClass("incoming");
                         DOM_Case.case.status.text("Incoming");
 
@@ -191,12 +179,12 @@ const Case = {
                             DOM_Case.case.time.text(status_time + " late");
                         }
                         break;
-                    case 1:
+                    case "active":
                         DOM_Case.case.patient.addClass("active");
                         DOM_Case.case.status.text("Active");
                         DOM_Case.case.time.text(status_time + " ago");
                         break;
-                    case 2:
+                    case "completed":
                         DOM_Case.case.patient.addClass("completed");
                         DOM_Case.case.status.text("Completed");
                         DOM_Case.case.time.text(status_time + " ago");
