@@ -1,0 +1,158 @@
+[
+    {
+        "table": "cases",
+        "fields": {
+            "case_id": "int",
+            "first_name": "varchar(30)",
+            "last_name": "varchar(30)",
+            "dob": "date",
+            "address": "text",
+            "gender": "varchar(1)",
+            "last_well": "datetime",
+            "nok": "varchar(40)",
+            "nok_phone": "varchar(16)",
+            "medicare_no": "varchar(12)",
+            "status": "tinyint",
+            "status_time": "datetime"
+        }
+    },
+    {
+        "table": "case_hospitals",
+        "fields": {
+            "case_id": "int",
+            "hospital_id": "int"
+        }
+    },
+    {
+        "table": "case_histories",
+        "fields": {
+            "case_id": "int",
+            "pmhx": "text",
+            "meds": "text",
+            "anticoags": "bool",
+            "anticoags_last_dose": "datetime",
+            "hopc": "text",
+            "weight": "float",
+            "last_meal": "datetime"
+        }
+    },
+    {
+        "table": "case_assessments",
+        "fields": {
+            "case_id": "int",
+            "facial_droop": "bool",
+            "arm_drift": "bool",
+            "weak_grip": "bool",
+            "speech_difficulty": "bool",
+            "bp_systolic": "int",
+            "bp_diastolic": "int",
+            "heart_rate": "int",
+            "heart_rhythm": "bool",
+            "rr": "int",
+            "o2sats": "int",
+            "temp": "int",
+            "gcs": "int",
+            "blood_glucose": "int",
+            "facial_palsy_race": "tinyint",
+            "arm_motor_impair": "tinyint",
+            "leg_motor_impair": "tinyint",
+            "head_gaze_deviate": "tinyint",
+            "hemiparesis": "bool",
+            "cannula": "bool",
+            "conscious_level": "tinyint",
+            "month_age": "tinyint",
+            "blink_squeeze": "tinyint",
+            "horizontal_gaze": "tinyint",
+            "visual_fields": "tinyint",
+            "facial_palsy_nihss": "tinyint",
+            "left_arm_drift": "tinyint",
+            "right_arm_drift": "tinyint",
+            "left_leg_drift": "tinyint",
+            "right_leg_drift": "tinyint",
+            "limb_ataxia": "tinyint",
+            "sensation": "tinyint",
+            "aphasia": "tinyint",
+            "dysarthria": "tinyint",
+            "neglect": "tinyint",
+            "rankin_conscious": "tinyint"
+        }
+    },
+    {
+        "table": "case_eds",
+        "fields": {
+            "case_id": "int",
+            "location": "VARCHAR(30)",
+            "registered": "bool",
+            "triaged": "bool",
+            "primary_survey": "bool"
+        }
+    },
+    {
+        "table": "case_radiologies",
+        "fields": {
+            "case_id": "int",
+            "ct1": "bool",
+            "ct2": "bool",
+            "ct3": "bool",
+            "arrived_to_ct": "bool",
+            "ct_complete": "bool",
+            "ich_found": "bool",
+            "do_cta_ctp": "bool",
+            "cta_ctp_complete": "bool",
+            "large_vessel_occlusion": "bool"
+        }
+    },
+    {
+        "table": "case_managements",
+        "fields": {
+            "case_id": "int",
+            "thrombolysis": "bool",
+            "new_trauma_haemorrhage": "bool",
+            "uncontrolled_htn": "bool",
+            "history_ich": "bool",
+            "known_intracranial": "bool",
+            "active_bleed": "bool",
+            "endocarditis": "bool",
+            "bleeding_diathesis": "bool",
+            "abnormal_blood_glucose": "bool",
+            "rapidly_improving": "bool",
+            "recent_trauma_surgery": "bool",
+            "recent_active_bleed": "bool",
+            "seizure_onset": "bool",
+            "recent_arterial_puncture": "bool",
+            "recent_lumbar_puncture": "bool",
+            "post_acs_pericarditis": "bool",
+            "pregnant": "bool",
+            "thrombolysis_time_given": "datetime",
+            "ecr": "bool",
+            "surgical_rx": "bool",
+            "conservative_rx": "bool"
+        }
+    },
+    {
+        "table": "clinicians",
+        "fields": {
+            "id": "int",
+            "first_name": "varchar(30)",
+            "last_name": "varchar(30)",
+            "username": "varchar(20)",
+            "pwhash": "text",
+            "hospital_id": "int",
+            "role": "int",
+            "creation_date": "date",
+            "email": "varchar(40)"
+        }
+    },
+    {
+        "table": "hospitals",
+        "fields": {
+            "id": "int",
+            "name": "varchar(30)",
+            "city": "varchar(30)",
+            "state": "varchar(5)",
+            "postcode": "varchar(30)",
+            "latitude": "text",
+            "longitude": "text"
+        }
+    }
+]

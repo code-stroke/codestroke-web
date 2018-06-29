@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Codestroke - Webapp</title>
+
+        <!-- External Scripts -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+      <!--button to enable push notifications-->
+      <button disabled class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Enable Push Messaging
+      </button>
+      <section class="subscription-details js-subscription-details is-invisible">
+              <pre><code class="js-subscription-json"></code></pre>
+      </section>
+
+
+        <div class="container">
+
+            <section id="js-connection" class="section section-connection">
+                <h3>Connection</h3>
+                <div class="inputs">
+                    <label>address</label>
+                    <input id="js-address" name="address" type="text" value="http://localhost">
+                    <!-- <label>port</label>
+                    <input id="js-port" name="port" type="text" value="8000"> -->
+                </div>
+            </section>
+            <section class="section section-form">
+                <h3>API Call</h3>
+                <div class="inputs">
+                    <h4>Select Action</h4>
+                    <select id="js-categories">
+                        <option style="display:none;"></option>
+                    </select>
+                    <select id="js-calls">
+                        <option style="display:none;"></option>
+                    </select>
+                </div>
+                <div id="js-required" class="inputs">
+                    <h4>Required</h4>
+                </div>
+                <div id="js-optional" class="inputs">
+                    <h4>Optional</h4>
+                </div>
+                <div id="js-optional" class="inputs">
+                    <button id="js-submit" class="submit">Submit</button>
+                    <label><input id="js-send" type="checkbox" name="ajax" value="ajax"> Send the request</label>
+
+                </div>
+            </section>
+            <section class="section section-output">
+                <h3>Output</h3>
+                <div id="js-errors">
+                </div>
+                <div id="js-output" class="inputs">
+                    <input id="js-output-address" class=""/>
+                    <input id="js-output-method" class=""/>
+                    <textarea id="js-output-data" class="output-data"></textarea>
+                </div>
+
+            </section>
+
+        </div>
+        <!-- Local Scripts -->
+        <script src="main.js"></script>
+
+    </body>
+</html>
