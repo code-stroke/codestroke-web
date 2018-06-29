@@ -228,14 +228,14 @@
      font-size: 1.0em;
  }
 
- .case-input:not([type]):focus, .case-input[type="text"]:focus {
-     background: white;
-     border: 1px solid #ffb347;
- }
+.case-input:not([type]):focus, .case-input[type="text"]:focus {
+    background: white;
+    border: 1px solid #ffb347;
+}
 
-  .case-section .case-input:not([type="checkbox"]) {
-      min-width: 300px;
-  }
+.case-input:not([type="checkbox"]) {
+     min-width: 300px;
+ }
 
 
 .case-section textarea {
@@ -474,6 +474,38 @@
     cursor: pointer;
 
     transition: height 0.5s ease, background 0.5s ease;
+}
+
+.assess-vitals {
+    min-width: 300px;
+    max-width: 300px;
+
+    display: flex;
+}
+
+.assess-vitals > .case-input {
+    min-width: 0;
+    width: auto;
+
+    display: flex;
+    flex: 2;
+
+    text-align: center;
+}
+
+.assess-vitals > span {
+    width: auto;
+    flex: 0.5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 .case-row.assess_heading > .case-label {
