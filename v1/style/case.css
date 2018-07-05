@@ -1,5 +1,108 @@
 .main-container {
     flex-direction: row;
+
+    position: relative;
+}
+
+/********
+ * DIALOG *
+ ********/
+.main-overlay {
+    position: absolute;
+    z-index: 99;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+}
+
+.main-timer {
+    position: absolute;
+    left: 265px;
+    top: 65px;
+    transform: translate(0, -50%);
+
+    display: flex;
+    align-items : center;
+}
+
+.main-timer > img {
+    animation: rotate 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.main-timer > span {
+    margin-left: 10px;
+
+    height: 100%;
+
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+}
+
+.main-dialog {
+    position: absolute;
+    left: 265px;
+    top: 35%;
+    transform: translate(0, -50%);
+
+    border: 3px solid #ffb23d;
+    border-radius: 15px 15px 0 15px;
+
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #e0dedb;
+    color: black;
+}
+
+.main-dialog-header {
+    border-radius: 12px 12px 0 0;
+
+    width: 100%;
+    height: 20px;
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    display: flex;
+    align-items: center;
+
+    background: #00A86B;
+}
+
+.main-dialog-header > * {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.main-dialog-body {
+    border-radius: 0 0 0 15px;
+
+    width: auto;
+    min-height: 50px;
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+
+    display: flex;
+    align-items: center;
+
+    background: #e0dedb;
 }
 
 /***********
@@ -10,6 +113,7 @@
      min-width: 200px;
      width: 200px;
      height: 100%;
+     z-index: 100;
 
      background-color: #fceabb;
 
@@ -395,7 +499,7 @@
 .assess-header {
     position: fixed;
     top: 71px;
-    z-index: 99;
+    z-index: 89;
 
     //border: 1px solid #ffb347;
 

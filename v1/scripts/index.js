@@ -84,27 +84,18 @@ const Cases = {
     `,
     load: function() {
         //Cases.loadFake();
+        API.list(function(data) {
+            console.log(data);
+            Cases.list = data;
 
-        $.ajax({
-            url: "https://codestroke.pythonanywhere.com/cases/",
-            method: "GET",
-            dataType: "json",
-            crossDomain: true,
-            success: function(data) {
-                console.log(data);
-                Cases.list = data.result;
-
-                //Add a 'full name' so searching can be easier
-                for (let i = 0; i < Cases.list.length; i++) {
-                    Cases.list[i].name = Cases.list[i].first_name + " " + Cases.list[i].last_name;
-                }
-
-                Cases.display();
-            },
-            error: function() {
-
+            //Add a 'full name' so searching can be easier
+            for (let i = 0; i < Cases.list.length; i++) {
+                Cases.list[i].name = Cases.list[i].first_name + " " + Cases.list[i].last_name;
             }
+
+            Cases.display();
         });
+
     },
     loadFake: function() {
 
@@ -159,49 +150,21 @@ const Cases = {
 
             row.case_id = dlist[i].case_id;
             row.name = dlist[i].name;
-
-            let agemilli = new Date().getTime() - new Date(dlist[i].dob).getTime();
-            let age = Math.floor(agemilli / 31536000000);
-            row.age_gender = age + "" + dlist[i].gender.toUpperCase();
-
-            let timemilli = new Date().getTime() - new Date(dlist[i].status_time).getTime();
-            let past = false;
-            if (dlist[i].status == "incoming") {
-                if (timemilli < 0) {
-                    timemilli = -timemilli;
-                } else {
-                    past = true;
-                }
-            }
-            let minutes = Math.floor(timemilli / 60000);
-            let hours = Math.floor(minutes / 60);
-            minutes = minutes % 60;
-            if (hours == 0) {
-                row.time = `${minutes}m`;
-            } else {
-                row.time = `${hours}h ${minutes}m`;
-            }
+            row.age_gender = API.data.getAgeGender(dlist[i]);
+            row.time = API.data.getStatusTime(dlist[i]);
 
             switch (dlist[i].status) {
                 case "incoming":
-                    if (!past) {
-                        row.time = "In " + row.time;
-                    } else {
-                        row.time = row.time + " late";
-                    }
-
                     DOM_Main.cases_incoming.append(
                         Cases.template_row(row)
                     );
                     break;
                 case "active":
-                    row.time = row.time + " ago";
                     DOM_Main.cases_active.append(
                         Cases.template_row(row)
                     );
                     break;
                 case "completed":
-                    row.time = row.time + " ago";
                     DOM_Main.cases_completed.append(
                         Cases.template_row(row)
                     );
@@ -209,7 +172,6 @@ const Cases = {
                 default:
                     break;
             }
-
         }
 
     }
@@ -251,3 +213,5 @@ $(document).ready(function() {
  function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
+
+console.log("Index loaded");

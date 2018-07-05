@@ -6,12 +6,17 @@
 
         <!-- External Scripts -->
         <script src="scripts/external/jquery-3.3.1.min.js"></script>
+        <script src="scripts/external/js.cookie.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 
         <!-- Local Scripts -->
+        <!-- Global -->
+        <script src="scripts/api.js"></script>
+        <script src="scripts/push-os.js"></script>
+        <script src="scripts/osinit.js"></script>
+        <!-- Specific -->
         <script src="scripts/ui.js"></script>
         <script src="scripts/case.js"></script>
-        <script src="scripts/push.js"></script>
-
 
         <!-- CSS -->
         <link rel="stylesheet" href="style/global.css">
@@ -20,7 +25,7 @@
     </head>
     <body scroll="no">
         <header class="header-container">
-            <a href="index.html" class="header-box logo">
+            <a href="/index.html" class="header-box logo">
                 <img src="logo-separated.png"/>
             </a>
 
@@ -43,8 +48,24 @@
 
         </header>
         <main class="main-container">
+            <div id="js-case-overlay" class="main-overlay hidden">
+                <!-- <div class="main-dialog">
+                    <header class="main-dialog-header">
+                        <img src="/icons/button/progress.png" />
+
+                        <span>Loading...</span>
+                    </header>
+                    <main class="main-dialog-body">
+                        Submitting Data to the Server
+                    </main>
+                </div> -->
+                <div id="js-case-timer" class="main-timer hidden">
+                    <img class="" src="/icons/button/empty-hourglass.png" />
+                    <span>Loading...</span>
+                </div>
+            </div>
             <nav class="sidebar-container">
-                <div id="js-patient" class="sidebar-patient incoming">
+                <div id="js-patient" class="sidebar-patient">
                     <div id="js-patient-name" class="sidebar-patient-field name">
 
                     </div>

@@ -10,6 +10,9 @@ const DOM_Case = {
             DOM_Case.case.btns = $(".js-case-button");
             DOM_Case.case.main = $("#js-case-main");
 
+            DOM_Case.case.overlay = $("#js-case-overlay");
+            DOM_Case.case.timer = $("#js-case-timer");
+
             DOM_Case.case.inputs = ".case-input";
             DOM_Case.case.submits = ".case-submit";
 
@@ -55,12 +58,11 @@ const Case = {
     section: "",
     load: function() {
         Case.case_id = new URL(window.location.href).searchParams.get("case_id");
-        console.log(Case.case_id);
 
         if (!Case.case_id) {
             window.location.href = "/index.html";
         } else {
-            Case.loadPatient();
+            API.get("cases", Case.case_id, Case.fillPatient);
         }
 
         Case.loadPageLoader();
@@ -68,134 +70,70 @@ const Case = {
     },
     loadSubmit: function() {
         $("body").on("click", DOM_Case.case.submits, function() {
+            Case.overlay.showTimer();
+
             let data = {};
             data.case_id = Case.case_id;
 
             $(DOM_Case.case.inputs).each(function() {
-                let key = $(this).attr("id").slice(3);
-
-                if (Case.section == "case_eds" && $(this).is("[type='checkbox']")) {
-                    if ($(this).is(":checked")) {
-                        data[key] = 1;
-                    } else {
-                        data[key] = 0;
-                    }
-                    return;
-                }
-
-                if ($(this).hasClass("-ui-since") || $(this).hasClass("-ui-toggle") || $(this).hasClass("-ui-select")) {
-                    let obj = {val: null};
-                    $(this).trigger("ui:get", obj);
-                    data[key] = obj.val;
-                    return;
-                }
-
-                if ($(this).prop("type") == "date") {
-                    data[key] = new Date($(this).val()).toISOString().substring(0, 10);
-
-                    return;
-                }
-
-                data[key] = $(this).val();
+                Case.getInput($(this), data);
             });
 
-            console.log(data);
+            API.put(Case.section, Case.case_id, data, function(result) {
+                console.log(result);
 
-            $.ajax({
-                url: `https://codestroke.pythonanywhere.com/${Case.section}/${Case.case_id}/`,
-                method: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function(result) {
-                    console.log(result);
-                },
-                error: function(obj, e1, e2) {
-                    console.log(`ERROR | e1: ${e1} , e2: ${e2}`);
-                }
-
+                API.get(Case.section, Case.case_id, function(info) {
+                    Case.fillPage(info);
+                    if (Case.section == "cases") {
+                        Case.fillPatient(info);
+                    }
+                });
             });
         });
+
     },
-    loadPatient: function() {
-        $.ajax({
-            url: `https://codestroke.pythonanywhere.com/cases/${Case.case_id}/`,
-            method: "GET",
-            dataType: "json",
-            crossDomain: true,
-            success: function(data) {
-                console.log(data);
+    fillPatient: function(patient) {
+        console.log(patient);
 
-                let patient = data.result[0];
-                if (!patient) {
-                    window.location.href = "/index.html";
-                }
+        if (!patient) {
+            window.location.href = "/index.html";
+        }
 
-                DOM_Case.case.name.text(patient.first_name + " " + patient.last_name);
+        DOM_Case.case.name.text(API.data.getName(patient));
+        DOM_Case.case.age_gender.text(API.data.getAgeGender(patient));
+        DOM_Case.case.well.text(API.data.getLastWell(patient));
+        DOM_Case.case.time.text(API.data.getStatusTime(patient));
 
-                let agemilli = new Date().getTime() - new Date(patient.dob).getTime();
-                let age = Math.floor(agemilli / 31536000000);
-                DOM_Case.case.age_gender.text(age + "" + patient.gender.toUpperCase());
+        DOM_Case.case.patient.removeClass("incoming active completed");
+        switch (patient.status) {
+            case "incoming":
+                DOM_Case.case.patient.addClass("incoming");
+                DOM_Case.case.status.text("Incoming");
+                break;
+            case "active":
+                DOM_Case.case.patient.addClass("active");
+                DOM_Case.case.status.text("Active");
+                break;
+            case "completed":
+                DOM_Case.case.patient.addClass("completed");
+                DOM_Case.case.status.text("Completed");
+                break;
+        }
+    },
+    fillPage: function(data) {
+        DOM_Case.case["main"].html("");
 
+        DOM_Case.case["main"].load(`${Case.section}.html`, function() {
+            //Make UI inputs work
+            $(document).trigger("case:refresh");
 
-                let wellmilli = new Date().getTime() - new Date(patient.last_well).getTime();
-                let wellminutes = Math.floor(wellmilli / 60000);
-                let wellhours = Math.floor(wellminutes / 60);
-                wellminutes = wellminutes % 60;
-                if (wellhours == 0) {
-                    DOM_Case.case.well.text(`Last Well ${wellminutes}m ago`);
-                } else {
-                    DOM_Case.case.well.text(`Last Well ${wellhours}h ${wellminutes}m ago`);
-                }
+            $.each(data, function(key, value) {
+                Case.setInput(key, value);
+            });
 
-                let status_time;
-                let timemilli = new Date().getTime() - new Date(patient.status_time).getTime();
-                let past = false;
-                if (patient.status == "incoming") {
-                    if (timemilli < 0) {
-                        timemilli = -timemilli;
-                    } else {
-                        past = true;
-                    }
-                }
-                let minutes = Math.floor(timemilli / 60000);
-                let hours = Math.floor(minutes / 60);
-                minutes = minutes % 60;
-                if (hours == 0) {
-                    status_time = `${minutes}m`;
-                } else {
-                    status_time = `${hours}h ${minutes}m`;
-                }
-
-
-                DOM_Case.case.patient.removeClass("incoming active completed");
-                switch (patient.status) {
-                    case "incoming":
-                        DOM_Case.case.patient.addClass("incoming");
-                        DOM_Case.case.status.text("Incoming");
-
-                        if (!past) {
-                            DOM_Case.case.time.text("In " + status_time);
-                        } else {
-                            DOM_Case.case.time.text(status_time + " late");
-                        }
-                        break;
-                    case "active":
-                        DOM_Case.case.patient.addClass("active");
-                        DOM_Case.case.status.text("Active");
-                        DOM_Case.case.time.text(status_time + " ago");
-                        break;
-                    case "completed":
-                        DOM_Case.case.patient.addClass("completed");
-                        DOM_Case.case.status.text("Completed");
-                        DOM_Case.case.time.text(status_time + " ago");
-                        break;
-                }
-
-            },
-            error: function() {
-
-            }
+            Case.overlay.hideTimer();
         });
+
     },
     loadPageLoader: function() {
         DOM_Case.case["btns"].click(function() {
@@ -203,40 +141,20 @@ const Case = {
                 return;
             }
 
+            Case.overlay.showTimer();
+
             let section = $(this).data("section");
             let button = $(this);
 
-            $.ajax({
-                url: `https://codestroke.pythonanywhere.com/${section}/${Case.case_id}/`,
-                method: "GET",
-                dataType: "json",
-                crossDomain: true,
-                success: function(d) {
-                    let data = d.result[0];
-                    console.log(data);
+            API.get(section, Case.case_id, function(data) {
+                Case.section = section;
 
-                    Case.section = section;
+                Case.fillPage(data);
 
-                    //Change the page
-                    DOM_Case.case["main"].html("");
-                    DOM_Case.case["main"].load(`${Case.section}.html`, function() {
-                        //Make UI inputs work
-                        $(document).trigger("case:refresh");
-
-                        $.each(data, function(key, value) {
-                            Case.setInput(key, value);
-                        });
-                    });
-
-                    //Change the selected button
-                    button.siblings(".js-case-button").removeClass("selected");
-                    button.addClass("selected");
-                },
-                error: function() {
-
-                }
+                //Change the selected button
+                button.siblings(".js-case-button").removeClass("selected");
+                button.addClass("selected");
             });
-
         });
 
         $("div[data-section='case_eds']").trigger("click");
@@ -272,6 +190,43 @@ const Case = {
 
         input.val(value);
 
+    },
+    getInput: function(element, data) {
+        let key = element.attr("id").slice(3);
+
+        if (Case.section == "case_eds" && element.is("[type='checkbox']")) {
+            if (element.is(":checked")) {
+                data[key] = 1;
+            } else {
+                data[key] = 0;
+            }
+            return;
+        }
+
+        if (element.hasClass("-ui-since") || element.hasClass("-ui-toggle") || element.hasClass("-ui-select")) {
+            let obj = {val: null};
+            element.trigger("ui:get", obj);
+            data[key] = obj.val;
+            return;
+        }
+
+        if (element.prop("type") == "date") {
+            data[key] = new Date(element.val()).toISOString().substring(0, 10);
+
+            return;
+        }
+
+        data[key] = element.val();
+    },
+    overlay: {
+        showTimer() {
+            DOM_Case.case.overlay.removeClass("hidden");
+            DOM_Case.case.timer.removeClass("hidden");
+        },
+        hideTimer() {
+            DOM_Case.case.overlay.addClass("hidden");
+            DOM_Case.case.timer.addClass("hidden");
+        }
     }
 };
 
