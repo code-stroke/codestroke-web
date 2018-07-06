@@ -70,7 +70,7 @@ const Cases = {
     active: [],
     completed: [],
     template_row: ({ case_id, name, age_gender, time }) => `
-        <a class="case-row" href="/case.html?case_id=${case_id}">
+        <a class="case-row" href="./case.html?case_id=${case_id}">
             <div class="case-row-field name" title="${name}">
                 <span>${name}</span>
             </div>
