@@ -93,8 +93,6 @@ const Case = {
 
     },
     fillPatient: function(patient) {
-        console.log(patient);
-
         if (!patient) {
             window.location.href = "/index.html";
         }
@@ -121,6 +119,7 @@ const Case = {
         }
     },
     fillPage: function(data) {
+        console.log(data);
         DOM_Case.case["main"].html("");
 
         DOM_Case.case["main"].load(`${Case.section}.html`, function() {
@@ -180,11 +179,8 @@ const Case = {
         }
 
         if (input.prop("type") == "date") {
-            let date = new Date(value);
-            let currentDate = date.toISOString().slice(0,10);
-            input.val(currentDate);
+            input.val(value);
             input.removeClass("empty");
-
             return;
         }
 
@@ -211,7 +207,7 @@ const Case = {
         }
 
         if (element.prop("type") == "date") {
-            data[key] = new Date(element.val()).toISOString().substring(0, 10);
+            data[key] = API.data.convertDate(new Date(element.val()));
 
             return;
         }

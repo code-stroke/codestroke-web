@@ -252,11 +252,8 @@ const SINCE = {
 
         parent.children("input").val(new Date(value).toDateString());
 
-        let date = new Date(value);
-        let currentDate = date.toISOString().slice(0,10);
-        let currentTime = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours())
-                            + ':'
-                            + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+        let currentDate = value.split(" ")[0];
+        let currentTime = value.split(" ")[1];
 
         parent.find("input[type='date']").val(currentDate);
         parent.find("input[type='time']").val(currentTime);
@@ -266,8 +263,16 @@ const SINCE = {
     },
     get: function(parent, obj) {
         let date = parent.children("input").val();
+
+        function pad(number) {
+            if (number < 10) {
+                return '0' + number;
+            }
+            return number;
+        }
+
         if (date) {
-            obj.val = new Date(parent.children("input").val()).toISOString().substring(0, 19).replace('T', ' ');
+            obj.val = API.data.convertDateTime(new Date(date));
         }
     },
     isRegistered: false

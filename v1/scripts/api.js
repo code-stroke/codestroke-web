@@ -80,7 +80,7 @@ const API = {
 
             let time = this.extractTime(new Date().getTime() - new Date(patient.last_well).getTime());
             if (time.hour == 0) {
-                return `Last Well ${time.hour}m ago`;
+                return `Last Well ${time.minute}m ago`;
             } else {
                 return `Last Well ${time.hour}h ${time.minute}m ago`;
             }
@@ -99,7 +99,7 @@ const API = {
             let time = this.extractTime(millis);
             let time_string;
             if (time.hour == 0) {
-                time_string = `${time.hour}m`;
+                time_string = `${time.minute}m`;
             } else {
                 time_string = `${time.hour}h ${time.minute}m`;
             }
@@ -116,7 +116,31 @@ const API = {
                 case "completed":
                     return time_string + " ago";
             }
+        },
+        convertDate: function(date) {
+            function pad(number) {
+                if (number < 10) {
+                    return '0' + number;
+                }
+                return number;
+            }
 
+            return date.getFullYear()
+                    + "-" + pad(date.getMonth() + 1)
+                    + "-" + pad(date.getDate());
+
+        },
+        convertDateTime: function(date) {
+            function pad(number) {
+                if (number < 10) {
+                    return '0' + number;
+                }
+                return number;
+            }
+
+            return this.convertDate(date)
+                    + " " + pad(date.getHours())
+                    + ":" + pad(date.getMinutes());
         }
     }
 }
