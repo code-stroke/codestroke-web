@@ -59,22 +59,17 @@ function initializeUI() {
 }
 
 function getSubscriptionState() {
+    return Promise.all([
+      OneSignal.isPushNotificationsEnabled(),
+      OneSignal.isOptedOut()
+    ]).then(function(result) {
+        var isPushEnabled = result[0];
+        var isOptedOut = result[1];
 
-    OneSignal.push(function() {
-
-        return Promise.all([
-          OneSignal.isPushNotificationsEnabled(),
-          OneSignal.isOptedOut()
-        ]).then(function(result) {
-            var isPushEnabled = result[0];
-            var isOptedOut = result[1];
-
-            return {
-                isPushEnabled: isPushEnabled,
-                isOptedOut: isOptedOut
-            };
-        });
-
+        return {
+            isPushEnabled: isPushEnabled,
+            isOptedOut: isOptedOut
+        };
     });
 }
 
