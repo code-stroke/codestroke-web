@@ -145,6 +145,9 @@ const Cases = {
             dlist = Cases.list;
         }
 
+        let rows_incoming = [];
+        let rows_active = [];
+        let rows_completed = [];
         for (let i = 0; i < dlist.length; i++) {
             let row = {};
 
@@ -152,27 +155,37 @@ const Cases = {
             row.name = dlist[i].name;
             row.age_gender = API.data.getAgeGender(dlist[i]);
             row.time = API.data.getStatusTime(dlist[i]);
+            row.status_time = dlist[i].status_time;
 
             switch (dlist[i].status) {
                 case "incoming":
-                    DOM_Main.cases_incoming.append(
-                        Cases.template_row(row)
-                    );
+                    rows_incoming.push(row);
                     break;
                 case "active":
-                    DOM_Main.cases_active.append(
-                        Cases.template_row(row)
-                    );
+                    rows_active.push(row);
                     break;
                 case "completed":
-                    DOM_Main.cases_completed.append(
-                        Cases.template_row(row)
-                    );
+                    rows_completed.push(row);
                     break;
                 default:
                     break;
             }
         }
+
+        function sortAndDisplay(modifier, array, dom) {
+            array.sort(function(a, b) {
+                return modifier * (new Date(a.status_time).getTime() - new Date(b.status_time).getTime());
+            });
+            $.each(array, function(index, row) {
+                dom.append(
+                    Cases.template_row(row)
+                );
+            });
+        }
+
+        sortAndDisplay(1, rows_incoming, DOM_Main.cases_incoming);
+        sortAndDisplay(1, rows_active, DOM_Main.cases_active);
+        sortAndDisplay(-1, rows_completed, DOM_Main.cases_completed);
 
     }
 };
