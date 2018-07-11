@@ -100,10 +100,10 @@ $( document ).ready(function() {
 /*register service worker and enable button if browser supports push notifications*/
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported')
-        OneSignal.push(function() {
-            OneSignal.registerForPushNotifications();
-            OneSignal.setSubscription(true);
-        });
+//        OneSignal.push(function() {
+//            OneSignal.registerForPushNotifications();
+//            OneSignal.setSubscription(true);
+//        });
         initializeUI();
 
     } else {
