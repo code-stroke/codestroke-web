@@ -73,48 +73,48 @@ const API = {
                 second: seconds
             };
         },
+        extractTimeString: function(millis) {
+            let time = this.extractTime(millis);
+            if (time.hour == 0) {
+                return `${time.minute}m`;
+            } else {
+                return `${time.hour}h ${time.minute}m`;
+            }
+        },
         getLastWell: function(patient) {
             if (!patient.last_well) {
                 return "Last Well - Unknown";
             }
 
-            let time = this.extractTime(new Date().getTime() - new Date(patient.last_well).getTime());
-            if (time.hour == 0) {
-                return `Last Well ${time.minute}m ago`;
-            } else {
-                return `Last Well ${time.hour}h ${time.minute}m ago`;
-            }
+            let time_string = this.extractTimeString(new Date().getTime() - new Date(patient.last_well).getTime());
+            return `Last Well ${time_string} ago`;
         },
         getStatusTime: function(patient) {
-            let millis = new Date().getTime() - new Date(patient.status_time).getTime();
-            let past = false;
-            if (patient.status == "incoming") {
-                if (millis < 0) {
-                    millis = -millis;
-                } else {
-                    past = true;
-                }
-            }
-
-            let time = this.extractTime(millis);
-            let time_string;
-            if (time.hour == 0) {
-                time_string = `${time.minute}m`;
-            } else {
-                time_string = `${time.hour}h ${time.minute}m`;
-            }
-
-            switch (patient.status) {
+            let millis;
+            switch(patient.status) {
                 case "incoming":
-                    if (!past) {
-                        return "In " + time_string;
+                    if (!patient.eta) {
+                        return "ETA Unknown";
+                    }
+
+                    millis = new Date().getTime() - new Date(patient.eta).getTime();
+                    // If ETA has passed, then calcuate time since ETA
+                    // Otherwise just calculate the ETA
+                    if (millis < 0) {
+                        millis = -millis;
+                        return "In " + this.extractTimeString(millis);
                     } else {
-                        return time_string + " late";
+                        return this.extractTimeString(millis) + " late";
                     }
                     break;
                 case "active":
+                    millis = new Date().getTime() - new Date(patient.active_timestamp).getTime();
+                    return this.extractTimeString(millis) + " ago";
+                    break;
                 case "completed":
-                    return time_string + " ago";
+                    millis = new Date().getTime() - new Date(patient.completed_timestamp).getTime();
+                    return this.extractTimeString(millis) + " ago";
+                    break;
             }
         },
         convertDate: function(date) {

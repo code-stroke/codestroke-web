@@ -155,16 +155,23 @@ const Cases = {
             row.name = dlist[i].name;
             row.age_gender = API.data.getAgeGender(dlist[i]);
             row.time = API.data.getStatusTime(dlist[i]);
-            row.status_time = dlist[i].status_time;
+
 
             switch (dlist[i].status) {
                 case "incoming":
+                    if (dlist[i].eta) {
+                        row.order_time = dlist[i].eta;
+                    } else {
+                        row.order_time = (new Date().getFullYear() + 1) + "-12-12";
+                    }
                     rows_incoming.push(row);
                     break;
                 case "active":
+                    row.order_time = dlist[i].active_timestamp;
                     rows_active.push(row);
                     break;
                 case "completed":
+                    row.order_time = dlist[i].completed_timestamp;
                     rows_completed.push(row);
                     break;
                 default:
@@ -174,7 +181,7 @@ const Cases = {
 
         function sortAndDisplay(modifier, array, dom) {
             array.sort(function(a, b) {
-                return modifier * (new Date(a.status_time).getTime() - new Date(b.status_time).getTime());
+                return modifier * (new Date(a.order_time).getTime() - new Date(b.order_time).getTime());
             });
             $.each(array, function(index, row) {
                 dom.append(
@@ -226,5 +233,3 @@ $(document).ready(function() {
  function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
-
-console.log("Index loaded");
