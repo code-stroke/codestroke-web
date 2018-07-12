@@ -48,17 +48,20 @@
 
         </header>
         <main class="main-container">
-            <div id="js-case-overlay" class="main-overlay hidden">
-                <!-- <div class="main-dialog">
+            <div id="js-case-overlay" class="main-overlay">
+                <div id="js-case-dialog" class="main-dialog hidden">
                     <header class="main-dialog-header">
-                        <img src="/icons/button/progress.png" />
-
-                        <span>Loading...</span>
+                        <img src="/icons/button/warning.png" />
+                        <span>Warning</span>
                     </header>
                     <main class="main-dialog-body">
-                        Submitting Data to the Server
+                        Are you sure you want to Submit?
                     </main>
-                </div> -->
+                    <aside class="main-dialog-btns">
+                        <button class="yes"> Yes </button>
+                        <button class="no"> No </button>
+                    </aside>
+                </div>
                 <div id="js-case-timer" class="main-timer hidden">
                     <img class="" src="icons/button/empty-hourglass.png" />
                     <span>Loading...</span>

@@ -13,6 +13,7 @@ const DOM_Case = {
 
             DOM_Case.case.overlay = $("#js-case-overlay");
             DOM_Case.case.timer = $("#js-case-timer");
+            DOM_Case.case.dialog = $("#js-case-dialog");
 
             DOM_Case.case.inputs = ".case-input";
             DOM_Case.case.submits = ".case-submit";
@@ -77,24 +78,46 @@ const Case = {
     },
     loadSubmit: function() {
         $("body").on("click", DOM_Case.case.submits, function() {
-            Case.overlay.showTimer();
 
-            let data = {};
-            data.case_id = Case.case_id;
+            Case.overlay.showDialog({
+                header: "warning",
+                text: "Are you sure you want to Submit?",
+                buttons: [
+                    {
+                        text: "Submit",
+                        style: "yes",
+                        click: function() {
+                            Case.overlay.hideDialog();
+                            Case.overlay.showTimer();
 
-            $(DOM_Case.case.inputs).each(function() {
-                Case.getInput($(this), data);
-            });
+                            let data = {};
+                            data.case_id = Case.case_id;
 
-            API.put(Case.section, Case.case_id, data, function(result) {
-                console.log(result);
+                            $(DOM_Case.case.inputs).each(function() {
+                                Case.getInput($(this), data);
+                            });
 
-                API.get(Case.section, Case.case_id, function(info) {
-                    Case.fillPage(info);
-                    if (Case.section == "cases") {
-                        Case.fillPatient(info);
+                            API.put(Case.section, Case.case_id, data, function(result) {
+                                console.log(result);
+
+                                API.get(Case.section, Case.case_id, function(info) {
+                                    Case.fillPage(info);
+                                    if (Case.section == "cases") {
+                                        Case.fillPatient(info);
+                                    }
+                                });
+                            });
+
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        style: "no",
+                        click: function() {
+                            Case.overlay.hideDialog();
+                        }
                     }
-                });
+                ]
             });
         });
 
@@ -144,6 +167,10 @@ const Case = {
     loadPageLoader: function() {
         DOM_Case.case["btns"].click(function() {
             if ($(this).hasClass("selected")) {
+                return;
+            }
+
+            if (Case.overlay.dialog_active) {
                 return;
             }
 
@@ -229,6 +256,50 @@ const Case = {
         hideTimer() {
             DOM_Case.case.overlay.addClass("hidden");
             DOM_Case.case.timer.addClass("hidden");
+        },
+        dialog_active: false,
+        showDialog(settings) {
+            this.dialog_active = true;
+            DOM_Case.case.overlay.removeClass("hidden");
+
+            let header = DOM_Case.case.dialog.find("header");
+            header.empty();
+            header.removeClass();
+            switch (settings.header) {
+                case "error":
+                case "warning":
+                    header.addClass("warning");
+                    header.html(`
+                        <img src="/icons/button/warning.png" />
+                        <span>Warning</span>
+                        `);
+                    break;
+            }
+
+            let body = DOM_Case.case.dialog.find("body");
+            body.empty();
+            body.text(settings.text);
+
+            let buttons = DOM_Case.case.dialog.find("aside");
+            buttons.empty();
+            $.each(settings.buttons, function(index, option) {
+                let button = $(`<button>${option.text}</button>`);
+                button.addClass(option.style);
+                button.on("click", option.click);
+
+                buttons.append(button);
+            });
+
+            DOM_Case.case.dialog.fadeIn({
+                duration: 250
+            });
+            DOM_Case.case.dialog.removeClass("hidden");
+        },
+        hideDialog() {
+            this.dialog_active = false;
+            DOM_Case.case.dialog.fadeOut();
+            DOM_Case.case.dialog.addClass("hidden");
+            DOM_Case.case.overlay.addClass("hidden");
         }
     }
 };
