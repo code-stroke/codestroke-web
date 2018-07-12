@@ -2,6 +2,7 @@ const DOM_Case = {
     load: function() {
         DOM_Case.case.load();
         DOM_Case.ed.load();
+        DOM_Case.history.load();
         DOM_Case.assess.load();
         DOM_Case.radiology.load();
     },
@@ -28,6 +29,12 @@ const DOM_Case = {
         load: function() {
             DOM_Case.ed.loc = "#js-ed-loc";
             DOM_Case.ed.complete = "ed_complete";
+        }
+    },
+    history: {
+        load: function() {
+            DOM_Case.history.anticoags = "#db-anticoags";
+            DOM_Case.history.last_dose = "#js-history-last_dose";
         }
     },
     assess: {
@@ -226,6 +233,20 @@ const Case = {
     }
 };
 
+const History = {
+    load: function() {
+        $("body").on("click", DOM_Case.history["anticoags"], function() {
+            let obj = {val: null};
+            $(this).trigger("ui:get", obj);
+            if (obj.val == "yes") {
+                $(DOM_Case.history["last_dose"]).removeClass("hidden");
+            } else {
+                $(DOM_Case.history["last_dose"]).addClass("hidden");
+            }
+        });
+    }
+}
+
 const Assess = {
     load: function() {
         $("body").on("click", DOM_Case.assess["btns"], function() {
@@ -346,7 +367,7 @@ $(document).ready(function() {
     DOM_Case.load();
 
     Case.load();
-
+    History.load();
     Assess.load();
     Radiology.load();
 

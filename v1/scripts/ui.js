@@ -264,13 +264,6 @@ const SINCE = {
     get: function(parent, obj) {
         let date = parent.children("input").val();
 
-        function pad(number) {
-            if (number < 10) {
-                return '0' + number;
-            }
-            return number;
-        }
-
         if (date) {
             obj.val = API.data.convertDateTime(new Date(date));
         }
