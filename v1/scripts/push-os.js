@@ -94,7 +94,8 @@ function disableBtn(message) {
     DOM_Push.button.off();
 }
 
-$( document ).ready(function() {
+//$( document ).ready(function() {
+$( window ).bind("load", function() {
     DOM_Push.button = $("#js-push-button");
 
 /*register service worker and enable button if browser supports push notifications*/
