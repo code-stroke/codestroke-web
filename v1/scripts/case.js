@@ -160,13 +160,15 @@ const Case = {
 
         DOM_Case.case["main"].load(`${Case.section}.html`, function() {
             //Make UI inputs work
-            $(document).trigger("case:refresh");
+            $(document).trigger("case:load_start");
 
             $.each(data, function(key, value) {
                 Case.setInput(key, value);
             });
 
             Case.overlay.hideTimer();
+
+            $(document).trigger("case:load_end");
         });
 
     },
@@ -400,13 +402,16 @@ const Case = {
     },
     overlay: {
         showTimer() {
+            this.loading = true;
             DOM_Case.case.overlay.removeClass("hidden");
             DOM_Case.case.timer.removeClass("hidden");
         },
         hideTimer() {
+            this.loading = false;
             DOM_Case.case.overlay.addClass("hidden");
             DOM_Case.case.timer.addClass("hidden");
         },
+        loading: false,
         dialog_active: false,
         showDialog(settings) {
             this.dialog_active = true;
@@ -518,6 +523,10 @@ const Radiology = {
         //Go down the progress pathway
         //TODO: Do this smarter?
         $("body").on("ui:toggle", DOM_Case.radiology["progress"] + " .-ui-toggle", function() {
+            if (Case.overlay.loading) {
+                return;
+            }
+
             let progress = 0;
 
             while (true) {
@@ -565,8 +574,8 @@ const Radiology = {
         });
 
         //Ensure the proper progress is loaded when the page is loaded
-        $(document).on("case:refresh", function() {
-            $(DOM_Case.radiology["progress"] + "-0").trigger("ui:toggle");
+        $(document).on("case:load_end", function() {
+            $(DOM_Case.radiology["progress"] + "-0 .-ui-toggle").trigger("ui:toggle");
         });
     },
     checkProgress: function(id, wanted) {
