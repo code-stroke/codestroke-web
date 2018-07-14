@@ -9,6 +9,7 @@ function initializeUI() {
     DOM_Push.button.removeClass("disabled");
 
     DOM_Push.button.click(function() {
+        DOM_Push.button.html(TEMP_Push.button({status: "wait"}))
       getSubscriptionState().then(function(state) {
           if (state.isPushEnabled) {
               /* Subscribed, opt them out */
