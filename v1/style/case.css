@@ -816,6 +816,10 @@
     margin-left: auto;
 }
 
+.case-input.manage_filled.-ui-toggle-unknown {
+    transform: translateX(50%);
+}
+
 .manage-button {
     margin-left: 50px;
 

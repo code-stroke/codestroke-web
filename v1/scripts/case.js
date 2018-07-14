@@ -280,6 +280,64 @@ const Case = {
             return;
         }
 
+        if (Case.section == "case_managements") {
+            switch (name) {
+                case "dob":
+                case "large_vessel_occlusion":
+                case "last_well":
+                case "ich_found":
+                    if (value == null) {
+                        input.addClass("-ui-toggle-unknown");
+                        input.text("Unknown");
+                        return;
+                    }
+            }
+
+            switch (name) {
+                case "dob":
+                    console.log(`Age: ${API.data.getAge(value)}`);
+                    if (API.data.getAge({dob: value}) > 18) {
+                        input.addClass("-ui-toggle-yes");
+                        input.text("Yes");
+                    } else {
+                        input.addClass("-ui-toggle-no");
+                        input.text("No");
+                    }
+                    break;
+                case "large_vessel_occlusion":
+                    console.log(`LVO: ${value}`);
+                    if (value) {
+                        input.addClass("-ui-toggle-yes");
+                        input.text("Yes");
+                    } else {
+                        input.addClass("-ui-toggle-no");
+                        input.text("No");
+                    }
+                    break;
+                case "last_well":
+                    let time = API.data.extractTime(new Date().getTime() - new Date(value).getTime());
+                    console.log(`LVO: ${time.hour}h ${time.minute}m`);
+                    if (time.hour > 3 && time.minute > 29) {
+                        input.addClass("-ui-toggle-no");
+                        input.text("No");
+                    } else {
+                        input.addClass("-ui-toggle-yes");
+                        input.text("Yes");
+                    }
+                    break;
+                case "ich_found":
+                    console.log(`ICH: ${value}`);
+                    if (value) {
+                        input.addClass("-ui-toggle-no");
+                        input.text("No");
+                    } else {
+                        input.addClass("-ui-toggle-yes");
+                        input.text("Yes");
+                    }
+                    break;
+            }
+        }
+
         if (input.hasClass("-ui-since") || input.hasClass("-ui-toggle") || input.hasClass("-ui-select")) {
             input.trigger("ui:set", value);
 
@@ -333,7 +391,7 @@ const Case = {
             return;
         }
 
-        if (element.val()) {
+        if (element.val() || element.val() === 0) {
             data[key] = element.val();
         } else {
             data[key] = null;
