@@ -95,7 +95,11 @@ const SELECT = {
         parent.trigger("focusout");
     },
     get: function(parent, obj) {
-        obj.val = parent.children("input").val();
+        let val = parent.children("input").val();
+
+        if (val) {
+            obj.val = val;
+        }
     },
     isRegistered: false
 }
@@ -148,7 +152,11 @@ const TOGGLE = {
         parent.find(`li[data-val="${value}"]`).trigger("click");
     },
     get: function(parent, obj) {
-        obj.val = parent.children("input").val();
+        let val = parent.children("input").val();
+
+        if (val) {
+            obj.val = val;
+        }
     },
     isRegistered: false
 }

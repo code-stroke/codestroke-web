@@ -64,6 +64,7 @@ const DOM_Case = {
 const Case = {
     case_id: null,
     section: "",
+    section_data: null,
     load: function() {
         Case.case_id = new URL(window.location.href).searchParams.get("case_id");
 
@@ -87,27 +88,7 @@ const Case = {
                         text: "Submit",
                         style: "yes",
                         click: function() {
-                            Case.overlay.hideDialog();
-                            Case.overlay.showTimer();
-
-                            let data = {};
-                            data.case_id = Case.case_id;
-
-                            $(DOM_Case.case.inputs).each(function() {
-                                Case.getInput($(this), data);
-                            });
-
-                            API.put(Case.section, Case.case_id, data, function(result) {
-                                console.log(result);
-
-                                API.get(Case.section, Case.case_id, function(info) {
-                                    Case.fillPage(info);
-                                    if (Case.section == "cases") {
-                                        Case.fillPatient(info);
-                                    }
-                                });
-                            });
-
+                            Case.submitPage();
                         }
                     },
                     {
@@ -121,6 +102,30 @@ const Case = {
             });
         });
 
+    },
+    submitPage: function() {
+        Case.overlay.hideDialog();
+        Case.overlay.showTimer();
+
+        let data = {};
+        data.case_id = Case.case_id;
+
+        $(DOM_Case.case.inputs).each(function() {
+            Case.getInput($(this), data);
+        });
+
+        console.log(data);
+
+        API.put(Case.section, Case.case_id, data, function(result) {
+            console.log(result);
+
+            API.get(Case.section, Case.case_id, function(info) {
+                Case.fillPage(info);
+                if (Case.section == "cases") {
+                    Case.fillPatient(info);
+                }
+            });
+        });
     },
     fillPatient: function(patient) {
         if (!patient) {
@@ -150,6 +155,7 @@ const Case = {
     },
     fillPage: function(data) {
         console.log(data);
+        this.section_data = data;
         DOM_Case.case["main"].html("");
 
         DOM_Case.case["main"].load(`${Case.section}.html`, function() {
@@ -166,7 +172,9 @@ const Case = {
     },
     loadPageLoader: function() {
         DOM_Case.case["btns"].click(function() {
-            if ($(this).hasClass("selected")) {
+            let button = $(this);
+
+            if (button.hasClass("selected")) {
                 return;
             }
 
@@ -174,23 +182,88 @@ const Case = {
                 return;
             }
 
-            Case.overlay.showTimer();
+            if (!Case.section_data) {
+                Case.loadPage(button);
+                return;
+            }
 
-            let section = $(this).data("section");
-            let button = $(this);
-
-            API.get(section, Case.case_id, function(data) {
-                Case.section = section;
-
-                Case.fillPage(data);
-
-                //Change the selected button
-                button.siblings(".js-case-button").removeClass("selected");
-                button.addClass("selected");
+            //Check if you haven't changed any fields
+            let data = {};
+            data.case_id = Case.case_id;
+            $(DOM_Case.case.inputs).each(function() {
+                Case.getInput($(this), data);
             });
+            let differences = [];
+            let i = 0, extras = 0;
+            $.each(data, function(key, value) {
+                if (Case.section_data[key] != data[key]) {
+                    i++;
+                    if (i < 9) {
+                        differences.push(key);
+                    } else {
+                        extras++;
+                    }
+                } else {
+
+                }
+            })
+            if (extras > 0) {
+                differences.push(`and ${extras} more field${extras > 1 ? "s" : ""}.`)
+            }
+
+            if (differences.length > 0) {
+                Case.overlay.showDialog({
+                    header: "warning",
+                    text: `There are unsubmitted changes to the following fields:
+                    <code>${differences.join("</br>")}</code>
+                    Are you sure you want to change pages?`,
+                    buttons: [
+                        {
+                            text: "Discard",
+                            style: "neutral",
+                            click: function() {
+                                Case.loadPage(button);
+                            }
+                        },
+                        {
+                            text: "Submit",
+                            style: "yes",
+                            click: function() {
+                                Case.submitPage();
+                            }
+                        },
+                        {
+                            text: "Cancel",
+                            style: "no",
+                            click: function() {
+                                Case.overlay.hideDialog();
+                            }
+                        }
+                    ]
+                });
+            } else {
+                Case.loadPage(button);
+            }
+
         });
 
         $("div[data-section='case_eds']").trigger("click");
+    },
+    loadPage: function(button) {
+        Case.overlay.hideDialog();
+        Case.overlay.showTimer();
+
+        let section = button.data("section");
+
+        API.get(section, Case.case_id, function(data) {
+            Case.section = section;
+
+            Case.fillPage(data);
+
+            //Change the selected button
+            button.siblings(".js-case-button").removeClass("selected");
+            button.addClass("selected");
+        });
     },
     setInput: function(name, value) {
         let input = $("#db-" + name);
@@ -201,6 +274,7 @@ const Case = {
             } else {
                 if (value == 1) {
                     input.closest("div").addClass(DOM_Case.ed.complete);
+                    input.prop("checked", true);
                 }
             }
             return;
@@ -224,17 +298,30 @@ const Case = {
     getInput: function(element, data) {
         let key = element.attr("id").slice(3);
 
-        if (Case.section == "case_eds" && element.is("[type='checkbox']")) {
-            if (element.is(":checked")) {
-                data[key] = 1;
+        if (Case.section == "case_eds") {
+            if (key == "location") {
+                let text = $(DOM_Case.ed.loc).children("span").html();
+                text = (text == "") ? null : text;
+                if (element.val()) {
+                    data[key] = element.val();
+                } else {
+                    data[key] = text;
+                }
             } else {
-                data[key] = 0;
+                if (element.is(":checked")) {
+                    data[key] = 1;
+                } else {
+                    data[key] = 0;
+                }
+
             }
             return;
         }
 
         if (element.hasClass("-ui-since") || element.hasClass("-ui-toggle") || element.hasClass("-ui-select")) {
-            let obj = {val: null};
+            let obj = {
+                val: null
+            };
             element.trigger("ui:get", obj);
             data[key] = obj.val;
             return;
@@ -246,7 +333,12 @@ const Case = {
             return;
         }
 
-        data[key] = element.val();
+        if (element.val()) {
+            data[key] = element.val();
+        } else {
+            data[key] = null;
+        }
+
     },
     overlay: {
         showTimer() {
@@ -276,9 +368,9 @@ const Case = {
                     break;
             }
 
-            let body = DOM_Case.case.dialog.find("body");
-            body.empty();
-            body.text(settings.text);
+            let main = DOM_Case.case.dialog.find("main");
+            main.empty();
+            main.html(settings.text);
 
             let buttons = DOM_Case.case.dialog.find("aside");
             buttons.empty();

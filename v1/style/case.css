@@ -105,9 +105,16 @@
     padding-left: 10px;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 
     background: #e0dedb;
+}
+
+.main-dialog-body > code {
+    margin-left: 10px;
+
+    color: red;
 }
 
 .main-dialog-btns {
@@ -404,6 +411,10 @@
 
 .case-input.empty {
     color: gray;
+}
+
+.case-input.highlighted {
+    border: 1px solid red;
 }
 
  .case-input[type="checkbox"] {
