@@ -60,7 +60,7 @@
     border: 3px solid #ffb23d;
     border-radius: 15px 15px 0 15px;
 
-    width: 400px;
+    width: 450px;
 
     display: flex;
     flex-direction: column;
@@ -87,6 +87,10 @@
 
 .main-dialog > header.warning {
     background: #FFCC00;
+}
+
+.main-dialog > header.caution {
+    background: #cc0000;
 }
 
 .main-dialog-header > * {

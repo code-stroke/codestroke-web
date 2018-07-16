@@ -134,7 +134,6 @@ const TOGGLE = {
     },
     value: function(child) {
         let parent = child.closest(".-ui-toggle");
-        console.log("ID: " + parent.prop("id"));
         parent.removeClass("empty");
 
         parent.children("input").val(child.data("val"));
@@ -150,7 +149,6 @@ const TOGGLE = {
         parent.children("input").val("");
     },
     set: function(parent, value) {
-
         parent.find(`li[data-val="${value}"]`).trigger("click");
     },
     get: function(parent, obj) {

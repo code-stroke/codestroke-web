@@ -5,6 +5,7 @@ const DOM_Case = {
         DOM_Case.history.load();
         DOM_Case.assess.load();
         DOM_Case.radiology.load();
+        DOM_Case.manage.load();
     },
     case: {
         load: function() {
@@ -58,6 +59,19 @@ const DOM_Case = {
         load: function() {
             DOM_Case.radiology.progress = "#js-radiology-progress"
         }
+    },
+    manage: {
+        load: function() {
+            DOM_Case.manage.thrombolysis = "#db-thrombolysis";
+            DOM_Case.manage.eligibility = "#js-manage-eligibility";
+            DOM_Case.manage.absolute = "#js-manage-absolute";
+            DOM_Case.manage.relative = "#js-manage-relative";
+            DOM_Case.manage.time = "#js-manage-time";
+
+            DOM_Case.manage.time_button = "#js-manage-time-button";
+            DOM_Case.manage.time_given = "#js-manage-time-given";
+            DOM_Case.manage.time_input = "#db-thrombolysis_time_given";
+        }
     }
 };
 
@@ -108,7 +122,7 @@ const Case = {
         Case.overlay.showTimer();
 
         let data = {};
-        data.case_id = Case.case_id;
+        data.case_id =  Case.case_id;
 
         $(DOM_Case.case.inputs).each(function() {
             Case.getInput($(this), data);
@@ -293,6 +307,8 @@ const Case = {
                         input.text("Unknown");
                         return;
                     }
+                default:
+                     break;
             }
 
             switch (name) {
@@ -301,41 +317,51 @@ const Case = {
                     if (API.data.getAge({dob: value}) > 18) {
                         input.addClass("-ui-toggle-yes");
                         input.text("Yes");
+                        input.val(1);
                     } else {
                         input.addClass("-ui-toggle-no");
                         input.text("No");
+                        input.val(0);
                     }
-                    break;
+                    return;
                 case "large_vessel_occlusion":
                     console.log(`LVO: ${value}`);
                     if (value) {
                         input.addClass("-ui-toggle-yes");
                         input.text("Yes");
+                        input.val(1);
                     } else {
                         input.addClass("-ui-toggle-no");
                         input.text("No");
+                        input.val(0);
                     }
-                    break;
+                    return;
                 case "last_well":
                     let time = API.data.extractTime(new Date().getTime() - new Date(value).getTime());
                     console.log(`LVO: ${time.hour}h ${time.minute}m`);
-                    if (time.hour > 3 && time.minute > 29) {
+                    if ((time.hour > 3 && time.minute > 29) || time.hour > 4) {
                         input.addClass("-ui-toggle-no");
                         input.text("No");
+                        input.val(0);
                     } else {
                         input.addClass("-ui-toggle-yes");
                         input.text("Yes");
+                        input.val(1);
                     }
-                    break;
+                    return;
                 case "ich_found":
                     console.log(`ICH: ${value}`);
                     if (value) {
                         input.addClass("-ui-toggle-no");
                         input.text("No");
+                        input.val(0);
                     } else {
                         input.addClass("-ui-toggle-yes");
                         input.text("Yes");
+                        input.val(1);
                     }
+                    return;
+                default:
                     break;
             }
         }
@@ -376,6 +402,19 @@ const Case = {
 
             }
             return;
+        }
+
+        if (Case.section == "case_managements") {
+            switch (key) {
+                case "dob":
+                case "large_vessel_occlusion":
+                case "last_well":
+                case "ich_found":
+                    data[key] = Case.section_data[key];
+                    return;
+                default:
+                    break;
+            }
         }
 
         if (element.hasClass("-ui-since") || element.hasClass("-ui-toggle") || element.hasClass("-ui-select")) {
@@ -422,10 +461,19 @@ const Case = {
             header.removeClass();
             switch (settings.header) {
                 case "error":
+                    header.addClass("error");
+                    break;
+                case "caution":
+                    header.addClass("caution");
+                    header.html(`
+                        <img src="icons/button/warning.png" />
+                        <span>Caution Advised</span>
+                        `);
+                    break;
                 case "warning":
                     header.addClass("warning");
                     header.html(`
-                        <img src="/icons/button/warning.png" />
+                        <img src="icons/button/warning.png" />
                         <span>Warning</span>
                         `);
                     break;
@@ -461,7 +509,7 @@ const Case = {
 
 const History = {
     load: function() {
-        $("body").on("click", DOM_Case.history["anticoags"], function() {
+        $("body").on("ui:toggle", DOM_Case.history["anticoags"], function() {
             let obj = {val: null};
             $(this).trigger("ui:get", obj);
             if (obj.val == "yes") {
@@ -588,6 +636,130 @@ const Radiology = {
     }
 };
 
+const Manage = {
+    load: function() {
+        $("body").on("ui:toggle", DOM_Case.manage["thrombolysis"], function() {
+            let obj = {val: null};
+            $(this).trigger("ui:get", obj);
+            if (obj.val == "1") {
+                $(DOM_Case.manage["eligibility"]).removeClass("hidden");
+                $(DOM_Case.manage["absolute"]).removeClass("hidden");
+                $(DOM_Case.manage["relative"]).removeClass("hidden");
+                $(DOM_Case.manage["time"]).removeClass("hidden");
+            } else {
+                $(DOM_Case.manage["eligibility"]).addClass("hidden");
+                $(DOM_Case.manage["absolute"]).addClass("hidden");
+                $(DOM_Case.manage["relative"]).addClass("hidden");
+                $(DOM_Case.manage["time"]).addClass("hidden");
+            }
+        });
+
+        $(document).on("case:load_end", function() {
+            $(DOM_Case.manage["thrombolysis"]).trigger("ui:toggle");
+        });
+
+        $(document).on("case:load_end", function() {
+            let obj = {val: null};
+            $(DOM_Case.manage["time_input"]).trigger("ui:get", obj);
+
+            if (obj.val) {
+                $(DOM_Case.manage["time_given"]).removeClass("hidden");
+                $(DOM_Case.manage["time_button"]).addClass("hidden");
+            } else {
+                $(DOM_Case.manage["time_given"]).addClass("hidden");
+                $(DOM_Case.manage["time_button"]).removeClass("hidden");
+            }
+        });
+
+        $("body").on("click", DOM_Case.manage["time_button"], function() {
+
+            let ci = false;
+            $(DOM_Case.case.inputs).each(function() {
+                let key = $(this).attr("id").slice(3);
+                let element = $(this);
+                //Handle special cases first
+                switch (key) {
+                    case "thrombolysis":
+                    case "ecr":
+                    case "surgical_rx":
+                    case "conservative_rx":
+                        return;
+                    case "dob":
+                    case "large_vessel_occlusion":
+                    case "last_well":
+                    case "ich_found":
+                        if ($(this).val() == "0") {
+                            ci = true;
+                        }
+                        return;
+                    default:
+                        break;
+                }
+
+                if (!element.hasClass("-ui-toggle")) {
+                    return;
+                }
+
+                let obj = {
+                    val: null
+                };
+                element.trigger("ui:get", obj);
+
+                if (obj.val == null && key != "large_vessel_occlusion") {
+                    ci = null;
+                    return false;
+                }
+
+                if (obj.val == "0") {
+                    ci = true;
+                }
+            });
+
+            let text, header;
+            switch (ci) {
+                case null:
+                    header = "caution";
+                    text = `You have not filled in all the contraindication fields.</br></br>
+                            <code>Are you sure you want to proceed with Thrombolysis?</code>`
+                    break;
+                case true:
+                    header = "caution";
+                    text = `You have contraindications to Thrombolysis.</br></br>
+                            <code>Are you sure you want to proceed with Thrombolysis?</code>`
+                    break;
+                case false:
+                    header = "warning";
+                    text = `Are you sure you want to proceed with thrombolysis?`
+                    break;
+            }
+
+            Case.overlay.showDialog({
+                header: header,
+                text: text,
+                buttons: [
+
+                    {
+                        text: "Continue",
+                        style: "yes",
+                        click: function() {
+                            $(DOM_Case.manage["time_input"]).trigger("ui:set", API.data.convertDateTime(new Date()));
+                            Case.submitPage();
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        style: "no",
+                        click: function() {
+                            Case.overlay.hideDialog();
+                        }
+                    }
+                ]
+            });
+
+        });
+    }
+}
+
 
 /************
  * ON READY *
@@ -600,7 +772,7 @@ $(document).ready(function() {
     History.load();
     Assess.load();
     Radiology.load();
-
+    Manage.load();
 });
 
 /*******************

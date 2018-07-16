@@ -11,7 +11,7 @@
         </ul>
     </div>
 
-    <div class="case-row-group">
+    <div id="js-manage-eligibility" class="case-row-group hidden">
         <div class="case-row manage_subheading top">
             <div class="case-label" style="border-top: 0;">
                 Eligibility for tPA
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="case-row-group">
+    <div id="js-manage-absolute" class="case-row-group hidden">
         <div class="case-row manage_subheading top">
             <div class="case-label">
                 Absolute Contraindications
@@ -135,7 +135,7 @@
         </div>
     </div>
 
-    <div class="case-row-group">
+    <div id="js-manage-relative" class="case-row-group hidden">
         <div class="case-row manage_subheading top">
             <div class="case-label">
                 Relative Contraindications
@@ -216,14 +216,14 @@
         </div>
     </div>
 
-    <div class="case-row">
-        <button class="manage-button">Administer Thrombolysis</button>
-    </div>
+    <div id="js-manage-time" class="case-row-group hidden">
+        <div id="js-manage-time-button" class="case-row">
+            <button class="manage-button">Administer Thrombolysis</button>
+        </div>
 
-    <div class="case-row-group">
-        <div class="case-row manage_subheading top">
+        <div id="js-manage-time-given" class="case-row manage_subheading top hidden">
             <div class="case-label">
-                Time when thrombolysis given??
+                Thrombolysis Time
             </div>
             <div id="db-thrombolysis_time_given" class="case-input -ui-since"></div>
         </div>
