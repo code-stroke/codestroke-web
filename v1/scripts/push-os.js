@@ -5,30 +5,50 @@ const DOM_Push = {};
 const TEMP_Push = {}
 TEMP_Push.button = ({ status }) => `Notifications &nbsp <img src="icons/button/switch-${status}.png" />`;
 
+//iitialise push notification check on windows load
+$( window ).bind("load", function() {
+    DOM_Push.button = $("#js-push-button");
+
+//if push notifications are supported initialise UI
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+        console.log('Service Worker and Push is supported')
+
+        initializeUI();
+
+    } else {
+        disableBtn("Error: Push Messaging not supported in your current browser");
+        console.warn('Push messaging is not supported');
+    }
+
+});
+
 function initializeUI() {
     DOM_Push.button.removeClass("disabled");
 
     DOM_Push.button.click(function() {
         DOM_Push.button.html(TEMP_Push.button({status: "wait"}))
-      getSubscriptionState().then(function(state) {
+        getSubscriptionState().then(function(state) {
+
+//if already subscribed mute Notifications
           if (state.isPushEnabled) {
-              /* Subscribed, opt them out */
               OneSignal.push(function() {
-                OneSignal.setSubscription(false);
+                  OneSignal.setSubscription(false);
               });
 
               DOM_Push.button.html(TEMP_Push.button({status: "off"}))
               console.log('User is no longer subscribed');
           } else {
+
+//if notifications currently muted, reactivate Notifications
               if (state.isOptedOut) {
-                  /* Opted out, opt them back in */
                   OneSignal.push(function() {
                       OneSignal.setSubscription(true);
                   });
                   DOM_Push.button.html(TEMP_Push.button({status: "on"}));
                   console.log('User is now subscribed');
               } else {
-                  /* Unsubscribed, subscribe them */
+
+//if neither muted nor enabled, service worker may not have been registered, so register service Worker
                   OneSignal.push(function() {
                     OneSignal.registerForPushNotifications();
                     OneSignal.setSubscription(true);
@@ -46,6 +66,7 @@ function initializeUI() {
 
 }
 
+//use OneSignal API to check if service worker is Subscribed
 function getSubscriptionState() {
     return Promise.all([
       OneSignal.isPushNotificationsEnabled(),
@@ -77,8 +98,6 @@ function updateBtn() {
                     OneSignal.setSubscription(true);
                 });
                 console.log('user has been subscribed')
-//                DOM_Push.button.html(TEMP_Push.button({status: "disabled"}))
-//                console.log('Please contact your IT staff. Make sure you do not have an adblocker turned on');
               }
           }
 
@@ -94,23 +113,3 @@ function disableBtn(message) {
 
     DOM_Push.button.off();
 }
-
-//$( document ).ready(function() {
-$( window ).bind("load", function() {
-    DOM_Push.button = $("#js-push-button");
-
-/*register service worker and enable button if browser supports push notifications*/
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-        console.log('Service Worker and Push is supported')
-//        OneSignal.push(function() {
-//            OneSignal.registerForPushNotifications();
-//            OneSignal.setSubscription(true);
-//        });
-        initializeUI();
-
-    } else {
-        disableBtn("Error: Push Messaging not supported in your current browser");
-        console.warn('Push messaging is not supported');
-    }
-
-});
