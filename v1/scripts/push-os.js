@@ -70,7 +70,8 @@ function initializeUI() {
 
       API.putacknowledge(data.content);
 
-      addListenerForNotificationOpened()
+      Onesignal.addListenerForNotificationOpened()
+
 
     }]);
 }
