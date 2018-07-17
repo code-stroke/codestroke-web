@@ -47,7 +47,7 @@ const API = {
         alert("test")
         $.ajax({
             url: `${API.address}/acknowledge/${case_id}/`,
-            method: "PUT",
+            method: "POST",
             contentType: "application/json",
             success: function(result) {
                 callback(result);
