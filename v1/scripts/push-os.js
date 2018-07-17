@@ -66,6 +66,13 @@ function initializeUI() {
 
 }
 
+//Event Listener for notification click
+OneSignal.push(["addListenerForNotificationOpened", function(data) {
+	console.log("Received NotificationOpened:");
+	console.log(data);
+}]);
+
+
 //use OneSignal API to check if service worker is Subscribed
 function getSubscriptionState() {
     return Promise.all([
