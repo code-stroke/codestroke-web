@@ -42,6 +42,22 @@ const API = {
             }
         });
     },
+
+    putacknowledge: function(case_id, callback) {
+        alert("test")
+        $.ajax({
+            url: `${API.address}/acknowledge/${case_id}/`,
+            method: "PUT",
+            contentType: "application/json",
+            success: function(result) {
+                callback(result);
+            },
+            error: function(obj, e1, e2) {
+                console.log('case_id putacknowledge' + case_id);
+            }
+        });
+    },
+
     data: {
         getName: function(patient) {
                 return `${patient.first_name} ${patient.last_name}`
