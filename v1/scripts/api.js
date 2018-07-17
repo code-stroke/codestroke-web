@@ -43,16 +43,14 @@ const API = {
         });
     },
 
-    putacknowledge: function(case_id, callback) {
+    putacknowledge: function(case_id) {
         alert("test")
         $.ajax({
             url: `${API.address}/acknowledge/${case_id}/`,
             method: "POST",
             contentType: "application/json",
-            success: function(result) {
-                callback(result);
-            },
-            error: function(obj, e1, e2) {
+
+            error: function() {
                 console.log('case_id putacknowledge' + case_id);
             }
         });
