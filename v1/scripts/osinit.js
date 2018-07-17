@@ -9,6 +9,9 @@ OneSignal.push(function() {
     notifyButton: {
       enable: false,
     },
+    notificationClickHandlerMatch: 'origin',
+    notificationClickHandlerAction: 'focus',
+
   });
 });
 

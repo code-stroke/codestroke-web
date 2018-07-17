@@ -70,6 +70,8 @@ function initializeUI() {
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
 	console.log("Received NotificationOpened:");
 	console.log(data);
+
+  
 }]);
 
 
