@@ -65,12 +65,18 @@ function initializeUI() {
     updateBtn();
 //Event Listener for notification click
     OneSignal.push(["addListenerForNotificationOpened", function(data) {
-    	console.log("Received Notification");
+      OneSignal.push(["addListenerForNotificationOpened", function(data) {
+      	console.log("Received Notification");
+      	console.log(data.content);
+          API.putacknowledge(data.content);
+      }]);
+
+      console.log("Received Notification");
     	console.log(data.content);
 
       API.putacknowledge(data.content);
 
-      Onesignal.addListenerForNotificationOpened()
+
 
 
     }]);
