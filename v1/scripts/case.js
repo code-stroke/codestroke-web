@@ -52,6 +52,9 @@ const DOM_Case = {
             DOM_Case.assess.nihss_score = "#js-assess-nihss-score";
             DOM_Case.assess.mrs = "#js-assess-mrs";
             DOM_Case.assess.mrs_score = "#js-assess-mrs-score";
+            DOM_Case.assess.lvo = "#js-assess-lvo";
+            DOM_Case.assess.lvo_input = "#db-likely_lvo";
+            DOM_Case.assess.lvo_button = "#js-assess-lvo-button";
             DOM_Case.assess.submit = "#js-assess-submit";
         }
     },
@@ -518,11 +521,16 @@ const History = {
                 $(DOM_Case.history["last_dose"]).addClass("hidden");
             }
         });
+
+        $(document).on("case:load_end", function() {
+            $(DOM_Case.history["anticoags"]).trigger("ui:toggle");
+        });
     }
 }
 
 const Assess = {
     load: function() {
+        //Load Scrolling
         $("body").on("click", DOM_Case.assess["btns"], function() {
             let loc = $(this).data("anchor");
             let val = $(DOM_Case.assess[loc]).offset().top - $(DOM_Case.assess["section"]).offset().top + $(DOM_Case.assess["section"]).scrollTop();
@@ -541,6 +549,44 @@ const Assess = {
             Assess.calcScore("race", "race_score");
             Assess.calcScore("nihss", "nihss_score");
             Assess.calcScore("mrs", "mrs_score");
+        });
+
+        //Load likely LVO status
+        $(document).on("case:load_end", function() {
+            if ($(DOM_Case.assess.lvo_input).val() == "1") {
+                $(DOM_Case.assess.lvo).addClass("hidden");
+            } else {
+                $(DOM_Case.assess.lvo).removeClass("hidden");
+            }
+        });
+
+        $("body").on("click", DOM_Case.assess.lvo_button, function() {
+            Case.overlay.showDialog({
+                header: `warning`,
+                text: `Are you sure you want to notify staff about a potential LVO?`,
+                buttons: [
+
+                    {
+                        text: "Continue",
+                        style: "yes",
+                        click: function() {
+                            $(DOM_Case.assess.lvo_input).val(1);
+                            Case.submitPage();
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        style: "no",
+                        click: function() {
+                            Case.overlay.hideDialog();
+                        }
+                    }
+                ]
+            });
+
+
+            $(DOM_Case.assess.lvo_input).val(1);
+
         });
     },
     calcScore: function(container_name, score_name) {
