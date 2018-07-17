@@ -63,16 +63,16 @@ function initializeUI() {
     })
 
     updateBtn();
+//Event Listener for notification click
+    OneSignal.push(["addListenerForNotificationOpened", function(data) {
+    	console.log("Received NotificationOpened:");
+    	console.log(data);
 
+
+    }]);
 }
 
-//Event Listener for notification click
-OneSignal.push(["addListenerForNotificationOpened", function(data) {
-	console.log("Received NotificationOpened:");
-	console.log(data);
 
-  
-}]);
 
 
 //use OneSignal API to check if service worker is Subscribed
