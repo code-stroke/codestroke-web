@@ -602,7 +602,7 @@ const Assess = {
         });
 
         //Print out
-        if (score) {
+        if (score || score === 0) {
             $(DOM_Case.assess[score_name]).text(score);
             $(DOM_Case.assess[score_name]).removeClass("empty");
         } else {
