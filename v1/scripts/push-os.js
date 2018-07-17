@@ -73,6 +73,8 @@ function notiflisten(){
     OneSignal.push(["addListenerForNotificationOpened", function(data) {
       console.log("Received Notification");
       console.log(data.content);
+      console.log(data.data);
+      console.log(data);
       API.putacknowledge(data.content);
       notiflisten();
     }]);
