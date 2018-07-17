@@ -63,26 +63,20 @@ function initializeUI() {
     })
 
     updateBtn();
-//Event Listener for notification click
-    OneSignal.push(["addListenerForNotificationOpened", function(data) {
-      OneSignal.push(["addListenerForNotificationOpened", function(data) {
-      	console.log("Received Notification");
-      	console.log(data.content);
-          API.putacknowledge(data.content);
-      }]);
+    notiflisten();
 
-      console.log("Received Notification");
-    	console.log(data.content);
-
-      API.putacknowledge(data.content);
-
-
-
-
-    }]);
 }
 
 
+//Event Listener for notification click
+function notiflisten(){
+    OneSignal.push(["addListenerForNotificationOpened", function(data) {
+      console.log("Received Notification");
+      console.log(data.content);
+      API.putacknowledge(data.content);
+      notiflisten();
+    }]);
+}
 
 
 //use OneSignal API to check if service worker is Subscribed
