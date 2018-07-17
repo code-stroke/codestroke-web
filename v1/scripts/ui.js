@@ -97,7 +97,14 @@ const SELECT = {
     get: function(parent, obj) {
         let val = parent.children("input").val();
 
-        if (val) {
+        if (!val) {
+            return;
+
+        }
+
+        if (!isNaN(val)) {
+            obj.val = parseInt(val);
+        } else {
             obj.val = val;
         }
     },
@@ -154,7 +161,14 @@ const TOGGLE = {
     get: function(parent, obj) {
         let val = parent.children("input").val();
 
-        if (val) {
+        if (!val) {
+            return;
+
+        }
+
+        if (!isNaN(val)) {
+            obj.val = parseInt(val);
+        } else {
             obj.val = val;
         }
     },

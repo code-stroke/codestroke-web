@@ -88,6 +88,7 @@ const Case = {
         if (!Case.case_id) {
             window.location.href = "/index.html";
         } else {
+            Case.case_id = parseInt(Case.case_id);
             API.get("cases", Case.case_id, Case.fillPatient);
         }
 
@@ -436,7 +437,11 @@ const Case = {
         }
 
         if (element.val() || element.val() === 0) {
-            data[key] = element.val();
+            if (element.prop("type") == "number") {
+                data[key] = parseInt(element.val());
+            } else {
+                data[key] = element.val();
+            }
         } else {
             data[key] = null;
         }
