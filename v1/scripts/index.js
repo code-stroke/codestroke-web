@@ -9,6 +9,10 @@ const DOM_Main = {
         DOM_Main.cases_incoming = $("#js-cases-incoming");
         DOM_Main.cases_active = $("#js-cases-active");
         DOM_Main.cases_completed = $("#js-cases-completed");
+
+        DOM_Main.overlay = $("#js-overlay");
+        DOM_Main.overlay_timer = $("#js-overlay-timer");
+
     }
 };
 
@@ -84,6 +88,8 @@ const Cases = {
     `,
     load: function() {
         //Cases.loadFake();
+
+        Overlay.showTimer();
         API.list(function(data) {
             console.log(data);
             Cases.list = data;
@@ -94,6 +100,7 @@ const Cases = {
             }
 
             Cases.display();
+            Overlay.hideTimer();
         });
 
     },
@@ -196,6 +203,20 @@ const Cases = {
 
     }
 };
+
+const Overlay = {
+    showTimer() {
+        this.loading = true;
+        DOM_Main.overlay.removeClass("hidden");
+        DOM_Main.overlay_timer.removeClass("hidden");
+    },
+    hideTimer() {
+        this.loading = false;
+        DOM_Main.overlay.addClass("hidden");
+        DOM_Main.overlay_timer.addClass("hidden");
+    },
+    loading: false
+}
 
 const Login = {
     check: function() {
