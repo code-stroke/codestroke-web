@@ -43,18 +43,21 @@ const API = {
         });
     },
 
-    putacknowledge: function(case_id) {
-        alert("test")
-        $.ajax({
-            url: `${API.address}/acknowledge/${case_id}/`,
-            method: "POST",
-            contentType: "application/json",
-
-            error: function() {
-                console.log('case_id putacknowledge' + case_id);
-            }
-        });
-    },
+    putacknowledge: function(additionalData) {
+            case_id = additionalData.case_id;
+            $.ajax({
+                url: `${API.address}/acknowledge/${case_id}/`,
+                method: "POST",
+                contentType: "application/json",
+                data: {},
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function() {
+                    console.log('case_id putacknowledge' + case_id);
+                }
+            });
+        },
 
     data: {
         getName: function(patient) {
