@@ -13,6 +13,9 @@ const DOM_Main = {
         DOM_Main.overlay = $("#js-overlay");
         DOM_Main.overlay_timer = $("#js-overlay-timer");
 
+        DOM_Main.refresh_text = $("#js-refresh-text");
+        DOM_Main.resfresh_button = $("#js-refresh-button");
+
     }
 };
 
@@ -218,6 +221,16 @@ const Overlay = {
     loading: false
 }
 
+const Refresh = {
+    load: function() {
+        DOM_Main.refresh_text.text(new Date().toLocaleTimeString());
+
+        $("#js-refresh-button").on("click", function() {
+            location.reload();
+        });
+    }
+}
+
 const Login = {
     check: function() {
         var username = Cookies.get("username");
@@ -243,6 +256,8 @@ $(document).ready(function() {
     Cases.load();
 
     Search.load();
+
+    Refresh.load();
 
     Login.check();
 });

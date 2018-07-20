@@ -57,17 +57,26 @@
             </div>
 
             <nav class="nav-container">
-                <div class="nav-search">
-                    <div id="js-cases-search-icon" class="nav-search-icon">
-                        <img src="icons/button/search.png" />
-                    </div>
-                    <span class="vr"></span>
-                    <input id="js-cases-search-input" class="nav-search-input" placeholder="Search...">
+                <div class="nav-box search">
+                    <div class="nav-search">
+                        <div id="js-cases-search-icon" class="nav-search-icon">
+                            <img src="icons/button/search.png" />
+                        </div>
+                        <span class="vr"></span>
+                        <input id="js-cases-search-input" class="nav-search-input" placeholder="Search...">
 
-                    </input>
-                    <div id="js-cases-search-cancel" class="nav-search-icon cancel">
-                        <img src="icons/button/cancel.png" />
+                        </input>
+                        <div id="js-cases-search-cancel" class="nav-search-icon cancel">
+                            <img src="icons/button/cancel.png" />
+                        </div>
                     </div>
+                </div>
+                <div class="nav-box refresh">
+                    <span>Cases last refreshed at:</span>
+                    <code id="js-refresh-text" code>Test</code>
+                </div>
+                <div id="js-refresh-button" class="nav-box button refresh_button" title="Refresh Page">
+                    <img src="icons/button/refresh.png"/>
                 </div>
             </nav>
 
