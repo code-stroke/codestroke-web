@@ -14,6 +14,21 @@ const API = {
             }
         });
     },
+    post: function(data, callback) {
+        $.ajax({
+            url: `${API.address}/cases/`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            crossDomain: true,
+            success: function(data) {
+                callback(data.case_id);
+            },
+            error: function(data) {
+
+            }
+        });
+    },
     get: function(table, case_id, callback) {
         $.ajax({
             url: `${API.address}/${table}/${case_id}/`,

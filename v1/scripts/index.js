@@ -14,7 +14,9 @@ const DOM_Main = {
         DOM_Main.overlay_timer = $("#js-overlay-timer");
 
         DOM_Main.refresh_text = $("#js-refresh-text");
-        DOM_Main.resfresh_button = $("#js-refresh-button");
+        DOM_Main.refresh_button = $("#js-refresh-button");
+
+        DOM_Main.add_button = $("#js-add-button");
 
     }
 };
@@ -225,7 +227,7 @@ const Refresh = {
     load: function() {
         DOM_Main.refresh_text.text(new Date().toLocaleTimeString());
 
-        $("#js-refresh-button").on("click", function() {
+        DOM_Main.refresh_button.on("click", function() {
             location.reload();
         });
     }

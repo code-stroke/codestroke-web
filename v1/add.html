@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Codestroke - Case</title>
+
+        <!-- External Scripts -->
+        <script src="scripts/external/jquery-3.3.1.min.js"></script>
+        <script src="scripts/external/js.cookie.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+        <!-- Local Scripts -->
+        <!-- Global -->
+        <script src="scripts/api.js"></script>
+        <script src="scripts/push-os.js"></script>
+        <script src="scripts/osinit.js"></script>
+        <!-- Specific -->
+        <script src="scripts/ui.js"></script>
+        <script src="scripts/add.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="style/global.css">
+        <link rel="stylesheet" href="style/case.css">
+        <link rel="stylesheet" href="style/ui.css">
+    </head>
+    <body scroll="no">
+        <header class="header-container">
+            <a href="./index.html" class="header-box logo">
+                <img src="logo-separated.png"/>
+            </a>
+
+            <div class="header-box user">
+                <div class="header-user-welcome">
+                    Welcome Back,
+                </div>
+                 <div class="header-user-name">
+                     Alan Ravarindragaban
+                 </div>
+            </div>
+
+            <button id="js-push-button" class="header-box btn notif">
+                Notifications &nbsp <img src="icons/button/switch-on.png" />
+            </button>
+
+            <button class="header-box btn">
+                Logout &nbsp <img src="icons/button/logout.png" />
+            </button>
+
+        </header>
+        <main class="main-container">
+            <div id="js-case-overlay" class="main-overlay hidden">
+                <div id="js-case-dialog" class="main-dialog hidden">
+                    <header class="main-dialog-header">
+
+                    </header>
+                    <main class="main-dialog-body">
+
+                    </main>
+                    <aside class="main-dialog-btns">
+
+                    </aside>
+                </div>
+                <div id="js-case-timer" class="main-timer hidden">
+                    <img class="" src="icons/button/empty-hourglass.png" />
+                    <span>Loading...</span>
+                </div>
+            </div>
+            <nav class="sidebar-container">
+                <div id="js-patient" class="sidebar-patient completed">
+                    <div id="js-patient-name" class="sidebar-patient-field name">
+                        <img src="icons/button/add.png"/>
+                    </div>
+                    <div id="js-patient-age_gender" class="sidebar-patient-field age">
+                        New Patient
+                    </div>
+                    <div id="js-patient-status" class="sidebar-patient-field status">
+
+                    </div>
+                    <div id="js-patient-time" class="sidebar-patient-field">
+                        Try include as many
+                    </div>
+                    <div id="js-patient-well" class="sidebar-patient-field">
+                        details as possible.
+                    </div>
+                </div>
+
+                <div data-section="case_eds" class="sidebar-button js-case-button selected">
+                     New Patient
+                </div>
+                <a href="./index.html" data-section="cases" class="sidebar-button js-case-button">
+                     Return to Index
+                </a>
+            </nav>
+
+            <main id="js-case-main" class="case-container">
+
+            </main>
+
+        </main>
+    </body>
+</html>

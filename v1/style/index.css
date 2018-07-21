@@ -70,7 +70,7 @@
 
     height: 100%;
 
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
 
     display: flex;
     align-items: center;
@@ -133,15 +133,15 @@
     background: none;
 }
 
-.nav-box.refresh {
+.nav-box.label {
     border-radius: 5px 0 0 5px;
 }
 
-.nav-box.refresh > span {
+.nav-box.label > span {
     font-size: 0.9em;
 }
 
-.nav-box.refresh > code {
+.nav-box.label > code {
     margin-left: 10px;
 
 
@@ -160,9 +160,11 @@
 
     font-weight: bold;
 
-    background: rgb(254,219,141);
-
     cursor: pointer;
+}
+
+.nav-box.refresh_button {
+    background: rgb(254,219,141);
 }
 
 .nav-box.refresh_button:hover > img {
@@ -175,6 +177,26 @@
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.nav-box.add_button {
+    background: rgb(232,255,153);
+}
+
+.nav-box.add_button:hover > img {
+    animation: grow 0.8s linear infinite;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
