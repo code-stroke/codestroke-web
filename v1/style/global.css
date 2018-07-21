@@ -64,6 +64,10 @@ a ,a:link, a:visited {
     cursor: auto;
 }
 
+*:focus {
+    outline: none;
+}
+
 .flex {
     display: flex !important;
 }

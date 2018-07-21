@@ -16,16 +16,56 @@
     </head>
     <body>
         <div class="login-background">
+            <div class="login-container">
+                <main class="login-container-content">
+                    <div class="login-logo">
+                        <img src="logo.png" width="240px">
+                    </div>
+                    <div class="login-row">
+                        <input class="login-row-input" placeholder="First Name...">
+                    </div>
+                    <div class="login-row">
+                        <input class="login-row-input" placeholder="Last Name...">
+                    </div>
+                    <div class="login-row">
+                        <select required class="login-row-input">
+                            <option selected disabled hidden value="">Role...</option>
+                            <option value="admin">Admin</option>
+                            <option value="anaesthetist">Anaesthetist</option>
+                            <option value="angio_nurse">Angiography Nurse</option>
+                            <option value="ed_clinician">ED Clinician</option>
+                            <option value="neuroint">Neurointerventionalist</option>
+                            <option value="paramedic">Paramedic</option>
+                            <option value="radiographer">Radiographer</option>
+                            <option value="radiologist">Radiologist</option>
+                            <option value="stroke_team">Stroke Team</option>
+                            <option value="stroke_ward">Stroke Ward</option>
+                        </select>
+                    </div>
+                    <div class="login-row">
+                        <input class="login-row-input" type="password" placeholder="Global Password...">
+                    </div>
+                    <div class="login-row">
+                        <button class="login-button">
+                            Login
+                        </button>
+                        <div class="login-errors hidden">
+                            Incorrect Password. Please try again.
+                        </div>
+                    </div>
 
+                </main>
+
+            </div>
         </div>
     </body>
 
-    <div class="main-logo">
-      <img src="logo.png" width="240px">
+    <!-- <div class="main-logo">
+
     </div>
     <div id="sign-in-container">
       <form id="sign-in-form" onsubmit="return false;" method="post">
-	<!-- Check placeholder works in IE?-->
+	Check placeholder works in IE?
 	<input id="username" type="text" name="username"  placeholder="Username">
 	<br>
 	<input id="password" type="password" name="password" placeholder="Password">
@@ -36,5 +76,5 @@
       <div id="error-container">
       </div>
     </div>
-  </body>
+</body> -->
 </html>
