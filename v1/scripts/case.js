@@ -641,13 +641,13 @@ const Radiology = {
                     break;
                 }
 
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-2", "0")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-2", "1")) {
                     progress++;
                 } else {
                     break;
                 }
 
-                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-3", "1")) {
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-3", "0")) {
                     progress++;
                 } else {
                     break;
@@ -659,14 +659,21 @@ const Radiology = {
                     break;
                 }
 
+                if (Radiology.checkProgress(DOM_Case.radiology["progress"] + "-5", "1")) {
+                    progress++;
+                } else {
+                    break;
+                }
+
                 break;
             }
 
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 7; i++) {
                 if (i <= progress) {
                     $(DOM_Case.radiology["progress"] + "-" + i).removeClass("hidden");
                 } else {
                     $(DOM_Case.radiology["progress"] + "-" + i).addClass("hidden");
+                    $(DOM_Case.radiology["progress"] + "-" + i).find("input").val("");
                     $(DOM_Case.radiology["progress"] + "-" + i).find(".-ui-toggle").trigger("ui:clear");
                 }
             }
@@ -678,8 +685,12 @@ const Radiology = {
         });
     },
     checkProgress: function(id, wanted) {
-        let input = $(id).find("input");
-        if (input.val() == wanted) {
+        let input = $(id).find(".-ui-toggle");
+        let obj = {
+            val: null
+        };
+        input.trigger("ui:get", obj);
+        if (obj.val == wanted) {
             return true;
         } else {
             return false;

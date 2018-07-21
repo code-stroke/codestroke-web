@@ -750,6 +750,10 @@
       font-weight: bold;
  }
 
+ .case-section.radiology .case-row-group {
+     margin-bottom: 0;
+ }
+
 
 /********
  * MANAGE *
