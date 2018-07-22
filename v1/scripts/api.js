@@ -1,30 +1,49 @@
 const API = {
     address: "https://codestroke.pythonanywhere.com",
+    handleResult: function(data) {
+        if (data.success) {
+            return true;
+        }
+
+        if (data.error_type == "auth") {
+            window.location.replace(`./login.html`);
+            return false;
+        }
+
+        //TODO: Handle other errors?
+    },
     list: function(callback) {
         $.ajax({
             url: `${API.address}/cases/`,
             method: "GET",
+            headers: API.login.headers,
             dataType: "json",
             crossDomain: true,
-            success: function(data) {
-                callback(data.result);
+            success: function(result) {
+                if (API.handleResult(result)) {
+                    callback(result.result);
+                }
             },
-            error: function(data) {
+            error: function(result) {
 
             }
         });
     },
     post: function(data, callback) {
+        $.extend(data, API.login.signoff);
         $.ajax({
             url: `${API.address}/cases/`,
             method: "POST",
+            headers: API.login.headers,
             contentType: "application/json",
             data: JSON.stringify(data),
             crossDomain: true,
-            success: function(data) {
-                callback(data.case_id);
+            success: function(result) {
+                if (API.handleResult(result)) {
+                    callback(result.case_id);
+                }
             },
-            error: function(data) {
+            error: function(result) {
 
             }
         });
@@ -33,10 +52,13 @@ const API = {
         $.ajax({
             url: `${API.address}/${table}/${case_id}/`,
             method: "GET",
+            headers: API.login.headers,
             dataType: "json",
             crossDomain: true,
-            success: function(data) {
-                callback(data.result[0]);
+            success: function(result) {
+                if (API.handleResult(result)) {
+                    callback(result.result[0]);
+                }
             },
             error: function(data) {
 
@@ -44,36 +66,117 @@ const API = {
         });
     },
     put: function(table, case_id, data, callback) {
+        $.extend(data, API.login.signoff);
         $.ajax({
             url: `${API.address}/${table}/${case_id}/`,
             method: "PUT",
+            headers: API.login.headers,
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function(result) {
-                callback(result);
+                if (API.handleResult(result)) {
+                    callback(result);
+                }
             },
             error: function(obj, e1, e2) {
                 console.log(`ERROR | e1: ${e1} , e2: ${e2}`);
             }
         });
     },
-
     putacknowledge: function(additionalData) {
-            case_id = additionalData.case_id;
-            $.ajax({
-                url: `${API.address}/acknowledge/${case_id}/`,
-                method: "POST",
-                contentType: "application/json",
-                data: {},
-                success: function(result) {
+        case_id = additionalData.case_id;
+        $.ajax({
+            url: `${API.address}/acknowledge/${case_id}/`,
+            method: "POST",
+            headers: API.login.headers,
+            contentType: "application/json",
+            data: {},
+            success: function(result) {
+                if (API.handleResult(result)) {
                     console.log(result);
+                }
+            },
+            error: function() {
+                console.log('case_id putacknowledge' + case_id);
+            }
+        });
+    },
+    login: {
+        loaded: false,
+        signoff: {},
+        headers: {},
+        setCookie: function(data) {
+            $.each(data, function(key, value) {
+                let cookie = "" + encodeURIComponent(key) + "=" + encodeURIComponent(value) + "; path=/";
+                console.log(cookie);
+                document.cookie = cookie;
+            });
+
+            this.loadCookie();
+        },
+        loadCookie: function() {
+            let string = document.cookie;
+            let parts = string.split("; ");
+
+            for (let i = 0; i < parts.length; i++) {
+                let subparts = parts[i].split("=");
+                subparts[0] = decodeURIComponent(subparts[0]);
+                subparts[1] = decodeURIComponent(subparts[1]);
+                this.signoff[subparts[0]] = subparts[1];
+            }
+
+            this.headers = {
+                "Authorization": "Basic " + btoa("Global:" + API.login.signoff.password)
+            };
+            delete this.signoff.password;
+
+            loaded = true;
+        },
+        checkCookie: function() {
+            if (document.cookie.indexOf("password") > -1) {
+                this.loadCookie();
+            }
+        },
+        verify: function(functions) {
+            $.ajax({
+                url: `${API.address}/`,
+                method: "GET",
+                headers: API.login.headers,
+                crossDomain: true,
+                success: function(data) {
+                    if (data.success) {
+                        functions.success();
+                    } else {
+                        functions.failure();
+                    }
                 },
-                error: function() {
-                    console.log('case_id putacknowledge' + case_id);
+                error: function(data) {
+
                 }
             });
         },
+        loadHeader: function() {
+            //Load the Name
+            let name = `${API.login.signoff.signoff_first_name} ${API.login.signoff.signoff_last_name}`;
+            $("#js-login-name").html(name);
+            $("#js-login-name").prop("title", name);
 
+            //Load the Logout Button
+            $("#js-login-logout").on("click", function() {
+                //Step 1: Delete all cookies
+                let string = document.cookie;
+                let parts = string.split("; ");
+
+                for (let i = 0; i < parts.length; i++) {
+                    let cookie = parts[i].split("=")[0];
+                    document.cookie = cookie + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+                }
+
+                //Step 2: Redirect
+                window.location.replace(`./login.html`);
+            });
+        }
+    },
     data: {
         getName: function(patient) {
                 return `${patient.first_name} ${patient.last_name}`
@@ -175,4 +278,22 @@ const API = {
                     + ":" + pad(date.getMinutes());
         }
     }
+}
+
+//Ensures that Cookie data is always loaded before everything else
+$.holdReady(true);
+if (window.location.href.indexOf("login") < 0) {
+    API.login.loadCookie();
+    API.login.verify({
+        success() {
+            //Nothing?
+            API.login.loadHeader();
+            $.holdReady(false);
+        },
+        failure() {
+            window.location.replace(`./login.html`);
+        }
+    })
+} else {
+    $.holdReady(false);
 }

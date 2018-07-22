@@ -168,6 +168,8 @@ a ,a:link, a:visited {
 .header-user-name {
     font-size: 1.2em;
 
+    width: 200px;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

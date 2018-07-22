@@ -6,8 +6,13 @@
         <title>Log In to Codestroke</title>
 
         <!-- Scripts -->
-        <script src="scripts/jquery-3.3.1.min.js"></script>
-        <script src="scripts/js.cookie.js"></script>
+        <!-- External Scripts -->
+        <script src="scripts/external/jquery-3.3.1.min.js"></script>
+
+        <!-- Local Scripts -->
+        <!-- Global -->
+        <script src="scripts/api.js"></script>
+        <!-- Specific -->
         <script src="scripts/login.js"></script>
 
         <!-- CSS -->
@@ -22,13 +27,13 @@
                         <img src="logo.png" width="240px">
                     </div>
                     <div class="login-row">
-                        <input class="login-row-input" placeholder="First Name...">
+                        <input id="js-login-signoff_first_name" class="login-row-input" placeholder="First Name...">
                     </div>
                     <div class="login-row">
-                        <input class="login-row-input" placeholder="Last Name...">
+                        <input id="js-login-signoff_last_name" class="login-row-input" placeholder="Last Name...">
                     </div>
                     <div class="login-row">
-                        <select required class="login-row-input">
+                        <select id="js-login-signoff_role" required class="login-row-input">
                             <option selected disabled hidden value="">Role...</option>
                             <option value="admin">Admin</option>
                             <option value="anaesthetist">Anaesthetist</option>
@@ -43,14 +48,14 @@
                         </select>
                     </div>
                     <div class="login-row">
-                        <input class="login-row-input" type="password" placeholder="Global Password...">
+                        <input id="js-login-password" class="login-row-input" type="password" placeholder="Global Password...">
                     </div>
                     <div class="login-row">
-                        <button class="login-button">
+                        <button id="js-login-button" class="login-button">
                             Login
                         </button>
-                        <div class="login-errors hidden">
-                            Incorrect Password. Please try again.
+                        <div id="js-login-errors" class="login-errors">
+
                         </div>
                     </div>
 
