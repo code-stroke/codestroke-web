@@ -28,7 +28,7 @@ function initializeUI() {
         OneSignal.sendTags({
             key: API.login.signoff.signoff_role,
         }).then(function(tagsSent) {
-            console.log('tag set as ' API.login.signoff.signoff_role)  
+            console.log('tag sent');
         });
     });
 
