@@ -23,6 +23,16 @@ $( window ).bind("load", function() {
 });
 
 function initializeUI() {
+
+    OneSignal.push(function() {
+        OneSignal.sendTags({
+            key: API.login.signoff.signoff_role,
+        }).then(function(tagsSent) {
+            console.log('tag set as ' API.login.signoff.signoff_role)  
+        });
+    });
+
+
     DOM_Push.button.removeClass("disabled");
 
     DOM_Push.button.click(function() {
