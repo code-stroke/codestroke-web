@@ -233,21 +233,6 @@ const Refresh = {
     }
 }
 
-const Login = {
-    check: function() {
-        var username = Cookies.get("username");
-        if (username !== undefined) {
-    	// TODO Replace with actual user's name
-    	$(".header-user-name").text(Cookies.get("username"));
-
-        } else {
-    	console.log("Not logged in");
-    	// Force login (may move to backend)
-    	//window.location.replace("/login.html");
-        }
-    }
-};
-
 /************
  * ON READY *
  ************/

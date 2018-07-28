@@ -223,3 +223,11 @@
      background: url("../icons/button/tick-green.png") center no-repeat;
      background-size: contain;
  }
+
+ /**
+  * CHANGE & ONCE
+  */
+
+.ui_changed {
+    border: 1px solid red;
+}

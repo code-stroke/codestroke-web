@@ -84,6 +84,7 @@ const SELECT = {
 
         parent.children("input").val(child.data("val"));
         parent.children("span").text(child.data("text"));
+        parent.trigger("ui:change", child.data("val"));
 
         child.addClass("selected");
         child.siblings("li").removeClass("selected");
@@ -144,16 +145,19 @@ const TOGGLE = {
         parent.removeClass("empty");
 
         parent.children("input").val(child.data("val"));
+        parent.trigger("ui:change", child.data("val"));
 
         child.addClass(child.data("class"));
 
         child.siblings("li").removeClass();
+
 
         parent.trigger("ui:toggle");
     },
     clear: function(parent) {
         parent.children("li").removeClass();
         parent.children("input").val("");
+        parent.trigger("ui:change", "");
     },
     set: function(parent, value) {
         parent.find(`li[data-val="${value}"]`).trigger("click");
@@ -202,8 +206,8 @@ const SINCE = {
                 SINCE.clear($(this));
             });
 
-            $("body").on("ui:set", ".-ui-since", function(event, value) {
-                SINCE.set($(this), value);
+            $("body").on("ui:set", ".-ui-since", function(event, value, noLoad) {
+                SINCE.set($(this), value, noLoad);
             });
 
             $("body").on("ui:get", ".-ui-since", function(event, obj) {
@@ -242,7 +246,8 @@ const SINCE = {
             //If input is valid, calculate time since, else display 'unknown'
             if (date != "" && time != "") {
                 let datetime = new Date(date + " " + time);
-                parent.children("input").val(datetime);
+                parent.children("input").val(datetime.toString());
+                parent.trigger("ui:change", datetime.toString());
 
                 let since = new Date().getTime() - datetime.getTime();
                 let obj = SINCE.convertTime(since);
@@ -255,6 +260,7 @@ const SINCE = {
 
             } else {
                 parent.children("input").val("");
+                parent.trigger("ui:change", "");
                 parent.find("span").html("Unknown");
             }
 
@@ -265,14 +271,20 @@ const SINCE = {
     },
     clear: function(parent) {
         parent.find("input").val("");
+        parent.trigger("ui:change", "");
         parent.find("span").html("Unknown");
     },
-    set: function(parent, value) {
+    set: function(parent, value, noLoad) {
         if (!value) {
             return;
         }
 
-        parent.children("input").val(new Date(value).toDateString());
+        parent.children("input").val(new Date(value).toString());
+        if (noLoad) {
+            parent.trigger("ui:change", new Date(value).toString());
+        } else {
+            parent.trigger("ui:load", new Date(value).toString());
+        }
 
         let currentDate = value.split(" ")[0];
         let currentTime = value.split(" ")[1];
@@ -293,12 +305,176 @@ const SINCE = {
     isRegistered: false
 };
 
+const CHANGE = {
+    registered: false,
+    setup: function() {
+        $(".-ui-change").each(function() {
+            $(this).data("hasChanged", false);
+        });
+
+        if (!CHANGE.isRegistered) {
+            $("body").on("change", ".-ui-change", function(event) {
+                //Do nothing if .-ui-change was not directly edited
+                if(event.target !== event.currentTarget) {
+                    return;
+                }
+
+                if ($(this).is(":checkbox")) {
+                    $(this).val($(this).is(":checked") ? 1 : 0);
+                }
+
+                $(this).trigger("ui:change", $(this).val());
+            });
+
+            $("body").on("ui:change", ".-ui-change", function(event, value) {
+                CHANGE.change($(this), value);
+            });
+
+            $("body").on("ui:load", ".-ui-change", function(event, value) {
+                CHANGE.load($(this), value);
+            });
+
+            CHANGE.isRegistered = true;
+        }
+    },
+    load: function(parent, value) {
+        if (value == null) {
+            parent.data("initial", "");
+        } else {
+            parent.data("initial", value.toString());
+        }
+    },
+    change: function(parent, value) {
+        value = value.toString();
+        if (parent.data("initial") === value) {
+            parent.data("hasChanged", false);
+            parent.removeClass("ui_changed");
+        } else {
+            parent.data("hasChanged", true);
+            parent.addClass("ui_changed");
+        }
+    },
+    hasChanged: function(parent) {
+        return parent.data("hasChanged");
+    }
+}
+
+/* Gives extra control over Normal Inputs */
+const INPUT = {
+    registered: false,
+    setup: function() {
+        $(".-ui-input").each(function() {
+
+        });
+
+        if (!INPUT.isRegistered) {
+            $("body").on("ui:clear", ".-ui-input", function() {
+                INPUT.clear($(this));
+            });
+
+            $("body").on("ui:set", ".-ui-input", function(event, value) {
+                INPUT.set($(this), value);
+            });
+
+            $("body").on("ui:get", ".-ui-input", function(event, obj) {
+                INPUT.get($(this), obj);
+            });
+
+            INPUT.isRegistered = true;
+        }
+    },
+    clear: function(parent) {
+        parent.val("");
+    },
+    set: function(parent, value) {
+        parent.val(value);
+    },
+    get: function(parent, obj) {
+        if (parent.val() === "") {
+            return null;
+        }
+
+        switch(parent.data("type")) {
+            case "int":
+                obj.val = parseInt(parent.val());
+                break;
+            case "float":
+                obj.val = parseFloat(parent.val());
+                break;
+            case "date":
+                obj.val = API.data.convertDate(new Date(parent.val()));
+                break;
+            case "check":
+                obj.val = parent.is(":checked") ? 1 : 0;
+                break;
+            default:
+                obj.val = parent.val();
+        }
+
+    }
+}
+
+/*const ONCE = {
+    registered: false,
+    setup: function() {
+        $(".-ui-once").each(function() {
+
+        });
+
+        if (!ONCE.isRegistered) {
+            $("body").on("ui:clear", ".-ui-once", function() {
+                INPUT.clear($(this));
+            });
+
+            $("body").on("ui:set", ".-ui-once", function(event, value) {
+                ONCE.set($(this), value);
+            });
+
+            $("body").on("ui:get", ".-ui-once", function(event, obj) {
+                ONCE.get($(this), obj);
+            });
+
+            ONCE.isRegistered = true;
+        }
+    },
+    clear: function(parent) {
+        parent.val("");
+    },
+    set: function(parent, value) {
+        parent.val(value);
+    },
+    get: function(parent, obj) {
+        if (parent.val() === "") {
+            return null;
+        }
+
+        switch(parent.data("type")) {
+            case "int":
+                obj.val = parseInt(parent.val());
+                break;
+            case "float":
+                obj.val = parseFloat(parent.val());
+                break;
+            case "date":
+                obj.val = API.data.convertDate(new Date(parent.val()));
+                break;
+            default:
+                obj.val = parent.val();
+        }
+
+    }
+}*/
+
 function refreshUI() {
     SELECT.setup();
 
     TOGGLE.setup();
 
     SINCE.setup();
+
+    CHANGE.setup();
+
+    INPUT.setup();
 }
 
 $(document).ready(function() {

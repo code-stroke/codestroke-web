@@ -129,7 +129,9 @@ const Case = {
         data.case_id =  Case.case_id;
 
         $(DOM_Case.case.inputs).each(function() {
-            Case.getInput($(this), data);
+            if (CHANGE.hasChanged($(this))) {
+                Case.getInput($(this), data);
+            }
         });
 
         console.log(data);
@@ -207,26 +209,19 @@ const Case = {
                 return;
             }
 
-            //Check if you haven't changed any fields
-            let data = {};
-            data.case_id = Case.case_id;
-            $(DOM_Case.case.inputs).each(function() {
-                Case.getInput($(this), data);
-            });
             let differences = [];
             let i = 0, extras = 0;
-            $.each(data, function(key, value) {
-                if (Case.section_data[key] != data[key]) {
+            $(DOM_Case.case.inputs).each(function() {
+                if (CHANGE.hasChanged($(this))) {
                     i++;
                     if (i < 9) {
-                        differences.push(key);
+                        differences.push($(this).attr("id").slice(3));
                     } else {
                         extras++;
                     }
-                } else {
-
                 }
-            })
+            });
+
             if (extras > 0) {
                 differences.push(`and ${extras} more field${extras > 1 ? "s" : ""}.`)
             }
@@ -291,11 +286,16 @@ const Case = {
         if (Case.section == "case_eds") {
             if (name == "location") {
                 $(DOM_Case.ed.loc).children("span").text(value);
+                input.trigger("ui:load", "");
             } else {
                 if (value == 1) {
                     input.closest("div").addClass(DOM_Case.ed.complete);
                     input.prop("checked", true);
+                } else {
+                    input.trigger("ui:load", value);
+                    input.trigger("ui:set", value);
                 }
+
             }
             return;
         }
@@ -370,43 +370,22 @@ const Case = {
             }
         }
 
-        if (input.hasClass("-ui-since") || input.hasClass("-ui-toggle") || input.hasClass("-ui-select")) {
-            input.trigger("ui:set", value);
-
-            return;
-        }
-
-        if (input.prop("type") == "date") {
-            input.val(value);
-            input.removeClass("empty");
-            return;
-        }
-
-        input.val(value);
+        input.trigger("ui:load", value);
+        input.trigger("ui:set", value);
 
     },
     getInput: function(element, data) {
         let key = element.attr("id").slice(3);
 
-        if (Case.section == "case_eds") {
-            if (key == "location") {
-                let text = $(DOM_Case.ed.loc).children("span").html();
-                text = (text == "") ? null : text;
-                if (element.val()) {
-                    data[key] = element.val();
-                } else {
-                    data[key] = text;
-                }
+        /*if (Case.section == "case_eds" & key == "location") {
+            let text = $(DOM_Case.ed.loc).children("span").html();
+            text = (text == "") ? null : text;
+            if (element.val()) {
+                data[key] = element.val();
             } else {
-                if (element.is(":checked")) {
-                    data[key] = 1;
-                } else {
-                    data[key] = 0;
-                }
-
+                data[key] = text;
             }
-            return;
-        }
+        }*/
 
         if (Case.section == "case_managements") {
             switch (key) {
@@ -421,30 +400,11 @@ const Case = {
             }
         }
 
-        if (element.hasClass("-ui-since") || element.hasClass("-ui-toggle") || element.hasClass("-ui-select")) {
-            let obj = {
-                val: null
-            };
-            element.trigger("ui:get", obj);
-            data[key] = obj.val;
-            return;
-        }
-
-        if (element.prop("type") == "date") {
-            data[key] = API.data.convertDate(new Date(element.val()));
-
-            return;
-        }
-
-        if (element.val() || element.val() === 0) {
-            if (element.prop("type") == "number") {
-                data[key] = parseInt(element.val());
-            } else {
-                data[key] = element.val();
-            }
-        } else {
-            data[key] = null;
-        }
+        let obj = {
+            val: null
+        };
+        element.trigger("ui:get", obj);
+        data[key] = obj.val;
 
     },
     overlay: {
@@ -576,6 +536,7 @@ const Assess = {
                         style: "yes",
                         click: function() {
                             $(DOM_Case.assess.lvo_input).val(1);
+                            $(DOM_Case.assess.lvo_input).trigger("change");
                             Case.submitPage();
                         }
                     },
@@ -804,7 +765,7 @@ const Manage = {
                         text: "Continue",
                         style: "yes",
                         click: function() {
-                            $(DOM_Case.manage["time_input"]).trigger("ui:set", API.data.convertDateTime(new Date()));
+                            $(DOM_Case.manage["time_input"]).trigger("ui:set", [API.data.convertDateTime(new Date()), true]);
                             Case.submitPage();
                         }
                     },
