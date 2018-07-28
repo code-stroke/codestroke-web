@@ -90,7 +90,7 @@ const API = {
             method: "POST",
             headers: API.login.headers,
             contentType: "application/json",
-            data: {},
+            data: {firstname: signoff_first_name, lastname: signoff_last_name, role: signoff_role},
             success: function(result) {
                 if (API.handleResult(result)) {
                     console.log(result);
