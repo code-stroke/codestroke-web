@@ -97,7 +97,9 @@ const Cases = {
         Overlay.showTimer();
         API.list(function(data) {
             console.log(data);
-            Cases.list = data;
+            if (data) {
+                Cases.list = data;
+            }
 
             //Add a 'full name' so searching can be easier
             for (let i = 0; i < Cases.list.length; i++) {
@@ -245,8 +247,6 @@ $(document).ready(function() {
     Search.load();
 
     Refresh.load();
-
-    Login.check();
 });
 
 /*******************
