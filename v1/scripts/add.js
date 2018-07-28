@@ -17,6 +17,7 @@ const Add = {
             $(document).trigger("case:load_start");
             Add.DOM.load();
 
+            Add.DOM.gender.trigger("ui:load", "u");
             Add.DOM.gender.trigger("ui:set", "u");
 
             Add.loadSubmit();

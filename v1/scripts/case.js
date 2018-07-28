@@ -223,7 +223,7 @@ const Case = {
             });
 
             if (extras > 0) {
-                differences.push(`and ${extras} more field${extras > 1 ? "s" : ""}.`)
+                differences.push(`</br>...and ${extras} more field${extras > 1 ? "s" : ""}.`)
             }
 
             if (differences.length > 0) {

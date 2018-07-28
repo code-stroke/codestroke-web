@@ -118,7 +118,8 @@
 .main-dialog-body > code {
     margin-left: 10px;
 
-    color: red;
+    color: lightseagreen;
+    font-weight: bold;
 }
 
 .main-dialog-btns {
