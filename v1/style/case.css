@@ -82,6 +82,8 @@
     align-items: center;
 
     //background: #00A86B;
+    color: black;
+    font-weight: bold;
 
 }
 
@@ -90,7 +92,7 @@
 }
 
 .main-dialog > header.caution {
-    background: #cc0000;
+    background: #FF4500;
 }
 
 .main-dialog-header > * {
@@ -118,7 +120,7 @@
 .main-dialog-body > code {
     margin-left: 10px;
 
-    color: lightseagreen;
+    color: #458B74;
     font-weight: bold;
 }
 
@@ -849,4 +851,29 @@
     background: #ffb347;
 
     transition: background 0.5s ease;
+}
+
+.manage-complete {
+    border: 2px solid black;
+
+    width: 100%;
+    min-height: 40px;
+
+    background-color: #A6D785;
+    cursor: pointer;
+
+    transition: background 0.5s ease;
+
+    font-weight: bold;
+}
+
+.manage-complete:hover {
+    background-color: #699864;
+
+    transition: background 0.5s ease;
+}
+
+.case-section.manage .case-submit{
+     margin-top: 0;
+     margin-bottom: 40px;
 }

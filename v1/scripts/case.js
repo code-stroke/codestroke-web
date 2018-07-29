@@ -74,6 +74,9 @@ const DOM_Case = {
             DOM_Case.manage.time_button = "#js-manage-time-button";
             DOM_Case.manage.time_given = "#js-manage-time-given";
             DOM_Case.manage.time_input = "#db-thrombolysis_time_given";
+
+            DOM_Case.manage.complete_row = "#js-manage-complete";
+            DOM_Case.manage.complete_button = "#js-manage-complete-button";
         }
     }
 };
@@ -82,6 +85,7 @@ const Case = {
     case_id: null,
     section: "",
     section_data: null,
+    patient: null,
     load: function() {
         Case.case_id = new URL(window.location.href).searchParams.get("case_id");
 
@@ -121,7 +125,7 @@ const Case = {
         });
 
     },
-    submitPage: function() {
+    submitPage: function(callback) {
         Case.overlay.hideDialog();
         Case.overlay.showTimer();
 
@@ -144,6 +148,9 @@ const Case = {
                 if (Case.section == "cases") {
                     Case.fillPatient(info);
                 }
+                if (callback) {
+                    callback();
+                }
             });
         });
     },
@@ -151,6 +158,8 @@ const Case = {
         if (!patient) {
             window.location.href = "/index.html";
         }
+
+        Case.patient = patient;
 
         DOM_Case.case.name.text(API.data.getName(patient));
         DOM_Case.case.age_gender.text(API.data.getAgeGender(patient));
@@ -229,8 +238,8 @@ const Case = {
             if (differences.length > 0) {
                 Case.overlay.showDialog({
                     header: "warning",
-                    text: `There are unsubmitted changes to the following fields:
-                    <code>${differences.join("</br>")}</code>
+                    text: `There are unsubmitted changes to the following fields:</br>
+                    <code>${differences.join("</br>")}</code></br>
                     Are you sure you want to change pages?`,
                     buttons: [
                         {
@@ -527,7 +536,7 @@ const Assess = {
 
         $("body").on("click", DOM_Case.assess.lvo_button, function() {
             Case.overlay.showDialog({
-                header: `warning`,
+                header: `caution`,
                 text: `Are you sure you want to notify staff about a potential LVO?`,
                 buttons: [
 
@@ -742,13 +751,13 @@ const Manage = {
             switch (ci) {
                 case null:
                     header = "caution";
-                    text = `You have not filled in all the contraindication fields.</br></br>
-                            <code>Are you sure you want to proceed with Thrombolysis?</code>`
+                    text = `<code>You have not filled in all the contraindication fields.</code></br>
+                            Are you sure you want to proceed with Thrombolysis?`
                     break;
                 case true:
                     header = "caution";
-                    text = `You have contraindications to Thrombolysis.</br></br>
-                            <code>Are you sure you want to proceed with Thrombolysis?</code>`
+                    text = `<code>You have contraindications to Thrombolysis.</code></br>
+                            Are you sure you want to proceed with Thrombolysis?`
                     break;
                 case false:
                     header = "warning";
@@ -780,6 +789,50 @@ const Manage = {
             });
 
         });
+
+        $(document).on("case:load_end", function() {
+            if (Case.patient.status == "completed") {
+                $(DOM_Case.manage.complete_row).addClass("hidden");
+            } else {
+                $(DOM_Case.manage.complete_row).removeClass("hidden");
+            }
+        });
+
+        $("body").on("click", DOM_Case.manage.complete_button, function() {
+            Case.overlay.showDialog({
+                header: "caution",
+                text: `You are about to submit changes and mark this case as complete. </br></br>
+                        <code>This will lock the case from any further editing.</code></br>
+                        Are you sure you want to continue?`,
+                buttons: [
+
+                    {
+                        text: "Continue",
+                        style: "yes",
+                        click: function() {
+                            // A little messy?
+                            // 1. Submits the current data on the page (so that the case isn't locked)
+                            // 2. Submits the completed status
+                            // 3. Gets the Completed Status back from the server so that the sidebar can update
+                            Case.submitPage(API.put("cases", Case.case_id, {
+                                status: "completed",
+                                completed_timestamp: API.data.convertDateTime(new Date())
+                            }, function(result) {
+                                API.get("cases", Case.case_id, Case.fillPatient)
+                            }));
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        style: "no",
+                        click: function() {
+                            Case.overlay.hideDialog();
+                        }
+                    }
+                ]
+            });
+        });
+
     }
 }
 
