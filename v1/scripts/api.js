@@ -24,7 +24,7 @@ const API = {
             success: function(result) {
                 if (API.handleResult(result)) {
                     callback(result.result);
-                    
+
                 }
             },
             error: function(data) {
@@ -110,7 +110,7 @@ const API = {
             method: "POST",
             headers: API.login.headers,
             contentType: "application/json",
-            data: {firstname: signoff_first_name, lastname: signoff_last_name, role: signoff_role},
+            data: JSON.stringify(API.login.signoff),
             success: function(result) {
                 if (API.handleResult(result)) {
                     console.log(result);
