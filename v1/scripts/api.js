@@ -12,6 +12,26 @@ const API = {
 
         //TODO: Handle other errors?
     },
+    events: function(callback, params) {
+        //TODO: Handle params
+
+        $.ajax({
+            url: `${API.address}/event_log/all/`,
+            method: "GET",
+            headers: API.login.headers,
+            dataType: "json",
+            crossDomain: true,
+            success: function(result) {
+                if (API.handleResult(result)) {
+                    callback(result.result);
+                    
+                }
+            },
+            error: function(data) {
+
+            }
+        });
+    },
     list: function(callback) {
         $.ajax({
             url: `${API.address}/cases/`,
