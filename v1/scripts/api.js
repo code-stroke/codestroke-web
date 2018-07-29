@@ -85,13 +85,16 @@ const API = {
     },
     putacknowledge: function(additionalData) {
         case_id = additionalData.case_id;
+        var signoff_first_name = ${API.login.signoff.signoff_first_name};
+        var signoff_last_name = ${API.login.signoff.signoff_last_name};
+        var signoff_role = ${API.login.signoff.signoff_role};
 
         $.ajax({
             url: `${API.address}/acknowledge/${case_id}/`,
             method: "POST",
             headers: API.login.headers,
             contentType: "application/json",
-            data: {signoff_first_name: ${API.login.signoff.signoff_first_name}, signoff_last_name: ${API.login.signoff.signoff_last_name}, signoff_role: ${API.login.signoff.signoff_role}},
+            data: {signoff_first_name: signoff_first_name, signoff_last_name: signoff_last_name, signoff_role: signoff_role},
             success: function(result) {
                 if (API.handleResult(result)) {
                     console.log(result);
