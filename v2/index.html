@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Codestroke - Home</title>
+        <link rel="manifest" href="/manifest.json" />
+
+        <!-- External Scripts -->
+        <script src="scripts/external/jquery-3.3.1.min.js"></script>
+        <script src="scripts/external/faker.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+        <!-- Local Scripts -->
+        <!-- Global -->
+        <script src="scripts/api.js"></script>
+        <script src="scripts/push-os.js"></script>
+        <script src="scripts/osinit.js"></script>
+        <!-- Specific -->
+        <script src="scripts/index.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="style/global.css">
+        <link rel="stylesheet" href="style/index.css">
+
+    </head>
+    <body>
+        <header class="header-container">
+            <a href="./index.html" class="header-box logo">
+                <img src="logo-separated.png"/>
+            </a>
+
+            <div class="header-box user">
+                <div class="header-user-welcome">
+                    Welcome Back,
+                </div>
+                 <div id="js-login-name" class="header-user-name">
+                     &nbsp
+                 </div>
+            </div>
+
+            <button id="js-push-button" class="header-box btn notif">
+                Notifications &nbsp <img src="icons/button/switch-disabled.png" />
+            </button>
+
+            <button id="js-login-logout" class="header-box btn">
+                Logout &nbsp <img src="icons/button/logout.png" />
+            </button>
+
+        </header>
+        <main class="main-container">
+            <div id="js-overlay" class="main-overlay">
+                <div id="js-overlay-timer" class="main-timer">
+                    <img class="" src="icons/button/empty-hourglass.png" />
+                    <span>Loading...</span>
+                </div>
+            </div>
+
+            <nav class="nav-container">
+                <div class="nav-box search">
+                    <div class="nav-search">
+                        <div id="js-cases-search-icon" class="nav-search-icon">
+                            <img src="icons/button/search.png" />
+                        </div>
+                        <span class="vr"></span>
+                        <input id="js-cases-search-input" class="nav-search-input" placeholder="Search...">
+
+                        </input>
+                        <div id="js-cases-search-cancel" class="nav-search-icon cancel">
+                            <img src="icons/button/cancel.png" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-box label">
+                    <span>Last refreshed</span>
+                    <code id="js-refresh-text" code></code>
+                </div>
+                <div id="js-refresh-button" class="nav-box button refresh_button" title="Refresh Page">
+                    <img src="icons/button/refresh.png"/>
+                </div>
+
+                <div class="nav-box label">
+                    <span><strong>New</strong> case</span>
+                </div>
+                <a href="./add.html" id="js-add-button" class="nav-box button add_button" title="Add Case">
+                    <img src="icons/button/plus.png"/>
+                </a>
+
+                <div class="nav-box label">
+                    <span><strong>Event Log</strong></span>
+                </div>
+                <a href="./events.html" id="js-add-button" class="nav-box button event_button" title="See Event Log">
+                    <img src="icons/button/log.png"/>
+                </a>
+            </nav>
+
+            <main id="js-cases-container" class="cases-container">
+                <div class="cases-divider">
+
+                </div>
+                <section class="cases-list incoming">
+                    <header class="cases-list-header">
+                        Incoming
+                    </header>
+                    <div class="cases-list-body">
+                        <div class="case-row header">
+                            <div class="case-row-field name">
+                                Name
+                            </div>
+                            <div class="case-row-field age">
+                                Age/Sex
+                            </div>
+                            <div class="case-row-field time">
+                                ETA
+                            </div>
+                        </div>
+                        <div id="js-cases-incoming" class="case-row-container">
+
+                        </div>
+                    </div>
+                </section>
+                <div class="cases-divider">
+
+                </div>
+                <section class="cases-list active">
+                    <header class="cases-list-header">
+                        Active
+                    </header>
+                    <div class="cases-list-body">
+                        <div class="case-row header">
+                            <div class="case-row-field name">
+                                Name
+                            </div>
+                            <div class="case-row-field age">
+                                Age/Sex
+                            </div>
+                            <div class="case-row-field time">
+                                Since arrival
+                            </div>
+                        </div>
+                        <div id="js-cases-active" class="case-row-container">
+
+                        </div>
+                    </div>
+                </section>
+                <div class="cases-divider">
+
+                </div>
+                <section class="cases-list completed">
+                    <header class="cases-list-header">
+                        Completed
+                    </header>
+                    <div class="cases-list-body">
+                        <div class="case-row header">
+                            <div class="case-row-field name">
+                                Name
+                            </div>
+                            <div class="case-row-field age">
+                                Age/Sex
+                            </div>
+                            <div class="case-row-field time">
+                                Completed
+                            </div>
+                        </div>
+                        <div id="js-cases-completed" class="case-row-container">
+
+                        </div>
+                    </div>
+                </section>
+                <div class="cases-divider">
+
+                </div>
+            </main>
+
+        </main>
+    </body>
+</html>

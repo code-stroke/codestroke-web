@@ -1,0 +1,51 @@
+<section class="case-section history">
+
+    <div class="case-row history_textarea">
+        <label class="case-label">Past Medical History</label>
+        <textarea id="db-pmhx" class="case-input text area -ui-input -ui-change"></textarea>
+    </div>
+    <div class="case-row history_textarea">
+        <label class="case-label">Medications</label>
+        <textarea id="db-meds" class="case-input text area -ui-input -ui-change"></textarea>
+    </div>
+
+    <div class="case-row history_heading">
+        <label class="case-label">Anticoagulants</label>
+        <ul id="db-anticoags" class="case-input -ui-toggle -ui-change">
+            <li data-val="yes" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="no" data-class="-ui-toggle-no" class="">No</li>
+            <li data-val="unknown" data-class="-ui-toggle-unknown" class="">Unknown</li>
+        </ul>
+    </div>
+
+    <div id="js-history-last_dose" class="case-row history_subheading first last hidden">
+        <div class="case-label">
+            Last Dose
+        </div>
+        <div id="db-anticoags_last_dose" class="case-input -ui-since -ui-change"></div>
+    </div>
+
+    <div class="case-row history_textarea">
+        <label class="case-label">Situation (HOPC)</label>
+        <textarea id="db-hopc" class="case-input text area -ui-input -ui-change"></textarea>
+    </div>
+
+    <div class="case-row">
+        <div class="case-label">
+            Weight (Kg)
+        </div>
+        <input id="db-weight" class="case-input text -ui-input -ui-change" data-type="float" type="number">
+    </div>
+
+    <div class="case-row last">
+        <div class="case-label">
+            Last Oral Intake
+        </div>
+        <div id="db-last_meal" class="case-input -ui-since -ui-change"></div>
+    </div>
+
+    <div class="case-row submit">
+        <button class="case-submit">Submit</button>
+    </div>
+
+</section>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Log In to Codestroke</title>
+
+        <!-- Scripts -->
+        <!-- External Scripts -->
+        <script src="scripts/external/jquery-3.3.1.min.js"></script>
+
+        <!-- Local Scripts -->
+        <!-- Global -->
+        <script src="scripts/api.js"></script>
+        <!-- Specific -->
+        <script src="scripts/login.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="style/global.css">
+        <link rel="stylesheet" href="style/login.css">
+    </head>
+    <body>
+        <div class="login-background">
+            <div class="login-container">
+                <main class="login-container-content">
+                    <div class="login-logo">
+                        <img src="logo.png" width="240px">
+                    </div>
+                    <div class="login-row">
+                        <input id="js-login-signoff_first_name" class="login-row-input" placeholder="First Name...">
+                    </div>
+                    <div class="login-row">
+                        <input id="js-login-signoff_last_name" class="login-row-input" placeholder="Last Name...">
+                    </div>
+                    <div class="login-row">
+                        <select id="js-login-signoff_role" required class="login-row-input">
+                            <option selected disabled hidden value="">Role...</option>
+                            <option value="admin">Admin</option>
+                            <option value="anaesthetist">Anaesthetist</option>
+                            <option value="angio_nurse">Angiography Nurse</option>
+                            <option value="ed_clinician">ED Clinician</option>
+                            <option value="neuroint">Neurointerventionalist</option>
+                            <option value="paramedic">Paramedic</option>
+                            <option value="radiographer">Radiographer</option>
+                            <option value="radiologist">Radiologist</option>
+                            <option value="stroke_team">Stroke Team</option>
+                            <option value="stroke_ward">Stroke Ward</option>
+                        </select>
+                    </div>
+                    <div class="login-row">
+                        <input id="js-login-password" class="login-row-input" type="password" placeholder="Global Password...">
+                    </div>
+                    <div class="login-row">
+                        <button id="js-login-button" class="login-button">
+                            Login
+                        </button>
+                        <div id="js-login-errors" class="login-errors">
+
+                        </div>
+                    </div>
+
+                </main>
+
+            </div>
+        </div>
+    </body>
+
+    <!-- <div class="main-logo">
+
+    </div>
+    <div id="sign-in-container">
+      <form id="sign-in-form" onsubmit="return false;" method="post">
+	Check placeholder works in IE?
+	<input id="username" type="text" name="username"  placeholder="Username">
+	<br>
+	<input id="password" type="password" name="password" placeholder="Password">
+	<br>
+	<input type="hidden" name="provider" value="manual">
+	<input id="submit" type="submit" value="Log In">
+      </form>
+      <div id="error-container">
+      </div>
+    </div>
+</body> -->
+</html>

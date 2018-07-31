@@ -1,0 +1,157 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+}
+
+.login-background {
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+}
+
+.login-container {
+    margin-left: auto;
+    margin-right: auto;
+
+    border-right: 1px solid #f2994a;
+    border-left: 1px solid #f2994a;
+
+    width: 600px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f2994a; /* fallback for old browsers */
+    background: linear-gradient(to bottom, #f2c94c, #f2c94c 55%, #f2994a 150%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.login-container-content {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.login-logo {
+
+}
+
+.login-row {
+    position: relative;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-row-input {
+    border: 0;
+    border-bottom: 3px solid #f2994a;
+
+    width: 400px;
+    min-height: 28px;
+
+    background: none;
+
+    font-size: 1.2em;
+    text-align: center;
+    text-align-last: center;
+
+    transition: border 0.4s ease;
+}
+
+.login-row-input::placeholder {
+    font-family: monospace;
+    color: #8E4600;
+}
+
+.login-row-input:focus {
+    border-bottom: 3px solid black;
+
+    transition: border 0.4s ease;
+}
+
+.login-row-input > option {
+    background: #f2c94c;
+    font-family: monospace;
+    font-size: 1.05em;
+    color: black;
+}
+
+.login-row-input:invalid {
+    font-size: 1.2em;
+    color: #8E4600;
+    font-family: monospace;
+}
+
+.login-button {
+    border: 2px solid #8E4600;
+
+    width: 400px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    color: #8E4600;
+    font-weight: bold;
+    font-size: 1.1em;
+
+    cursor: pointer;
+
+    transition: background 0.4s ease, color 0.4s ease, border 0.4s ease;
+}
+
+.login-button:hover {
+    border: 2px solid black;
+
+    background: rgba(142,70,0, 0.5);
+
+    color: black;
+
+    transition: background 0.4s ease, color 0.4s ease, border 0.4s ease;
+}
+
+.login-errors {
+    position: absolute;
+    height: 20px;
+
+    bottom: -20px;
+
+    color: red;
+}
+
+/*input {
+    width: 100%;
+    margin: 2px;
+    padding: 8px;
+    font-size: 1.2em;
+    background-color: white;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+input[type="submit"]:hover {
+    background-color: lightgray;
+}
+
+#error-container {
+    width: 100%
+    margin: 2px;
+    padding: 8px;
+    font-size: 1.2em;
+    background-color: Tomato;
+    color: white;
+    visibility: hidden;
+}*/

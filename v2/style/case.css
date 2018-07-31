@@ -1,0 +1,879 @@
+.main-container {
+    flex-direction: row;
+
+    position: relative;
+}
+
+/********
+ * DIALOG *
+ ********/
+.main-overlay {
+    position: absolute;
+    z-index: 99;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+}
+
+.main-timer {
+    position: absolute;
+    left: 265px;
+    top: 65px;
+    transform: translate(0, -50%);
+
+    display: flex;
+    align-items: center;
+}
+
+.main-timer > img {
+    animation: rotate 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.main-timer > span {
+    margin-left: 10px;
+
+    height: 100%;
+
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+}
+
+.main-dialog {
+    position: absolute;
+    left: 265px;
+    top: 35%;
+    transform: translate(0, -50%);
+
+    border: 3px solid #ffb23d;
+    border-radius: 15px 15px 0 15px;
+
+    width: 450px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #e0dedb;
+    color: black;
+}
+
+.main-dialog > header {
+    border-radius: 12px 12px 0 0;
+
+    width: 100%;
+    height: 20px;
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    display: flex;
+    align-items: center;
+
+    //background: #00A86B;
+    color: black;
+    font-weight: bold;
+
+}
+
+.main-dialog > header.warning {
+    background: #FFCC00;
+}
+
+.main-dialog > header.caution {
+    background: #FF4500;
+}
+
+.main-dialog-header > * {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.main-dialog-body {
+    border-radius: 0 0 0 15px;
+
+    width: auto;
+    min-height: 50px;
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #e0dedb;
+}
+
+.main-dialog-body > code {
+    margin-left: 10px;
+
+    color: #458B74;
+    font-weight: bold;
+}
+
+.main-dialog-btns {
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+
+    height: 30px;
+
+    display: flex;
+
+}
+
+.main-dialog-btns > button {
+    margin-left: 15px;
+
+    border: 3px solid #ffb23d;
+    border-radius: 5px 5px 5px 5px;
+
+    height: 30px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    //background: #e0dedb;
+    cursor: pointer;
+
+    transition: border 0.3s ease;
+}
+
+.main-dialog-btns > button:hover {
+    border: 3px solid #fff;
+
+    transition: border 0.3s ease;
+}
+
+.main-dialog-btns > button.yes {
+    background: rgb(139,226,139);
+}
+
+.main-dialog-btns > button.no {
+    background: rgb(255,129,123);
+}
+
+.main-dialog-btns > button.neutral {
+    background: #e0dedb;
+}
+
+
+/***********
+ * SIDEBAR *
+ ***********/
+
+ .sidebar-container {
+     min-width: 200px;
+     width: 200px;
+     height: 100%;
+     z-index: 100;
+
+     background-color: #fceabb;
+
+     display: flex;
+     flex-direction: column;
+ }
+
+ .sidebar-patient {
+     margin-top: 20px;
+
+     width: 100%;
+
+     padding-top: 10px;
+     padding-bottom: 10px;
+     padding-right: 20px;
+
+     display: flex;
+     flex-direction: column;
+ }
+
+ /* Colours */
+ .sidebar-patient.incoming {
+     border-top: 1px solid rgb(247,141,124);
+     border-bottom: 1px solid rgb(247,141,124);
+     border-right: 1px solid rgb(247,141,124);
+
+     background-color: rgb(249,179,167);
+ }
+
+ .sidebar-patient.active {
+     border-top: 1px solid rgb(255,179,122);
+     border-bottom: 1px solid rgb(255,179,122);
+     border-right: 1px solid rgb(255,179,122);
+
+     background-color: rgb(255,204,166);
+ }
+
+ .sidebar-patient.completed {
+     border-top: 1px solid rgb(202,242,151);
+     border-bottom: 1px solid rgb(202,242,151);
+     border-right: 1px solid rgb(202,242,151);
+
+     background-color: rgb(220,247,186);
+ }
+ /*        */
+
+ .sidebar-patient-field {
+     width: 100%;
+     height: 20px;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .sidebar-patient-field.name {
+     font-weight: bold;
+ }
+
+ .sidebar-patient-field.age {
+     font-weight: bold;
+
+ }
+
+ .sidebar-patient-field.status {
+      margin-top: 5px;
+      text-decoration: underline;
+ }
+
+.sidebar-button {
+    border-bottom: 1px solid #ffb347;
+
+    width: calc(100% - 20px);
+    height: 30px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    transition: width 0.5s ease, background 0.5s ease;
+}
+
+.sidebar-button:nth-child(2) {
+    margin-top: 40px;
+
+    border-top: 1px solid #ffb347;
+}
+
+.sidebar-button:hover {
+    width: 100%;
+    background: #ffcc33;
+    cursor: pointer;
+
+    transition: width 0.5s ease, background 0.5s ease;
+}
+
+.sidebar-button.selected {
+    width: 100%;
+    background: #ffb347;
+
+    cursor: default;
+}
+
+/********
+ * Main *
+ ********/
+
+ .case-container {
+     margin-left: 50px;
+
+     width: 100%;
+     height: calc(100%);
+     overflow-y: auto;
+
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+
+     background: white;
+ }
+
+ .case-section {
+     margin-top: 40px;
+     height: calc(100% + 40px);
+ }
+
+ /*.js-input.active {
+     border: 1px solid #ffb347;
+ }*/
+
+ .case-row {
+     min-height: 40px;
+     width: 100%;
+
+     padding-top: 5px;
+     padding-bottom: 5px;
+
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+ }
+
+ .case-row-group {
+     margin-bottom: 20px;
+
+     width: 100%;
+
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+
+     //background: red;
+ }
+
+ .case-label {
+     margin-right: 10px;
+
+     border: 1px solid gray;
+
+     width: 100%;
+     min-height: 30px;
+
+     padding-top: 5px;
+     padding-bottom: 5px;
+     padding-left: 10px;
+     padding-right: 10px;
+
+     font-size: 1.1em;
+
+     display: flex;
+     align-items: center;
+ }
+
+ .case-submit {
+     margin-top: 20px;
+
+     border: 2px solid black;
+
+     width: 100%;
+     min-height: 40px;
+
+     background: white;
+     cursor: pointer;
+
+     transition: background 0.5s ease;
+ }
+
+ .case-submit:hover {
+     background-color: #FDD5B1;
+
+     transition: background 0.5s ease;
+ }
+
+ /********
+  * INPUT *
+  ********/
+
+.case-input {
+     border: 1px solid darkgray;
+     border-radius: 5px;
+
+     height: 40px;
+     box-sizing: border-box;
+
+     padding-left: 10px;
+     padding-right: 10px;
+
+     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+     background: #F5F5F5;
+
+     font-size: 1.0em;
+ }
+
+.case-input:not([type]):focus, .case-input[type="text"]:focus {
+    background: white;
+    border: 1px solid #ffb347;
+}
+
+.case-input:not([type="checkbox"]) {
+     min-width: 300px;
+ }
+
+
+.case-section textarea {
+    min-height: 100px;
+    min-width: 300px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.case-input.empty {
+    color: gray;
+}
+
+.case-input.highlighted {
+    border: 1px solid red;
+}
+
+ .case-input[type="checkbox"] {
+     display: block;
+
+     min-height: 40px;
+     min-width: 40px;
+     flex: 0;
+
+     background-size: contain;
+
+     cursor: pointer;
+ }
+
+ .case-input[type="checkbox"]:checked {
+     //background-color: white;
+     background: url("../icons/button/checked.png") center no-repeat;
+     border: 1px solid #ffb347;
+ }
+
+ /********
+  * ED *
+  ********/
+
+.case-section.ed {
+    min-width: 400px;
+}
+
+.case-row.ed_loc {
+    margin-bottom: 10px;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.4em;
+}
+
+.case-row.ed_loc span {
+    margin-left: 10px;
+
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+.case-row.ed_loc_input {
+    margin-bottom: 20px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.case-row.ed_complete .case-label {
+    background-color: #dfd;
+}
+
+.case-row.ed_complete input[type="checkbox"] {
+    border-radius: 0;
+
+    box-shadow: none;
+    background-color: white;
+    background: url("../icons/button/tick-green.png") center no-repeat;
+
+    pointer-events: none;
+    cursor: auto;
+}
+
+
+/***********
+ * Details *
+ ***********/
+.case-section.details {
+    min-width: 600px;
+}
+
+/********
+ * History *
+ ********/
+.case-section.history {
+
+}
+
+.case-section.history .case-label {
+    min-width: 300px;
+    max-width: 300px;
+    flex: 0;
+}
+
+/**/
+
+.case-row.history_textarea > .case-label {
+    align-self: flex-start;
+}
+
+/**/
+
+.case-row.history_heading {
+    //padding-bottom: 0;
+}
+
+.case-row.history_subheading {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.case-row.history_subheading.first {
+    margin-top: -5px;
+}
+
+.case-row.history_subheading.last {
+    margin-bottom: 10px;
+}
+
+.case-row.history_subheading > .case-label {
+    margin-left: 50px;
+
+    border-top: none;
+    border-bottom: 1px solid gray;
+
+    min-width: 250px;
+    max-width: 250px;
+
+    font-size: 1.0em;
+}
+
+.case-row.history_subheading > .case-input {
+    height: 30px;
+    font-size: 0.95em;
+}
+
+.case-section.history .case-submit {
+    max-width: 630px;
+}
+
+/********
+ * Assessment *
+ ********/
+
+.case-section.assess {
+    margin-top: 80px;
+
+    width: 100%;
+    overflow-y: auto;
+}
+
+.assess-container {
+    max-width: 600px;
+}
+
+.assess-header {
+    position: fixed;
+    top: 71px;
+    z-index: 89;
+
+    //border: 1px solid #ffb347;
+
+    height: 40px;
+    width: 600px;
+
+    //background-color: #fceabb;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*.assess-header::before {
+    content: "";
+
+    z-index: -2;
+    position: absolute;
+    top: -21px;
+    left: -1px;
+
+    border: 1px solid white;
+    border-top: 0;
+
+    height: 19px;
+    width: 100%;
+
+    background: white;
+}
+
+.assess-header::after {
+    content: "";
+
+    z-index: -1;
+    position: absolute;
+    top: 41px;
+    left: -1px;
+
+    border: 1px solid white;
+    border-top: 0;
+
+    height: 20px;
+    width: 100%;
+
+    background: white;
+}*/
+
+.assess-header-button {
+    border: 1px solid #ffb347;
+    border-left: none;
+
+    min-width: 60px;
+    height: 100%;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fceabb;
+
+    cursor: pointer;
+
+    transition: height 0.5s ease, background 0.5s ease;
+}
+
+.assess-header-button:first-of-type {
+    border-left: 1px solid #ffb347;
+}
+
+.assess-header-button:hover {
+    height: calc(100% + 10px);
+    background: #ffcc33;
+    cursor: pointer;
+
+    transition: height 0.5s ease, background 0.5s ease;
+}
+
+.assess-vitals {
+    min-width: 300px;
+    max-width: 300px;
+
+    display: flex;
+}
+
+.assess-vitals > .case-input {
+    min-width: 0;
+    width: auto;
+
+    display: flex;
+    flex: 2;
+
+    text-align: center;
+}
+
+.assess-vitals > span {
+    width: auto;
+    flex: 0.5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.case-row.assess_heading > .case-label {
+     margin-right: 0;
+
+     border: 2px gray solid;
+
+     width: 100%;
+
+     font-size: 1.2em;
+     font-weight: bold;
+}
+
+.case-label.assess_score {
+     margin-left: 20px;
+
+     max-width: 40px;
+
+     justify-content: center;
+}
+
+.case-label.assess_score.empty {
+    color: grey;
+}
+
+.case-section.assess .case-submit{
+     margin-top: 0;
+     margin-bottom: 40px;
+}
+
+.assess-alert {
+    border: 2px solid black;
+
+    width: 100%;
+    min-height: 40px;
+
+    background-color: rgb(249,179,167);
+    cursor: pointer;
+
+    transition: background 0.5s ease;
+
+    font-weight: bold;
+}
+
+.assess-alert:hover {
+    background-color: rgb(247,141,124);;
+
+    transition: background 0.5s ease;
+}
+
+/********
+ * RADIOLOGY *
+ ********/
+
+ .case-section.radiology {
+     min-width: 600px;
+ }
+
+ .case-row.radiology_heading > .case-label {
+      margin-right: 0;
+
+      border: 2px gray solid;
+
+      width: 100%;
+
+      font-size: 1.2em;
+      font-weight: bold;
+ }
+
+ .case-section.radiology .case-row-group {
+     margin-bottom: 0;
+ }
+
+
+/********
+ * MANAGE *
+ ********/
+
+.case-row.manage_heading {
+    padding-bottom: 0;
+}
+
+.case-row.manage_heading > .case-label {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.case-row.manage_thrombolysis > .case-label {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.case-label .manage_description {
+    font-size: 0.8em;
+}
+
+.case-row.manage_subheading {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.case-row.manage_subheading.last {
+    margin-bottom: 10px;
+}
+
+.case-row.manage_subheading > .case-label {
+    margin-left: 50px;
+
+    border-top: none;
+    border-bottom: 1px solid gray;
+
+    max-width: 250px;
+    min-width: 250px;
+
+    font-size: 1.0em;
+}
+
+.case-row.manage_subheading.top > .case-label {
+    border-top: 1px solid gray;
+    background-color: #fceabb;
+
+    font-weight: bold;
+}
+
+.case-row.manage_subheading > .case-input {
+    height: 30px;
+    font-size: 0.95em;
+}
+
+.case-input.manage_filled {
+    min-width: 150px !important;
+    max-width: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.case-input.manage_filled.-ui-toggle-no {
+    margin-left: auto;
+}
+
+.case-input.manage_filled.-ui-toggle-unknown {
+    transform: translateX(50%);
+}
+
+.manage-button {
+    margin-left: 50px;
+
+    border: 2px solid black;
+
+    width: 100%;
+    min-height: 40px;
+
+    background: #fceabb;
+    cursor: pointer;
+
+    transition: background 0.5s ease;
+
+    font-weight: bold;
+}
+
+.manage-button:hover {
+    background: #ffb347;
+
+    transition: background 0.5s ease;
+}
+
+.manage-complete {
+    border: 2px solid black;
+
+    width: 100%;
+    min-height: 40px;
+
+    background-color: #A6D785;
+    cursor: pointer;
+
+    transition: background 0.5s ease;
+
+    font-weight: bold;
+}
+
+.manage-complete:hover {
+    background-color: #699864;
+
+    transition: background 0.5s ease;
+}
+
+.case-section.manage .case-submit{
+     margin-top: 0;
+     margin-bottom: 40px;
+}

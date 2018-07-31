@@ -1,0 +1,266 @@
+<section class="case-section manage">
+
+    <div class="case-row manage_heading manage_thrombolysis">
+        <label class="case-label">
+            <span>Thrombolysis</span>
+            <span class="manage_description">(Click "Yes" to see a list of contraindications)</span>
+        </label>
+        <ul id="db-thrombolysis" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+
+    <div id="js-manage-eligibility" class="case-row-group hidden">
+        <div class="case-row manage_subheading top">
+            <div class="case-label" style="border-top: 0;">
+                Inclusion Criteria
+            </div>
+        </div>
+
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Age >18
+            </div>
+            <div id="db-dob" class="case-input manage_filled">
+                Yes
+            </div>
+
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                LVO
+            </div>
+            <div id="db-large_vessel_occlusion" class="case-input manage_filled">
+                No
+            </div>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Time of Onset < 4.5hr
+            </div>
+            <div id="db-last_well" class="case-input manage_filled">
+                No
+            </div>
+        </div>
+        <div class="case-row manage_subheading last">
+            <div class="case-label">
+                No evidence of ICH
+            </div>
+            <div id="db-ich_found" class="case-input manage_filled">
+                No
+            </div>
+        </div>
+    </div>
+
+    <div id="js-manage-absolute" class="case-row-group hidden">
+        <div class="case-row manage_subheading top">
+            <div class="case-label">
+                Absolute Contraindications
+            </div>
+
+        </div>
+
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Recent Head Trauma or Stroke
+            </div>
+            <ul id="db-new_trauma_haemorrhage" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Uncontrolled HTN (SBP > 180)
+            </div>
+            <ul id="db-uncontrolled_htn" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                History of ICH
+            </div>
+            <ul id="db-history_ich" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Known Intracranial AVM, Neoplasm or Aneurysm
+            </div>
+            <ul id="db-known_intracranial" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Active Bleeding
+            </div>
+            <ul id="db-active_bleed" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Endocarditis (incl. Suspected)
+            </div>
+            <ul id="db-endocarditis" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Known Bleeding Diathesis
+            </div>
+            <ul id="db-bleeding_diathesis" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Abnormal Blood Glucose
+            </div>
+            <ul id="db-abnormal_blood_glucose" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="js-manage-relative" class="case-row-group hidden">
+        <div class="case-row manage_subheading top">
+            <div class="case-label">
+                Relative Contraindications
+            </div>
+        </div>
+
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Rapidly Improving
+            </div>
+            <ul id="db-rapidly_improving" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Major Trauma or Surgery in Last 3 Weeks
+            </div>
+            <ul id="db-recent_trauma_surgery" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Active Bleeding in Last 3 Weeks
+            </div>
+            <ul id="db-recent_active_bleed" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Seizure at Onset
+            </div>
+            <ul id="db-seizure_onset" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Recent Arterial Puncture
+            </div>
+            <ul id="db-recent_arterial_puncture" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Recent Lumbar Puncture
+            </div>
+            <ul id="db-recent_lumbar_puncture" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Post ACS Pericarditis
+            </div>
+            <ul id="db-post_acs_pericarditis" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+        <div class="case-row manage_subheading ">
+            <div class="case-label">
+                Pregnant
+            </div>
+            <ul id="db-pregnant" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="js-manage-time" class="case-row-group hidden">
+        <div id="js-manage-time-button" class="case-row">
+            <button class="manage-button">Administer Thrombolysis</button>
+        </div>
+
+        <div id="js-manage-time-given" class="case-row manage_subheading top hidden">
+            <div class="case-label">
+                Thrombolysis Time
+            </div>
+            <div id="db-thrombolysis_time_given" class="case-input -ui-since -ui-change"></div>
+        </div>
+    </div>
+
+    <div class="case-row manage_heading">
+        <label class="case-label">ECR</label>
+        <ul id="db-ecr" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+
+    <div class="case-row manage_heading">
+        <label class="case-label">Surgical Mx</label>
+        <ul id="db-surgical_rx" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+
+    <div class="case-row manage_heading">
+        <label class="case-label">Conservative Mx</label>
+        <ul id="db-conservative_rx" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+
+    <div class="case-row-group" style="margin-top: 40px;">
+        <div id="js-manage-complete" class="case-row">
+            <button id="js-manage-complete-button" class="manage-complete">Mark case as Completed</button>
+        </div>
+
+        <div class="case-row submit">
+            <button class="case-submit">Submit</button>
+        </div>
+    </div>
+
+</section>
