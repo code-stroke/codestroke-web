@@ -1,20 +1,6 @@
 const DOM_Main = {
     load: function() {
-        DOM_Main.search_input = $("#js-cases-search-input");
-        DOM_Main.search_cancel = $("#js-cases-search-cancel");
-        DOM_Main.search_icon = $("#js-cases-search-cancel");
 
-        DOM_Main.cases_container = $("#js-cases-container");
-        DOM_Main.cases_row = $(".case-row");
-        DOM_Main.cases_incoming = $("#js-cases-incoming");
-        DOM_Main.cases_active = $("#js-cases-active");
-        DOM_Main.cases_completed = $("#js-cases-completed");
-
-        DOM_Main.overlay = $("#js-overlay");
-        DOM_Main.overlay_timer = $("#js-overlay-timer");
-
-        DOM_Main.refresh_text = $("#js-refresh-text");
-        DOM_Main.refresh_button = $("#js-refresh-button");
 
         DOM_Main.add_button = $("#js-add-button");
 
@@ -22,14 +8,19 @@ const DOM_Main = {
 };
 
 const Search = {
+    DOM: {
+        input: "#js-cases-search-input",
+        cancel: "#js-cases-search-cancel",
+        icon: "#js-cases-search-cancel",
+    },
     searching: false,
     input: "",
     list: [],
     load: function() {
-        DOM_Main.search_input.on("keyup", function() {
+        $(Search.DOM.input).on("keyup", function() {
             DOM_Main.cases_container.scrollTop(0);
 
-            Search.input = DOM_Main.search_input.val();
+            Search.input = $(Search.DOM.input).val();
             if (Search.input == "") {
                 Search.searching = false;
                 Cases.display();
@@ -53,27 +44,34 @@ const Search = {
             Cases.display();
         });
 
-        DOM_Main.search_cancel.hover(
+        $(Search.DOM.cancel).hover(
             function() {
-                DOM_Main.search_cancel.children("img").prop("src", "icons/button/cancel-red.png");
+                $(Search.DOM.cancel).children("img").prop("src", "icons/button/cancel-red.png");
             },
             function() {
-                DOM_Main.search_cancel.children("img").prop("src", "icons/button/cancel.png");
+                $(Search.DOM.cancel).children("img").prop("src", "icons/button/cancel.png");
             }
         );
 
-        DOM_Main.search_cancel.on("click", function() {
-            DOM_Main.search_input.val("");
-            DOM_Main.search_input.trigger("keyup");
+        $(Search.DOM.cancel).on("click", function() {
+            $(Search.DOM.input).val("");
+            $(Search.DOM.input).trigger("keyup");
         });
 
-        DOM_Main.search_icon.on("click", function() {
-            DOM_Main.search_input.focus();
+        $(Search.DOM.icon).on("click", function() {
+            $(Search.DOM.input).focus();
         });
     }
 }
 
 const Cases = {
+    DOM: {
+        container: "#js-cases-container",
+        row: ".case-row",
+        incoming: "#js-cases-incoming",
+        active: "#js-cases-active",
+        completed: "#js-cases-completed"
+    },
     list: [],
     incoming: [],
     active: [],
@@ -148,9 +146,9 @@ const Cases = {
         }
     },
     display: function() {
-        DOM_Main.cases_incoming.html("");
-        DOM_Main.cases_active.html("");
-        DOM_Main.cases_completed.html("");
+        let dom_incoming = $(Cases.DOM.incoming).empty();
+        let dom_active = $(Cases.DOM.active).empty();
+        let dom_completed = $(Cases.DOM.completed).empty();
 
         let dlist;
         if (Search.searching) {
@@ -204,32 +202,40 @@ const Cases = {
             });
         }
 
-        sortAndDisplay(1, rows_incoming, DOM_Main.cases_incoming);
-        sortAndDisplay(1, rows_active, DOM_Main.cases_active);
-        sortAndDisplay(-1, rows_completed, DOM_Main.cases_completed);
+        sortAndDisplay(1, rows_incoming, dom_incoming);
+        sortAndDisplay(1, rows_active, dom_active);
+        sortAndDisplay(-1, rows_completed, dom_completed);
 
     }
 };
 
 const Overlay = {
+    DOM: {
+        overlay: "#js-overlay",
+        timer: "#js-overlay-timer"
+    },
     showTimer() {
         this.loading = true;
-        DOM_Main.overlay.removeClass("hidden");
-        DOM_Main.overlay_timer.removeClass("hidden");
+        $(Overlay.DOM.overlay).removeClass("hidden");
+        $(Overlay.DOM.timer).removeClass("hidden");
     },
     hideTimer() {
         this.loading = false;
-        DOM_Main.overlay.addClass("hidden");
-        DOM_Main.overlay_timer.addClass("hidden");
+        $(Overlay.DOM.overlay).addClass("hidden");
+        $(Overlay.DOM.timer).addClass("hidden");
     },
     loading: false
 }
 
 const Refresh = {
+    DOM: {
+        text: "#js-refresh-text",
+        button: "#js-refresh-button"
+    },
     load: function() {
-        DOM_Main.refresh_text.text(new Date().toLocaleTimeString());
+        $(Refresh.DOM.text).text(new Date().toLocaleTimeString());
 
-        DOM_Main.refresh_button.on("click", function() {
+        $(Refresh.DOM.button).on("click", function() {
             location.reload();
         });
     }
@@ -240,8 +246,6 @@ const Refresh = {
  ************/
 
 $(document).ready(function() {
-    DOM_Main.load();
-
     Cases.load();
 
     Search.load();

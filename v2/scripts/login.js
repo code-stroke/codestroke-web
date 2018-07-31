@@ -3,23 +3,22 @@ var localserver = "http://localhost:5000/";
 
 const Login = {
     DOM: {
-        load: function() {
-            this.first_name = $("#js-login-first_name");
-            this.last_name = $("#js-login-last_name");
-            this.role = $("#js-login-role");
-            this.password = $("#js-login-password");
-            this.button = $("#js-login-button");
-            this.errors = $("#js-login-errors");
+        container: "#js-login-container",
 
-            this.inputs = ".login-row-input";
-        }
+        first_name: "#js-login-first_name",
+        last_name: "#js-login-last_name",
+        role: "#js-login-role",
+        password: "#js-login-password",
+        button: "#js-login-button",
+        errors: "#js-login-errors",
+
+        inputs = ".login-row-input"
     },
     load: function() {
-        this.DOM.load();
-        this.DOM.button.on("click", function() {
+        Login.DOM.button.on("click", function() {
             let data = {};
             let empty = false;
-            $("body").find(Login.DOM.inputs).each(function() {
+            $(Login.DOM.container).find(Login.DOM.inputs).each(function() {
                 let key = $(this).attr("id").slice(9);
                 let val = $(this).val();
                 if (val) {
@@ -31,16 +30,16 @@ const Login = {
             });
 
             if (empty) {
-                Login.DOM.errors.html("Please fill in all fields and try again");
+                $(Login.DOM.errors).html("Please fill in all fields and try again");
             } else {
-                Login.DOM.errors.html("");
+                $(Login.DOM.errors).html("");
                 API.login.setCookie(data);
                 API.login.verify({
                     success() {
                         window.location.replace(`./index.html`);
                     },
                     failure() {
-                        Login.DOM.errors.html("Incorrect Password. Please try again");
+                        $(Login.DOM.errors).html("Incorrect Password. Please try again");
                     }
                 })
             }

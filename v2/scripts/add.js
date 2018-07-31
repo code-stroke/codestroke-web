@@ -174,26 +174,6 @@ const Add = {
     }
 }
 
-/*const Add = {
-    counter: 1,
-    load: function() {
-        DOM_Main.add_button.on("click", function() {
-            console.log("ADD");
-            API.post({
-                status: "active",
-                first_name: "New",
-                last_name: "Patient " + Add.counter,
-                gender: "u",
-                active_timestamp: API.data.convertDateTime(new Date())
-            }, function() {
-                counter++;
-                Cases.load();
-            });
-        });
-    }
-}*/
-
-
 $(document).ready(function() {
     Add.load();
 });
