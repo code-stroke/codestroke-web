@@ -1,12 +1,3 @@
-const DOM_Main = {
-    load: function() {
-
-
-        DOM_Main.add_button = $("#js-add-button");
-
-    }
-};
-
 const Search = {
     DOM: {
         input: "#js-cases-search-input",
