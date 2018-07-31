@@ -188,6 +188,14 @@
     animation: grow 0.8s linear infinite;
 }
 
+.nav-box.event_button {
+    background: #b0e0e6;
+}
+
+.nav-box.event_button:hover > img {
+    animation: grow 0.8s linear infinite;
+}
+
 @keyframes grow {
     0% {
         transform: scale(1);

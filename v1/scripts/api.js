@@ -13,13 +13,15 @@ const API = {
         //TODO: Handle other errors?
     },
     events: function(callback, params) {
-        //TODO: Handle params
-
+        // TODO: Handle params
         $.ajax({
-            url: `${API.address}/event_log/all/`,
+            url: `${API.address}/event_log/limit/`,
             method: "GET",
             headers: API.login.headers,
-            dataType: "json",
+            data: {
+                start: 1,
+                number: 50
+            },
             crossDomain: true,
             success: function(result) {
                 if (API.handleResult(result)) {

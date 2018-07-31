@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Codestroke - Home</title>
+        <link rel="manifest" href="/manifest.json" />
+
+        <!-- External Scripts -->
+        <script src="scripts/external/jquery-3.3.1.min.js"></script>
+        <script src="scripts/external/faker.js"></script>
+	    <script src="scripts/external/js.cookie.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+        <!-- Local Scripts -->
+        <!-- Global -->
+        <script src="scripts/api.js"></script>
+        <script src="scripts/push-os.js"></script>
+        <script src="scripts/osinit.js"></script>
+        <!-- Specific -->
+        <script src="scripts/events.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="style/global.css">
+        <link rel="stylesheet" href="style/events.css">
+
+    </head>
+    <body>
+        <header class="header-container">
+            <a href="./index.html" class="header-box logo">
+                <img src="logo-separated.png"/>
+            </a>
+
+            <div class="header-box user">
+                <div class="header-user-welcome">
+                    Welcome Back,
+                </div>
+                 <div id="js-login-name" class="header-user-name">
+                     &nbsp
+                 </div>
+            </div>
+
+            <button id="js-push-button" class="header-box btn notif">
+                Notifications &nbsp <img src="icons/button/switch-disabled.png" />
+            </button>
+
+            <button id="js-login-logout" class="header-box btn">
+                Logout &nbsp <img src="icons/button/logout.png" />
+            </button>
+
+        </header>
+        <main class="main-container">
+            <div id="js-overlay" class="main-overlay">
+                <div id="js-overlay-timer" class="main-timer">
+                    <img class="" src="icons/button/empty-hourglass.png" />
+                    <span>Loading...</span>
+                </div>
+            </div>
+            <main class="events-container">
+                <article class="events-holder">
+                    <header class="events-header">
+                        <div class="events-header-box patient">
+                            Patient
+                        </div>
+                        <div class="events-header-box patient_age">
+
+                        </div>
+                        <div class="events-header-spacer"></div>
+                        <div class="events-header-box clinician_icon">
+
+                        </div>
+                        <div class="events-header-box clinician">
+                            Clinician
+                        </div>
+                        <div class="events-header-spacer"></div>
+                        <div class="events-header-box action_icon">
+
+                        </div>
+                        <div class="events-header-box action">
+                            Action
+                        </div>
+                        <div class="events-header-spacer"></div>
+                        <div class="events-header-box time">
+                            Time
+                        </div>
+                        <div class="events-header-spacer"></div>
+                        <div class="events-header-box buttons">
+
+                        </div>
+                    </header>
+                    <main id="js-events-main" class="events-main">
+
+                    </main>
+                </article>
+            </main>
+        </main>
+    </body>
+</html>

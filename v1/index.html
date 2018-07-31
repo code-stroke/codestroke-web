@@ -8,7 +8,6 @@
         <!-- External Scripts -->
         <script src="scripts/external/jquery-3.3.1.min.js"></script>
         <script src="scripts/external/faker.js"></script>
-	      <script src="scripts/external/js.cookie.js"></script>
         <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 
         <!-- Local Scripts -->
@@ -50,7 +49,7 @@
         </header>
         <main class="main-container">
             <div id="js-overlay" class="main-overlay">
-                <div id="js-overlay-timer" class="main-timer hidden">
+                <div id="js-overlay-timer" class="main-timer">
                     <img class="" src="icons/button/empty-hourglass.png" />
                     <span>Loading...</span>
                 </div>
@@ -73,18 +72,25 @@
                 </div>
 
                 <div class="nav-box label">
-                    <span>Cases last refreshed at:</span>
-                    <code id="js-refresh-text" code>Test</code>
+                    <span>Last refreshed</span>
+                    <code id="js-refresh-text" code></code>
                 </div>
                 <div id="js-refresh-button" class="nav-box button refresh_button" title="Refresh Page">
                     <img src="icons/button/refresh.png"/>
                 </div>
 
                 <div class="nav-box label">
-                    <span><strong>Add</strong> a new case:</span>
+                    <span><strong>New</strong> case</span>
                 </div>
                 <a href="./add.html" id="js-add-button" class="nav-box button add_button" title="Add Case">
                     <img src="icons/button/plus.png"/>
+                </a>
+
+                <div class="nav-box label">
+                    <span><strong>Event Log</strong></span>
+                </div>
+                <a href="./events.html" id="js-add-button" class="nav-box button event_button" title="See Event Log">
+                    <img src="icons/button/log.png"/>
                 </a>
             </nav>
 
