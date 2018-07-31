@@ -99,32 +99,11 @@ const Add = {
     getInput: function(element, data) {
         let key = element.attr("id").slice(3);
 
-        if (element.hasClass("-ui-since") || element.hasClass("-ui-toggle") || element.hasClass("-ui-select")) {
-            let obj = {
-                val: null
-            };
-            element.trigger("ui:get", obj);
-            data[key] = obj.val;
-            return data[key];
-        }
-
-        if (element.prop("type") == "date") {
-            data[key] = API.data.convertDate(new Date(element.val()));
-
-            return data[key];
-        }
-
-        if (element.val() || element.val() === 0) {
-            if (element.prop("type") == "number") {
-                data[key] = parseInt(element.val());
-            } else {
-                data[key] = element.val();
-            }
-        } else {
-            data[key] = null;
-        }
-
-        return data[key];
+        let obj = {
+            val: null
+        };
+        element.trigger("ui:get", obj);
+        return data[key] = obj.val;
 
     },
     overlay: {
