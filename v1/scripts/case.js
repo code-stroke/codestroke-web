@@ -813,13 +813,20 @@ const Manage = {
                             // A little messy?
                             // 1. Submits the current data on the page (so that the case isn't locked)
                             // 2. Submits the completed status
-                            // 3. Gets the Completed Status back from the server so that the sidebar can update
-                            Case.submitPage(API.put("cases", Case.case_id, {
-                                status: "completed",
-                                completed_timestamp: API.data.convertDateTime(new Date())
-                            }, function(result) {
-                                API.get("cases", Case.case_id, Case.fillPatient)
-                            }));
+                            // 3. Hides the Button
+                            // 4. Gets the Completed Status back from the server so that the sidebar can update
+
+                            Case.submitPage(function() {
+                                Case.overlay.showTimer();
+                                API.put("cases", Case.case_id, {
+                                    status: "completed",
+                                    completed_timestamp: API.data.convertDateTime(new Date())
+                                }, function() {
+                                    window.location.reload();
+                                    //$(DOM_Case.manage.complete_row).addClass("hidden");
+                                    //API.get("cases", Case.case_id, Case.fillPatient);
+                                });
+                            });
                         }
                     },
                     {

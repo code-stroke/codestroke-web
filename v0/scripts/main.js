@@ -7,7 +7,6 @@ $(document).ready(function(){
 	$(".sidebar-user-name span").text(Cookies.get("user_name"));
     } else {
 	console.log("Not logged in");
-	window.location.replace("/triage/login.html");
+	//window.location.replace("/triage/login.html");
     }
 });
-
