@@ -68,7 +68,7 @@ const Add = {
                             text: "Submit",
                             style: "yes",
                             click: function() {
-                                Case.submitPage(data);
+                                Add.submitPage(data);
                             }
                         },
                         {
