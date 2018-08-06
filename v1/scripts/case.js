@@ -810,23 +810,29 @@ const Manage = {
                         text: "Continue",
                         style: "yes",
                         click: function() {
-                            // A little messy?
-                            // 1. Submits the current data on the page (so that the case isn't locked)
-                            // 2. Submits the completed status
-                            // 3. Hides the Button
-                            // 4. Gets the Completed Status back from the server so that the sidebar can update
+                            Case.overlay.hideDialog();
+                            Case.overlay.showTimer();
 
-                            Case.submitPage(function() {
-                                Case.overlay.showTimer();
+                            let data = {};
+                            data.case_id =  Case.case_id;
+
+                            $(DOM_Case.case.inputs).each(function() {
+                                if (CHANGE.hasChanged($(this))) {
+                                    Case.getInput($(this), data);
+                                }
+                            });
+
+                            console.log(data);
+
+                            API.put(Case.section, Case.case_id, data, function(result) {
                                 API.put("cases", Case.case_id, {
                                     status: "completed",
                                     completed_timestamp: API.data.convertDateTime(new Date())
-                                }, function() {
+                                }, function(result) {
                                     window.location.reload();
-                                    //$(DOM_Case.manage.complete_row).addClass("hidden");
-                                    //API.get("cases", Case.case_id, Case.fillPatient);
                                 });
                             });
+                            
                         }
                     },
                     {
