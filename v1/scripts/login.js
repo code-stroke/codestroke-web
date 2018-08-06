@@ -4,6 +4,7 @@ var localserver = "http://localhost:5000/";
 const Login = {
     DOM: {
         load: function() {
+            this.form = $("#js-login-form");
             this.first_name = $("#js-login-first_name");
             this.last_name = $("#js-login-last_name");
             this.role = $("#js-login-role");
@@ -16,7 +17,9 @@ const Login = {
     },
     load: function() {
         this.DOM.load();
-        this.DOM.button.on("click", function() {
+        this.DOM.form.on("submit", function(event) {
+            event.preventDefault();
+
             let data = {};
             let empty = false;
             $("body").find(Login.DOM.inputs).each(function() {

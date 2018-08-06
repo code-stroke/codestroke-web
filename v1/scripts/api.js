@@ -130,7 +130,7 @@ const API = {
         setCookie: function(data) {
             $.each(data, function(key, value) {
                 let cookie = "" + encodeURIComponent(key) + "=" + encodeURIComponent(value) + "; path=/";
-                console.log(cookie);
+                //console.log(cookie);
                 document.cookie = cookie;
             });
 

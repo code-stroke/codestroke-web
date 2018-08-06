@@ -22,15 +22,15 @@
     <body>
         <div class="login-background">
             <div class="login-container">
-                <main class="login-container-content">
+                <form id="js-login-form" class="login-container-content">
                     <div class="login-logo">
                         <img src="logo.png" width="240px">
                     </div>
                     <div class="login-row">
-                        <input id="js-login-signoff_first_name" class="login-row-input" placeholder="First Name...">
+                        <input id="js-login-signoff_first_name" required class="login-row-input" placeholder="First Name...">
                     </div>
                     <div class="login-row">
-                        <input id="js-login-signoff_last_name" class="login-row-input" placeholder="Last Name...">
+                        <input id="js-login-signoff_last_name" required class="login-row-input" placeholder="Last Name...">
                     </div>
                     <div class="login-row">
                         <select id="js-login-signoff_role" required class="login-row-input">
@@ -48,7 +48,7 @@
                         </select>
                     </div>
                     <div class="login-row">
-                        <input id="js-login-password" class="login-row-input" type="password" placeholder="Global Password...">
+                        <input id="js-login-password" required class="login-row-input" type="password" placeholder="Global Password...">
                     </div>
                     <div class="login-row">
                         <button id="js-login-button" class="login-button">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                </main>
+                </form>
 
             </div>
         </div>
