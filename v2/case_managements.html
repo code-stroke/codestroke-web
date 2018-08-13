@@ -1,9 +1,9 @@
-<section class="case-section manage">
+<section class="manage-section">
 
-    <div class="case-row manage_heading manage_thrombolysis">
-        <label class="case-label">
+    <div class="case-row manage_heading">
+        <label class="case-label manage-thrombolysis">
             <span>Thrombolysis</span>
-            <span class="manage_description">(Click "Yes" to see a list of contraindications)</span>
+            <span class="manage-thrombolysis-sub">(Click "Yes" to see a list of contraindications)</span>
         </label>
         <ul id="db-thrombolysis" class="case-input text -ui-toggle -ui-change">
             <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
@@ -11,14 +11,14 @@
         </ul>
     </div>
 
-    <div id="js-manage-eligibility" class="case-row-group hidden">
-        <div class="case-row manage_subheading top">
-            <div class="case-label" style="border-top: 0;">
+    <section class="manage-ci">
+        <div class="case-row manage-subheading top">
+            <div class="case-label">
                 Inclusion Criteria
             </div>
+            <div></div>
         </div>
-
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Age >18
             </div>
@@ -27,7 +27,7 @@
             </div>
 
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 LVO
             </div>
@@ -35,7 +35,7 @@
                 No
             </div>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Time of Onset < 4.5hr
             </div>
@@ -43,7 +43,7 @@
                 No
             </div>
         </div>
-        <div class="case-row manage_subheading last">
+        <div class="case-row">
             <div class="case-label">
                 No evidence of ICH
             </div>
@@ -51,17 +51,17 @@
                 No
             </div>
         </div>
-    </div>
 
-    <div id="js-manage-absolute" class="case-row-group hidden">
-        <div class="case-row manage_subheading top">
+        <div class="manage-spacer"></div>
+
+        <div class="case-row manage-subheading top">
             <div class="case-label">
                 Absolute Contraindications
             </div>
-
+            <div></div>
         </div>
 
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Recent Head Trauma or Stroke
             </div>
@@ -70,7 +70,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Uncontrolled HTN (SBP > 180)
             </div>
@@ -79,7 +79,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 History of ICH
             </div>
@@ -88,7 +88,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Known Intracranial AVM, Neoplasm or Aneurysm
             </div>
@@ -97,7 +97,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Active Bleeding
             </div>
@@ -106,7 +106,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Endocarditis (incl. Suspected)
             </div>
@@ -115,7 +115,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Known Bleeding Diathesis
             </div>
@@ -124,7 +124,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Abnormal Blood Glucose
             </div>
@@ -133,16 +133,19 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-    </div>
 
-    <div id="js-manage-relative" class="case-row-group hidden">
-        <div class="case-row manage_subheading top">
+        <div class="manage-spacer"></div>
+
+        <div class="case-row manage-subheading top">
             <div class="case-label">
                 Relative Contraindications
             </div>
+            <div>
+
+            </div>
         </div>
 
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Rapidly Improving
             </div>
@@ -151,7 +154,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Major Trauma or Surgery in Last 3 Weeks
             </div>
@@ -160,7 +163,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Active Bleeding in Last 3 Weeks
             </div>
@@ -169,7 +172,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Seizure at Onset
             </div>
@@ -178,7 +181,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Recent Arterial Puncture
             </div>
@@ -187,7 +190,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Recent Lumbar Puncture
             </div>
@@ -196,7 +199,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Post ACS Pericarditis
             </div>
@@ -205,7 +208,7 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-        <div class="case-row manage_subheading ">
+        <div class="case-row">
             <div class="case-label">
                 Pregnant
             </div>
@@ -214,20 +217,20 @@
                 <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
             </ul>
         </div>
-    </div>
 
-    <div id="js-manage-time" class="case-row-group hidden">
+        <div class="manage-spacer"></div>
+
         <div id="js-manage-time-button" class="case-row">
             <button class="manage-button">Administer Thrombolysis</button>
         </div>
 
-        <div id="js-manage-time-given" class="case-row manage_subheading top hidden">
+        <div id="js-manage-time-given" class="case-row manage-subheading hidden">
             <div class="case-label">
                 Thrombolysis Time
             </div>
             <div id="db-thrombolysis_time_given" class="case-input -ui-since -ui-change"></div>
         </div>
-    </div>
+    </section>
 
     <div class="case-row manage_heading">
         <label class="case-label">ECR</label>
@@ -253,14 +256,8 @@
         </ul>
     </div>
 
-    <div class="case-row-group" style="margin-top: 40px;">
-        <div id="js-manage-complete" class="case-row">
-            <button id="js-manage-complete-button" class="manage-complete">Mark case as Completed</button>
-        </div>
-
-        <div class="case-row submit">
-            <button class="case-submit">Submit</button>
-        </div>
+    <div id="js-manage-complete" class="case-row">
+        <button id="js-manage-complete-button" class="manage-complete">Mark case as Completed</button>
     </div>
 
 </section>

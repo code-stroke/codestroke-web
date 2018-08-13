@@ -1,70 +1,61 @@
-<section class="case-section radiology">
-    <section id="js-radiology-progress" class="case-row-group">
-        <!-- <div class="case-row radiology_heading">
-            <label class="case-label">Progress</label>
-        </div> -->
-        <div id="js-radiology-progress-0" class="case-row">
-            <label class="case-label">CT Available</label>
-            <ul id="db-ct_available" class="case-input text -ui-toggle -ui-change">
-                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
+<section class="radiology-section">
+    <div id="js-radiology-progress-0" class="case-row">
+        <label class="case-label">CT Available</label>
+        <ul id="db-ct_available" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+
+    <div id="js-radiology-progress-1" class="case-row-group">
+        <div class="case-row">
+            <label class="case-label">Location of Available CT</label>
+            <input id="db-ct_available_loc" class="case-input text -ui-input -ui-change">
         </div>
 
-        <div id="js-radiology-progress-1" class="case-row-group">
-            <div class="case-row">
-                <label class="case-label">Location of Available CT</label>
-                <input id="db-ct_available_loc" class="case-input text -ui-input -ui-change">
-            </div>
+        <div class="case-row">
+            <label class="case-label">Patient Arrived in CT</label>
+            <ul id="db-arrived_to_ct" class="case-input text -ui-toggle -ui-change">
+                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+            </ul>
+        </div>
+    </div>
 
-            <div class="case-row">
-                <label class="case-label">Patient Arrived in CT</label>
-                <ul id="db-arrived_to_ct" class="case-input text -ui-toggle -ui-change">
-                    <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                    <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="js-radiology-progress-2" class="case-row hidden">
-            <label class="case-label">CT Complete</label>
-            <ul id="db-ct_complete" class="case-input text -ui-toggle -ui-change">
-                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
-        </div>
-        <div id="js-radiology-progress-3" class="case-row hidden">
-            <label class="case-label">ICH on Non-Contrast CT</label>
-            <ul id="db-ich_found" class="case-input text -ui-toggle -ui-change">
-                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
-        </div>
-        <div id="js-radiology-progress-4" class="case-row hidden">
-            <label class="case-label">Proceed with CTA/CTP</label>
-            <ul id="db-do_cta_ctp" class="case-input text -ui-toggle -ui-change">
-                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
-        </div>
-        <div id="js-radiology-progress-5" class="case-row hidden">
-            <label class="case-label">CTA/CTP Complete</label>
-            <ul id="db-cta_ctp_complete" class="case-input text -ui-toggle -ui-change">
-                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
-        </div>
-        <div id="js-radiology-progress-6" class="case-row hidden">
-            <label class="case-label">Large Vessel Occlusion</label>
-            <ul id="db-large_vessel_occlusion" class="case-input text -ui-toggle -ui-change">
-                <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
-                <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
-            </ul>
-        </div>
-    </section>
-
-    <div class="case-row submit">
-        <button class="case-submit">Submit</button>
+    <div id="js-radiology-progress-2" class="case-row hidden">
+        <label class="case-label">CT Complete</label>
+        <ul id="db-ct_complete" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+    <div id="js-radiology-progress-3" class="case-row hidden">
+        <label class="case-label">ICH on Non-Contrast CT</label>
+        <ul id="db-ich_found" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+    <div id="js-radiology-progress-4" class="case-row hidden">
+        <label class="case-label">Proceed with CTA/CTP</label>
+        <ul id="db-do_cta_ctp" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+    <div id="js-radiology-progress-5" class="case-row hidden">
+        <label class="case-label">CTA/CTP Complete</label>
+        <ul id="db-cta_ctp_complete" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
+    </div>
+    <div id="js-radiology-progress-6" class="case-row hidden">
+        <label class="case-label">Large Vessel Occlusion</label>
+        <ul id="db-large_vessel_occlusion" class="case-input text -ui-toggle -ui-change">
+            <li data-val="1" data-class="-ui-toggle-yes" class="">Yes</li>
+            <li data-val="0" data-class="-ui-toggle-no" class="">No</li>
+        </ul>
     </div>
 
 </section>

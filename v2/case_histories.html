@@ -1,24 +1,28 @@
-<section class="case-section history">
+<section class="history-section">
 
-    <div class="case-row history_textarea">
+    <div class="case-row">
         <label class="case-label">Past Medical History</label>
         <textarea id="db-pmhx" class="case-input text area -ui-input -ui-change"></textarea>
     </div>
-    <div class="case-row history_textarea">
+    <div class="case-row ">
         <label class="case-label">Medications</label>
         <textarea id="db-meds" class="case-input text area -ui-input -ui-change"></textarea>
     </div>
 
-    <div class="case-row history_heading">
+    <div class="history-subtable">
         <label class="case-label">Anticoagulants</label>
         <ul id="db-anticoags" class="case-input -ui-toggle -ui-change">
             <li data-val="yes" data-class="-ui-toggle-yes" class="">Yes</li>
             <li data-val="no" data-class="-ui-toggle-no" class="">No</li>
             <li data-val="unknown" data-class="-ui-toggle-unknown" class="">Unknown</li>
         </ul>
+        <div class="case-label history-sublabel">
+            Last Dose
+        </div>
+        <div id="db-anticoags_last_dose" class="case-input history-subinput -ui-since -ui-change"></div>
     </div>
 
-    <div id="js-history-last_dose" class="case-row history_subheading first last hidden">
+    <div id="js-history-last_dose" class="case-row first last">
         <div class="case-label">
             Last Dose
         </div>
@@ -43,9 +47,4 @@
         </div>
         <div id="db-last_meal" class="case-input -ui-since -ui-change"></div>
     </div>
-
-    <div class="case-row submit">
-        <button class="case-submit">Submit</button>
-    </div>
-
 </section>

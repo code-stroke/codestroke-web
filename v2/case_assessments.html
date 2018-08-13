@@ -1,35 +1,11 @@
-<header class="assess-header">
-    <a data-anchor="mass" class="assess-header-button js-assess-button">
-        MASS
-    </a>
-    <a data-anchor="vitals" class="assess-header-button js-assess-button">
-        Vitals
-    </a>
-    <a data-anchor="race" class="assess-header-button js-assess-button">
-        RACE
-    </a>
-    <a data-anchor="cannula" class="assess-header-button js-assess-button">
-        Cannula
-    </a>
-    <a data-anchor="nihss" class="assess-header-button js-assess-button">
-        NIHSS
-    </a>
-    <a data-anchor="mrs" class="assess-header-button js-assess-button">
-        mRS
-    </a>
-    <a data-anchor="submit" class="assess-header-button js-assess-button">
-        <img class="icon" src="icons/button/down.png"/>
-    </a>
-</header>
-<section id="js-assess-section" class="case-section assess">
-<div class="assess-container">
+<section class="assess-section">
 
-    <section id="js-assess-mass" class="case-row-group top">
-        <div class="case-row assess_heading">
+    <section id="js-assess-mass" class="case-row-group">
+        <div class="assess-heading">
             <label class="case-label">MASS</label>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Facial Droop</label>
             <ul id="db-facial_droop" class="case-input -ui-toggle -ui-change">
                 <li data-val="yes" data-class="-ui-toggle-yes">Yes</li>
@@ -38,7 +14,7 @@
             </ul>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Arm Drift</label>
             <ul id="db-arm_drift" class="case-input -ui-toggle -ui-change">
                 <li data-val="yes" data-class="-ui-toggle-yes">Yes</li>
@@ -47,7 +23,7 @@
             </ul>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Weak Grip</label>
             <ul id="db-weak_grip" class="case-input -ui-toggle -ui-change">
                 <li data-val="yes" data-class="-ui-toggle-yes">Yes</li>
@@ -56,7 +32,7 @@
             </ul>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Speech Difficulty</label>
             <ul id="db-speech_difficulty" class="case-input -ui-toggle -ui-change">
                 <li data-val="yes" data-class="-ui-toggle-yes">Yes</li>
@@ -66,12 +42,16 @@
         </div>
     </section>
 
+    <div class="assess-spacer">
+
+    </div>
+
     <section id="js-assess-vitals" class="case-row-group">
-        <div class="case-row assess_heading">
+        <div class="assess-heading">
             <label class="case-label">Vital Signs</label>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Blood pressure (mmHg)</label>
             <div class="assess-vitals">
                 <input id="db-bp_systolic" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
@@ -80,12 +60,12 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Heart Rate (bpm)</label>
             <input id="db-heart_rate" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label" style="visibility:hidden;"></label>
             <ul id="db-heart_rhythm" class="case-input -ui-toggle -ui-change">
                 <li data-val="regular" data-class="-ui-toggle-yes">Regular</li>
@@ -94,39 +74,43 @@
             </ul>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Respiratory Rate (BPM)</label>
             <input id="db-rr" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">O<sub>2</sub> &nbsp Saturation (%)</label>
             <input id="db-o2sats" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Temperature (<sup>o</sup>C)</label>
             <input id="db-temp" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">GCS</label>
             <input id="db-gcs" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Blood Glucose (mmol/L)</label>
             <input id="db-blood_glucose" class="case-input text -ui-input -ui-change" data-type="int" type="number"></input>
         </div>
     </section>
 
+    <div class="assess-spacer">
+
+    </div>
+
     <section id="js-assess-race" class="case-row-group">
-        <div class="case-row assess_heading">
+        <div class="assess-heading">
             <label class="case-label">RACE Score</label>
-            <label id="js-assess-race-score" class="case-label assess_score empty">??</label>
+            <label id="js-assess-race-score" class="case-label assess-score empty">??</label>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Facial Palsy</label>
             <div id="db-facial_palsy_race" class="case-input -ui-select -ui-change">
                 <ul>
@@ -137,7 +121,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Arm Motor Impairment</label>
             <div id="db-arm_motor_impair" class="case-input -ui-select -ui-change">
                 <ul>
@@ -148,7 +132,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Leg Motor Impairment</label>
             <div id="db-leg_motor_impair" class="case-input -ui-select -ui-change">
                 <ul>
@@ -159,7 +143,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Head & Gaze Deviation</label>
             <div id="db-head_gaze_deviate" class="case-input -ui-select -ui-change">
                 <ul>
@@ -169,7 +153,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Hemiparesis</label>
             <ul id="db-hemiparesis" class="case-input -ui-toggle -ui-change">
                 <li data-val="left" data-class="-ui-toggle-unknown">Left</li>
@@ -179,10 +163,14 @@
         </div>
     </section>
 
+    <div class="assess-spacer">
+
+    </div>
+
     <section id="js-assess-cannula" class="case-row-group">
-        <div class="case-row assess_heading">
+        <div class="case-row assess-heading">
             <label class="case-label" style="text-align: center;">18G IV Cannula in Cubital Fossa</label>
-            <ul id="db-cannula" class="case-input -ui-toggle -ui-change" style="margin-left: 20px; min-width: 250px; font-size: 1.2em; font-weight: bold;">
+            <ul id="db-cannula" class="case-input assess-score -ui-toggle -ui-change" style="min-width: 250px;">
                 <li data-val="yes" data-class="-ui-toggle-yes">Yes</li>
                 <li data-val="no" data-class="-ui-toggle-no">No</li>
                 <li data-val="no" data-class="-ui-toggle-unknown">Unknown</li>
@@ -190,13 +178,17 @@
         </div>
     </section>
 
+    <div class="assess-spacer">
+
+    </div>
+
     <section id="js-assess-nihss" class="case-row-group">
-        <div class="case-row assess_heading">
+        <div class="assess-heading">
             <label class="case-label">NIHSS</label>
-            <label id="js-assess-nihss-score" class="case-label assess_score empty">??</label>
+            <label id="js-assess-nihss-score" class="case-label assess-score empty">??</label>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Level of Consciousness</label>
             <div id="db-conscious_level" class="case-input -ui-select -ui-change">
                 <ul>
@@ -209,7 +201,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Month and Age</label>
             <div id="db-month_age" class="case-input -ui-select -ui-change">
                 <ul>
@@ -220,7 +212,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Blink Eyes & Squeeze Hands</label>
             <div id="db-blink_squeeze" class="case-input -ui-select -ui-change">
                 <ul>
@@ -231,7 +223,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Horizontal Gaze</label>
             <div id="db-horizontal_gaze" class="case-input -ui-select -ui-change">
                 <ul>
@@ -242,7 +234,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Visual Fields</label>
             <div id="db-visual_fields" class="case-input -ui-select -ui-change">
                 <ul>
@@ -254,7 +246,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Facial Palsy</label>
             <div id="db-facial_palsy_nihss" class="case-input -ui-select -ui-change">
                 <ul>
@@ -266,7 +258,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Left Arm Drift</label>
             <div id="db-left_arm_drift" class="case-input -ui-select -ui-change">
                 <ul>
@@ -279,7 +271,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Right Arm Drift</label>
             <div id="db-right_arm_drift" class="case-input -ui-select -ui-change">
                 <ul>
@@ -292,7 +284,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Left Leg Drift</label>
             <div id="db-left_leg_drift" class="case-input -ui-select -ui-change">
                 <ul>
@@ -305,7 +297,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Right Leg Drift</label>
             <div id="db-right_leg_drift" class="case-input -ui-select -ui-change">
                 <ul>
@@ -318,7 +310,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Limb Ataxia</label>
             <div id="db-limb_ataxia" class="case-input -ui-select -ui-change">
                 <ul>
@@ -329,7 +321,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Sensation</label>
             <div id="db-sensation" class="case-input -ui-select -ui-change">
                 <ul>
@@ -340,7 +332,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Aphasia</label>
             <div id="db-aphasia" class="case-input -ui-select -ui-change">
                 <ul>
@@ -352,7 +344,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Dysarthria</label>
             <div id="db-dysarthria" class="case-input -ui-select -ui-change">
                 <ul>
@@ -363,7 +355,7 @@
             </div>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Extinction/Inattention/Neglect</label>
             <div id="db-neglect" class="case-input -ui-select -ui-change">
                 <ul>
@@ -375,13 +367,17 @@
         </div>
     </section>
 
+    <div class="assess-spacer">
+
+    </div>
+
     <section id="js-assess-mrs" class="case-row-group">
-        <div class="case-row assess_heading">
+        <div class="assess-heading">
             <label class="case-label">Modified Rankin Scale (Premorbid)</label>
-            <label id="js-assess-mrs-score" class="case-label assess_score empty">??</label>
+            <label id="js-assess-mrs-score" class="case-label assess-score empty">??</label>
         </div>
 
-        <div class="case-row assess_subheading">
+        <div class="case-row">
             <label class="case-label">Level of Consciousness</label>
             <div id="db-rankin_conscious" class="case-input -ui-select -ui-change">
                 <ul>
@@ -396,15 +392,4 @@
         </div>
     </section>
 
-    <div id="js-assess-lvo" class="case-row">
-        <input id="db-likely_lvo" class="case-input -ui-change -ui-input" data-type="int" type="hidden" />
-        <button id="js-assess-lvo-button" class="assess-alert">Likely LVO - pre-notify Angriography Staff</button>
-    </div>
-
-    <div id="js-assess-submit" class="case-row submit">
-        <button class="case-submit">Submit</button>
-    </div>
-
-
-</div>
 </section>

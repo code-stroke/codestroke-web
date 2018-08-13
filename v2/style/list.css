@@ -1,0 +1,161 @@
+.list-section {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 400px 1fr 400px 1fr 400px 1fr;
+    grid-template-rows: 25px 1fr;
+    grid-column-gap: 1fr;
+
+    align-items: start
+}
+
+/*******
+ * NAV *
+ *******/
+
+
+.nav-search {
+    border: 2px solid darkgray;
+    border-radius: 15px;
+
+    height: 30px;
+
+    background-color: white;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-search-icon {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-search-icon.cancel{
+     cursor: pointer;
+ }
+
+.nav-search-icon img {
+    height: 32px;
+    width: 32px;
+}
+
+.vr {
+    margin-left: 2px;
+
+    width: 1px;
+    height: 80%;
+
+    background: darkgray;
+}
+
+.nav-search-input {
+    height: 100%;
+    width: 220px;
+
+    padding-left: 10px;
+
+    font-size: 1.1em;
+
+    background: none;
+}
+
+
+.list-table {
+    grid-row-start: 2;
+
+    background: red;
+
+    display: grid;
+    grid-template-columns: 170px 60px 170px;
+    grid-auto-rows: minmax(40px, 40px);
+}
+
+.list-table.incoming {
+    grid-column-start: 2;
+    background-color: rgb(249,179,167);
+}
+
+.list-table.incoming > heading {
+    background-color: rgb(247,141,124);
+}
+
+.list-table.active {
+    grid-column-start: 4;
+    background-color: rgb(255,204,166);
+}
+
+.list-table.active > heading {
+    background-color: rgb(255,179,122);
+}
+
+.list-table.completed {
+    grid-column-start: 6;
+    background-color: rgb(220,247,186);
+}
+
+.list-table.completed > heading {
+    background-color: rgb(202,242,151);
+}
+
+.list-table > heading {
+    grid-column-start: span 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.2em;
+}
+
+.list-table > header {
+    grid-column-start: span 3;
+    display: contents;
+}
+
+.list-table > header > span {
+    border-bottom: 3px solid white;
+    margin-top: 0px;
+
+    min-height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+}
+
+.list-table > main {
+    display: contents;
+}
+
+.list-row {
+    display: contents;
+
+    cursor: pointer;
+}
+
+.list-row:hover > div {
+    background: rgba(255,255,255,0.5) !important;
+    cursor: pointer;
+}
+
+.list-row:nth-of-type(even) > div {
+    background: rgba(220,220,220,0.2);
+}
+
+.list-row > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-row > div > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
