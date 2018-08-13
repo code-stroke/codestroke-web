@@ -209,18 +209,27 @@
      background-size: contain;
  }
 
+.-ui-since-result > button:hover {
+    background: url("../icons/button/date-edit-green.png") center no-repeat;
+    background-size: contain;
+}
+
+.-ui-since.invalid input {
+    color: red;
+}
+
  .-ui-since-edit > input:not(:last-child) {
      border-right: 1px solid darkgray;
  }
 
  .-ui-since-edit > *:last-child {
-     background: url("../icons/button/tick-black.png") center no-repeat;
+     background: url("../icons/button/clock.png") center no-repeat;
      background-size: contain;
  }
 
  .-ui-since-edit > *:last-child:hover {
 
-     background: url("../icons/button/tick-green.png") center no-repeat;
+     background: url("../icons/button/clock-green.png") center no-repeat;
      background-size: contain;
  }
 

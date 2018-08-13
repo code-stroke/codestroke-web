@@ -202,6 +202,10 @@ const SINCE = {
                 SINCE.toggle($(this));
             });
 
+            $("body").on("change", ".-ui-since-edit input", function() {
+                SINCE.update($(this));
+            });
+
             $("body").on("ui:clear", ".-ui-since", function() {
                 SINCE.clear($(this));
             });
@@ -233,6 +237,23 @@ const SINCE = {
             seconds: seconds
         };
     },
+    update: function(child) {
+        let parent = child.closest(".-ui-since");
+        let date = parent.find("input[type='date']").val();
+        let time = parent.find("input[type='time']").val();
+
+        if (date != "" && time != "") {
+            let datetime = new Date(date + " " + time);
+            parent.children("input").val(datetime.toString());
+            parent.trigger("ui:change", datetime.toString());
+            parent.removeClass("invalid");
+        } else {
+            parent.children("input").val("");
+            parent.trigger("ui:change", "");
+            parent.addClass("invalid");
+            parent.find("span").html("Unknown");
+        }
+    },
     toggle: function(child) {
         let parent = child.closest(".-ui-since");
         if (parent.data("state") == "result") {
@@ -246,8 +267,6 @@ const SINCE = {
             //If input is valid, calculate time since, else display 'unknown'
             if (date != "" && time != "") {
                 let datetime = new Date(date + " " + time);
-                parent.children("input").val(datetime.toString());
-                parent.trigger("ui:change", datetime.toString());
 
                 let since = new Date().getTime() - datetime.getTime();
                 let obj = SINCE.convertTime(since);
@@ -257,11 +276,6 @@ const SINCE = {
                 } else {
                     parent.find("span").html(`${obj.minute}m ago`);
                 }
-
-            } else {
-                parent.children("input").val("");
-                parent.trigger("ui:change", "");
-                parent.find("span").html("Unknown");
             }
 
             parent.find(".-ui-since-edit").addClass("hidden");
