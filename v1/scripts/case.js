@@ -162,6 +162,7 @@ const Case = {
         Case.patient = patient;
 
         DOM_Case.case.name.text(API.data.getName(patient));
+        DOM_Case.case.name.prop("title", API.data.getName(patient));
         DOM_Case.case.age_gender.text(API.data.getAgeGender(patient));
         DOM_Case.case.well.text(API.data.getLastWell(patient));
         DOM_Case.case.time.text(API.data.getStatusTime(patient));
@@ -832,7 +833,7 @@ const Manage = {
                                     window.location.reload();
                                 });
                             });
-                            
+
                         }
                     },
                     {
