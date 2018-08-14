@@ -3,13 +3,17 @@ const Router = {
     routes: [],
     addRoute: function(route) {
         this.routes.push(route);
+    },
+    parseRoute: function(path : string) {
+        let parts = path.split("/");
     }
 
 };
 
 
 $(document).ready(function() {
-    let global_overlay = new Overlay("#js-global-main",
+    Login.displayLogin();
+    /*let global_overlay = new Overlay("#js-global-main",
                                     {
                                         timer: {
                                             top: "50px",
@@ -53,7 +57,7 @@ $(document).ready(function() {
                 });
             });
         });
-    });
+    });*/
 
 
 });

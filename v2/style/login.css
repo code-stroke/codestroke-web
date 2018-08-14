@@ -11,7 +11,6 @@
     background: hsla(31, 100%, 0%, 0.8);;
 
     display: grid;
-    //grid-template-rows: 200px 1fr 200px;
     grid-template-columns: 1fr minmax(500px,500px) 1fr;
 }
 
@@ -28,7 +27,18 @@
     position: relative;
     display: grid;
     grid-template-rows: 1fr 250px repeat(7, 60px) 1fr;
+
+    transition: transform 1s ease;
 }
+
+.login-content.away {
+    transform: translateX(-75vw);
+
+    transition: transform 1s ease;
+}
+
+
+
 .login-logo {
     position: relative;
 }

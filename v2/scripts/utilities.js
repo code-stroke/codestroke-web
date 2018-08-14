@@ -131,7 +131,7 @@ class PageLoader {
         let loader = this;
 
         function load() {
-            $interim.fadeIn(2000, function() {
+            $interim.fadeIn(500, function() {
                 loader.$previous = $interim.children();
                 $interim.children().unwrap();
 
@@ -142,7 +142,7 @@ class PageLoader {
 
         $interim.load(path, function() {
             if (loader.$previous) {
-                loader.$previous.fadeOut(1995, function() {
+                loader.$previous.fadeOut(495, function() {
                     loader.$previous.remove();
                 });
                 load();
