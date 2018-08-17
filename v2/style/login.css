@@ -123,3 +123,13 @@
 
     transition: background 0.4s ease, color 0.4s ease, border 0.4s ease;
 }
+
+.login-errors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: monospace;
+    font-size: 1.2em;
+    color: red;
+}

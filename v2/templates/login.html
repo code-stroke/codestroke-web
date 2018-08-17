@@ -6,9 +6,9 @@
         <div class="login-logo">
             <img src="logo.png"/>
         </div>
-        <input id="js-login-signoff_first_name"  class="login-input" placeholder="First Name...">
-        <input id="js-login-signoff_last_name"  class="login-input" placeholder="Last Name...">
-        <select id="js-login-signoff_role"  class="login-input">
+        <input id="login-signoff_first_name" required class="login-input" placeholder="First Name...">
+        <input id="login-signoff_last_name" required class="login-input" placeholder="Last Name...">
+        <select id="login-signoff_role" required class="login-input">
             <option selected disabled hidden value="">Role...</option>
             <option value="admin">Admin</option>
             <option value="anaesthetist">Anaesthetist</option>
@@ -21,10 +21,13 @@
             <option value="stroke_team">Stroke Team</option>
             <option value="stroke_ward">Stroke Ward</option>
         </select>
-        <input id="js-login-password" class="login-input" type="password" placeholder="Global Password...">
+        <input id="login-password" required class="login-input" type="password" placeholder="Global Password...">
         <div>
 
         </div>
         <button class="login-button">Login</button>
+        <div id="js-login-errors" class="login-errors">
+
+        </div>
     </form>
 </div>

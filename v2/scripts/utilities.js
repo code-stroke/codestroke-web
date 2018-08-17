@@ -117,11 +117,19 @@ class Overlay {
 class PageLoader {
     constructor(container, settings) {
         this.container = container;
-
+        this.container_nav = "#js-global-nav";
         //this.empty = settings.empty;
     }
 
-    loadPage(path, callback) {
+    load(path, nav) {
+        let def = $.Deferred();
+
+        this._loadPage(path, nav, def);
+
+        return def;
+    }
+
+    _loadPage(path, nav, def) {
         let $interim = $("<div>")
                         .addClass("global-loader")
                         .appendTo($(this.container))
@@ -135,8 +143,7 @@ class PageLoader {
                 loader.$previous = $interim.children();
                 $interim.children().unwrap();
 
-
-                callback();
+                loader._loadNav(nav, def);
             });
         }
 
@@ -150,6 +157,26 @@ class PageLoader {
                 load();
             }
         });
+    }
 
+    _loadNav(nav, def) {
+        if(!nav) {
+            // TODO: Clear old nav
+            $(this.container_nav).children("fade-out");
+            def.resolve();
+            return;
+        }
+
+        if (nav == true) {
+            def.resolve();
+            return;
+        }
+
+        let $interim = $("<div>")
+                        .addClass("global-loader")
+                        .appendTo($(this.container_nav))
+                        .hide();
+
+        def.resolve();
     }
 }

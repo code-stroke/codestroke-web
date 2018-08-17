@@ -1,63 +1,141 @@
+const Logger = {
+    debug_on: true,
+    debug(loc, message) {
+        if (Logger.debug_on) {
+            console.log(`[Debug | ${loc}]: ${message}`);
+        }
+    },
+    warning() {
+
+    },
+    error(loc, message) {
+        console.log(`%c [Debug | ${loc}]: ${message}`, "color: red");
+    }
+}
+
 const Router = {
-    current: {},
+    current_path: [],
     routes: [],
-    addRoute: function(route) {
+    default_route: {},
+    addDefaultRoute(route) {
+        Router.default_route = route;
+        Router.addRoute(route);
+    },
+    addRoute(route) {
         this.routes.push(route);
     },
-    parseRoute: function(path : string) {
-        let parts = path.split("/");
+    parseURL() {
+        // RegEx that matches appropriate values for the URL Hash
+        // eg. #/test , #/test/ , #/test/test1 , #/test/test1/
+        // etc.
+        let reg = /(^\/(?:\w+\/?)+)$/ig;
+        let path = window.location.hash.substring(1);
+        if (reg.test(path)) {
+            // Separate path into its components
+            let frags = path.split("/");
+            // Remove any empty strings
+            frags = frags.filter(function(value) { return value;});
+            Router.parseRoute(frags);
+        } else {
+            Router.submitRoute(Router.default_route, Router.default_route.path);
+        }
+    },
+    parseRoute(p) {
+        // TODO: Handle invalid path
+
+        for (let i = 0; i < Router.routes.length; i++) {
+            let route = Router.routes[i];
+            if (route.path.length != p.length) {
+                continue;
+            }
+
+            let variables = {};
+            let path = [];
+            let matched = false;
+            for (let j = 0; j < route.path.length; j++) {
+                if (route.path[j].startsWith(":")) {
+                    variables[route.path[j].substring(1)] = p[j];
+                    matched = true;
+                    continue;
+                }
+
+                if (route.path[j] == p[j]) {
+                    matched = true;
+                    continue;
+                }
+
+                matched = false;
+                break;
+            }
+
+            if (!matched) {
+                continue;
+            }
+
+            Router.submitRoute(route, p, variables);
+            return;
+        }
+
+        Router.submitRoute(Router.default_route, Router.default_route.path);
+    },
+    submitRoute(route, path, vars) {
+        Router.current_path = path;
+        history.pushState(null, null, "#" + "/" + path.join("/") + "/");
+        route.callback(vars);
     }
 
 };
 
+const Global = {
+    DOM: {},
+    overlay: {},
+    loader: {},
+    setup() {
+        Global.overlay = new Overlay("#js-global-main",
+                                        {
+                                            timer: {
+                                                top: "50px",
+                                                left: "50px"
+                                            },
+                                            dialog: {
+                                                top: "50px",
+                                                left: "200px"
+                                            }
+                                        });
+
+        Global.loader = new PageLoader("#js-global-main",{});
+
+        Router.addDefaultRoute({
+            path: ["list"],
+            callback: function (vars) {
+                Global.loader.load("/templates/list.html")
+                .then(function() {
+                    Logger.debug("global.js", "List Page loaded");
+                });
+            }
+        });
+
+
+    }
+};
+
 
 $(document).ready(function() {
-    Login.displayLogin();
-    /*let global_overlay = new Overlay("#js-global-main",
-                                    {
-                                        timer: {
-                                            top: "50px",
-                                            left: "50px"
-                                        },
-                                        dialog: {
-                                            top: "50px",
-                                            left: "200px"
-                                        }
-                                    });
+    Global.setup();
 
+    Login.setup();
 
+    Router.addRoute({
+        path: ["edit", ":id", ":section"],
+        callback: function(vars) {
+            console.log(vars);
+        }
+    });
 
-    let global_loader = new PageLoader("#js-global-main",{});
+    //Router.parseRoute(["edit","2",":sectionasasdasd"]);
+    //Router.parseRoute(["edit","2", "3"]);
+    //Router.parseRoute(["edit","asdfasdf",":sectionasasdasd"]);
 
-    global_loader.loadPage("list.html", function(){
-
-        global_overlay.showTimer();
-        global_loader.loadPage("case.html", function(){
-            global_overlay.hideTimer();
-
-            let case_loader = new PageLoader("#js-case-main",{});
-            let case_overlay = new Overlay("#js-case-main",
-                                            {
-                                                timer: {
-                                                    top: "50px",
-                                                    left: "50px"
-                                                },
-                                                dialog: {
-                                                    top: "50px",
-                                                    left: "200px"
-                                                }
-                                            });
-
-
-            case_loader.loadPage("case_histories.html", function() {
-                case_overlay.showTimer();
-                case_loader.loadPage("case_assessments.html", function() {
-                    case_overlay.hideTimer();
-                    global_loader.loadPage("list.html", function(){});
-                });
-            });
-        });
-    });*/
 
 
 });
