@@ -74,6 +74,7 @@ function initializeUI() {
 
     updateBtn();
     notiflisten();
+    notifdismiss();
 
 }
 
@@ -86,6 +87,20 @@ function notiflisten(){
       notiflisten();
     }]);
 }
+
+//Event if notification is dismissed
+function notifdismiss(){
+    try{
+        OneSignal.on('notificationDismiss', function (event) {
+        	console.warn('OneSignal notification dismissed:', event);
+            API.putacknowledge(data.data)
+         });
+    }
+    catch{
+        console.log("notifdismiss error")        
+    }
+}
+
 
 
 //use OneSignal API to check if service worker is Subscribed
