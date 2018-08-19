@@ -185,8 +185,13 @@ const Cases = {
                     rows_active.push(row);
                     break;
                 case "completed":
-                    row.order_time = dlist[i].completed_timestamp;
-                    rows_completed.push(row);
+                    // Only display cases that were completed < 24h ago
+                    // TODO: This is a bit of a dirty workaround - more of API should be exposed
+                    let millis = new Date().getTime() - new Date(dlist[i].completed_timestamp).getTime();
+                    if (API.data.extractTime(millis).hour < 24) {
+                        row.order_time = dlist[i].completed_timestamp;
+                        rows_completed.push(row);
+                    }
                     break;
                 default:
                     break;
