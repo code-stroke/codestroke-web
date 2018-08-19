@@ -17,9 +17,18 @@ const Router = {
     current_path: [],
     routes: [],
     default_route: {},
+    setup() {
+
+    },
     addDefaultRoute(route) {
         Router.default_route = route;
         Router.addRoute(route);
+
+        $(window).on('hashchange', function(event) {
+            event.preventDefault();
+
+            Router.parseURL();
+        });
     },
     addRoute(route) {
         this.routes.push(route);
@@ -115,7 +124,15 @@ const Global = {
             }
         });
 
-
+        Router.addRoute({
+            path: ["case"],
+            callback: function (vars) {
+                Global.loader.load("/templates/case.html")
+                .then(function() {
+                    Logger.debug("global.js", "Case Page loaded");
+                });
+            }
+        });
     }
 };
 

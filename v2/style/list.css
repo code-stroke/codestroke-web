@@ -2,7 +2,7 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr 400px 1fr 400px 1fr 400px 1fr;
-    grid-template-rows: 25px 1fr;
+    grid-template-rows: 45px 25px 1fr;
     grid-column-gap: 1fr;
 
     align-items: start
@@ -65,7 +65,7 @@
 
 
 .list-table {
-    grid-row-start: 2;
+    grid-row-start: 3;
 
     background: red;
 

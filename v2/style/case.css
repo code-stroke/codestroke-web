@@ -1,6 +1,6 @@
 .case-section {
     display: grid;
-    grid-template-rows: 35px 1fr 35px;
+    grid-template-rows: 45px 35px 1fr 35px;
     grid-template-columns: 200px 35px 1fr;
     align-items: start;
 
@@ -8,7 +8,8 @@
 }
 
 .case-sidebar {
-    grid-row-start: span 3;
+    grid-row-start: 2;
+    grid-row-end: span 3;
     align-self: stretch;
 
     display: grid;
@@ -205,7 +206,7 @@
  ********/
 
 .case-main {
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-column-start: 3;
 
     position: relative;

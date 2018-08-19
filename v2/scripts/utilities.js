@@ -121,15 +121,9 @@ class PageLoader {
         //this.empty = settings.empty;
     }
 
-    load(path, nav) {
+    load(path) {
         let def = $.Deferred();
 
-        this._loadPage(path, nav, def);
-
-        return def;
-    }
-
-    _loadPage(path, nav, def) {
         let $interim = $("<div>")
                         .addClass("global-loader")
                         .appendTo($(this.container))
@@ -143,7 +137,7 @@ class PageLoader {
                 loader.$previous = $interim.children();
                 $interim.children().unwrap();
 
-                loader._loadNav(nav, def);
+                def.resolve();
             });
         }
 
@@ -157,26 +151,7 @@ class PageLoader {
                 load();
             }
         });
-    }
 
-    _loadNav(nav, def) {
-        if(!nav) {
-            // TODO: Clear old nav
-            $(this.container_nav).children("fade-out");
-            def.resolve();
-            return;
-        }
-
-        if (nav == true) {
-            def.resolve();
-            return;
-        }
-
-        let $interim = $("<div>")
-                        .addClass("global-loader")
-                        .appendTo($(this.container_nav))
-                        .hide();
-
-        def.resolve();
+        return def;
     }
 }

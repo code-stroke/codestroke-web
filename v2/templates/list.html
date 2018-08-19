@@ -1,11 +1,50 @@
 <section class="list-section">
+    <nav class="global-nav">
+        <header>
+            Case List
+        </header>
+        <div style="margin-right: 10px; text-decoration: none; font-weight: bold; font-size: 0.9em; color: #8B4513">
+            Search:
+        </div>
+        <div style="margin-right: 40px;">
+            <div class="nav-search">
+                <div id="js-cases-search-icon" class="nav-search-icon">
+                    <img src="icons/button/search.png" />
+                </div>
+                <span class="vr"></span>
+                <input id="js-cases-search-input" class="nav-search-input" placeholder="Search...">
+
+                </input>
+                <div id="js-cases-search-cancel" class="nav-search-icon cancel">
+                    <img src="icons/button/cancel.png" />
+                </div>
+            </div>
+        </div>
+        <div style="margin-right: 10px; text-decoration: none; font-weight: bold; font-size: 0.9em; color: #8B4513">
+            Actions:
+        </div>
+        <button class="yellow first">
+            <img src="icons/button/refresh.png"/>
+            <span>Last <Strong>refresh</Strong>ed: </span>
+            <code id="js-refresh-text" code>10:56:43PM 02/08/18</code>
+        </button>
+        <button class="green">
+            <img src="icons/button/plus.png"/>
+            <span><strong>New</strong> case</span>
+        </button>
+        <button class="blue">
+            <img src="icons/button/log.png"/>
+            <span><strong>Event Log</strong></span>
+        </button>
+    </nav>
+
     <div class="list-table incoming">
         <heading>Incoming</heading>
         <header>
             <span>Name</span><span>Age/Sex</span><span>ETA</span>
         </header>
         <main>
-            <div class="list-row">
+            <a href="#/case" class="list-row">
                 <div class="list-row-name">
                     <span>Little Miss Sunshinea</span>
                 </div>
@@ -15,7 +54,7 @@
                 <div class="list-row-time">
                     5m Ago
                 </div>
-            </div>
+            </a>
             <div class="list-row">
                 <div class="list-row-name">
                     <span>Little Miss Sunshinea</span>
