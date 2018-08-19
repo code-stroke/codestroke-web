@@ -337,6 +337,12 @@ const CHANGE = {
                     $(this).val($(this).is(":checked") ? 1 : 0);
                 }
 
+                // [AUSTIN-V1] Only send the year not the actual day/month
+                if ($(this).is("input[type='date']")) {
+                    let d = new Date($(this).val());
+                    $(this).val(API.data.convertDate(new Date(d.getFullYear(), 0, 1)));
+                }
+
                 $(this).trigger("ui:change", $(this).val());
             });
 
