@@ -1,5 +1,5 @@
 const API = {
-    address: "https://codestroke.pythonanywhere.com",
+    address: "https://codestroke.austin.org.au/",
     handleResult: function(data) {
         if (data.success) {
             return true;

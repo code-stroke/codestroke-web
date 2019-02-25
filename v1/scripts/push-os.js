@@ -23,7 +23,7 @@ $( window ).bind("load", function() {
 });
 
 function initializeUI() {
-
+//copy this over
     OneSignal.push(function() {
         OneSignal.sendTags({
             role: API.login.signoff.signoff_role,
@@ -97,7 +97,7 @@ function notifdismiss(){
          });
     }
     catch{
-        console.log("notifdismiss error")        
+        console.log("notifdismiss error")
     }
 }
 
